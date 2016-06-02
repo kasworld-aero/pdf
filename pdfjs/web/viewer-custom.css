@@ -1,0 +1,44 @@
+body {
+	background-color: #F7F7F7;
+    font-family: Lato,sans-serif;
+}
+
+#toolbarContainer {
+	background-color: #1ABC9C;
+	background-image: none;
+}
+
+html[dir='ltr'] .toolbarButton.pageUp::before {
+    content: '\f106';
+    font-family: FontAwesome;
+    font-weight: normal;
+    font-style: normal;
+    display: inline-block;
+    text-decoration: inherit;
+    font-size: 5rem;
+    margin: 9px 0px;
+}
+
+html[dir='ltr'] .toolbarButton.pageDown::before {
+    content: '\f107';
+    font-family: FontAwesome;
+    font-weight: normal;
+    font-style: normal;
+    display: inline-block;
+    text-decoration: inherit;
+    font-size: 5rem;
+    margin: 9px 0px;
+}
+
+
+#scaleSelectContainer {
+    margin-top: 6px;
+}
+
+.textLayer .highlight.selected {
+    background-color: #1ABC9C;
+}
+
+.textLayer .highlight {
+    background-color: #9B59B6;
+}
