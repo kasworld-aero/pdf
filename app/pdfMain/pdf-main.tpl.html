@@ -1,0 +1,11 @@
+<div class="background-dark">
+    <div class="row">
+        <div class="container col-xs-12 col-md-4">
+            <pdf-tools search="$ctrl.search(query)" fullscreen="$ctrl.fullscreen()" highlight="$ctrl.updateHighlight(highlightAll)"></pdf-tools>
+        </div>
+        <div class="col-xs-12 col-md-8">
+            <pdf-viewer file="'/pdf/duffing.pdf'" find="$ctrl.searchQuery"
+            highlight="$ctrl.highlightAll" fullscreen="$ctrl.isFullscreen" on-update="$ctrl.viewerUpdated()"></pdf-viewer>
+        </div>
+    </div>
+</div>
