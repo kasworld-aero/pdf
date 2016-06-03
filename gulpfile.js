@@ -14,7 +14,7 @@ gulp.task('connect', function() {
 });
 
 gulp.task('sass', function() {
-    return sass('sass/style.scss')
+    return sass('sass/*.scss')
         .pipe(gulp.dest('./public/css'));
 });
 
@@ -34,7 +34,7 @@ gulp.task('static', function() {
 gulp.task('watch', function() {
     gulp.watch('app/**/*.js', ['browserify']);
     gulp.watch('app/**/*.html', ['static']);
-    gulp.watch('sass/style.scss', ['sass']);
+    gulp.watch('sass/*.scss', ['sass']);
 });
 
 gulp.task('default', ['connect', 'watch']);

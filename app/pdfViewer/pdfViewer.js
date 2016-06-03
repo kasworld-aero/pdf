@@ -15,9 +15,9 @@
         }
     };
 
-    pdfViewerCtrl.$inject = ['$element', '$sce', '$q'];
+    pdfViewerCtrl.$inject = ['$element', '$ocLazyLoad', '$q',  '$sce'];
 
-    function pdfViewerCtrl($element, $sce, $q) {
+    function pdfViewerCtrl($element, $ocLazyLoad, $q, $sce) {
         var $ctrl = this;
 
         // Attribute Properties with defaults
@@ -30,6 +30,7 @@
 
         // Computed Properties
         $ctrl.fileUrl = buildUrl();
+
 
 
         // Update on data change
@@ -79,28 +80,51 @@
             init: function() {
                 var ctrlApi = this;
                 var deferred = $q.defer();
-                var iframe = $element[0].firstChild;
 
-                iframe.onload = function() {
-                    $ctrl.PDFViewer = iframe.contentWindow.PDFViewerApplication;
+                //load script
+                loadl10n('js/pdf/locale/locale.properties',
+                    $ocLazyLoad.load({
+                        // insertBefore: '#load_css_before',
+                        files: [
+                            'css/viewer.css',
+                            'js/pdf/compatibility.js',
+                            'js/pdf/l10n.js',
+                            'js/pdf/pdf.js'
+                        ]
+                    }).then(function() {
+                        function checkVariable() {
+                            if(PDFJS){
+                                $ocLazyLoad.load('js/pdf/viewer.js');
+                            }
+                        }
+                        setTimeout(checkVariable,100);
+                    })
+                );
 
-                    // get document elements
-                    var content = iframe.contentWindow;
-                    var keys = [
-                        'findInput',
-                        'findHighlightAll',
-                        'findNext',
-                        'findPrevious'
-                    ];
-                    var elements = _.zipObject(keys, _.map(keys, function(id) {
-                        return content.document.getElementById(id);
-                    }));
-                    console.log(elements);
-                    _.assign(ctrlApi, elements);
-
-                    deferred.resolve(true);
-                };
-
+                // $ocLazyLoad.load('js/viewer.js');
+                // $ocLazyLoad.load('js/viewer.js');
+                // var iframe = $element[0].firstChild;
+                //
+                // iframe.onload = function() {
+                //     $ctrl.PDFViewer = iframe.contentWindow.PDFViewerApplication;
+                //
+                //     // get document elements
+                //     var content = iframe.contentWindow;
+                //     var keys = [
+                //         'findInput',
+                //         'findHighlightAll',
+                //         'findNext',
+                //         'findPrevious'
+                //     ];
+                //     var elements = _.zipObject(keys, _.map(keys, function(id) {
+                //         return content.document.getElementById(id);
+                //     }));
+                //     console.log(elements);
+                //     _.assign(ctrlApi, elements);
+                //
+                //     deferred.resolve(true);
+                // };
+                //
                 return deferred.promise;
             },
 
@@ -131,6 +155,23 @@
             // findNext();
             // cycleFind();
         });
+
+        function loadl10n(href, callback) {
+            var link = document.createElement('link');
+            var loaded = false;
+            link.setAttribute('rel', 'resource');
+            link.setAttribute('type', 'application/l10n');
+            link.setAttribute('href', href);
+            if (callback) {
+              link.onload = function() {
+                if (!loaded) {
+                  callback();
+                }
+                loaded = true;
+              };
+            }
+            document.getElementsByTagName('head')[0].appendChild(link);
+        }
 
 
 
