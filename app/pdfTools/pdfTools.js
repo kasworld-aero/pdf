@@ -17,7 +17,7 @@
         var $ctrl = this;
 
         $ctrl.searchQuery = '';
-        $ctrl.highlightAll = true;
+        $ctrl.highlightAll = false;
         $ctrl.keywords = ['nonlinear', 'discuss', 'duffing', 'equation'];
 
         $ctrl.selectKeyword = function(index) {
