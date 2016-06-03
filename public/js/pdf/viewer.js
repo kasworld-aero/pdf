@@ -8338,8 +8338,8 @@
     fileInput.className = 'fileInput';
     fileInput.setAttribute('type', 'file');
     fileInput.oncontextmenu = noContextMenuHandler;
-    document.body.appendChild(fileInput);
-
+    document.getElementById('outerContainer').appendChild(fileInput);
+outerContainer
     if (!window.File || !window.FileReader || !window.FileList || !window.Blob) {
       appConfig.toolbar.openFile.setAttribute('hidden', 'true');
       appConfig.secondaryToolbar.openFileButton.setAttribute('hidden', 'true');

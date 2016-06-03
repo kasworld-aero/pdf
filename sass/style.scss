@@ -1,1 +1,31 @@
-
+pdf-viewer {
+	div.main {
+		background-color: #F7F7F7;
+	}
+	#toolbarContainer {
+		background-color: #1ABC9C;
+		background-image: none;
+	}
+	div[dir='ltr'] .toolbarButton.pageUp::before, div[dir='ltr'] .toolbarButton.pageDown::before {
+		content: '\f106';
+		font-family: FontAwesome;
+		font-weight: normal;
+		font-style: normal;
+		display: inline-block;
+		text-decoration: inherit;
+		font-size: 4rem;
+	    margin: 10px 3px;
+	}
+	div[dir='ltr'] .toolbarButton.pageDown::before {
+		content: '\f107';
+	}
+	#scaleSelectContainer {
+		margin-top: 6px;
+	}
+	.textLayer .highlight.selected {
+		background-color: #1ABC9C;
+	}
+	.textLayer .highlight {
+		background-color: #9B59B6;
+	}
+}

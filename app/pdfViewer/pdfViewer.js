@@ -52,6 +52,10 @@
                 if (changes.highlight) {
                     $ctrl.highlightAll($ctrl.highlight);
                 }
+
+                if (changes.fullscreen) {
+                    $ctrl.enterFullscreen();
+                }
             }
 
             if ($ctrl.onUpdate) {
@@ -84,7 +88,7 @@
                 //load script
                 loadl10n('js/pdf/locale/locale.properties',
                     $ocLazyLoad.load({
-                        // insertBefore: '#load_css_before',
+                        insertBefore: '#load_css_before',
                         files: [
                             'css/viewer.css',
                             'js/pdf/compatibility.js',
@@ -92,57 +96,49 @@
                             'js/pdf/pdf.js'
                         ]
                     }).then(function() {
-                        function checkVariable() {
-                            if(PDFJS){
-                                $ocLazyLoad.load('js/pdf/viewer.js');
-                            }
-                        }
-                        setTimeout(checkVariable,100);
+                        $ocLazyLoad.load('js/pdf/viewer.js').then(attatchDomElements);
                     })
                 );
 
-                // $ocLazyLoad.load('js/viewer.js');
-                // $ocLazyLoad.load('js/viewer.js');
-                // var iframe = $element[0].firstChild;
-                //
-                // iframe.onload = function() {
-                //     $ctrl.PDFViewer = iframe.contentWindow.PDFViewerApplication;
-                //
-                //     // get document elements
-                //     var content = iframe.contentWindow;
-                //     var keys = [
-                //         'findInput',
-                //         'findHighlightAll',
-                //         'findNext',
-                //         'findPrevious'
-                //     ];
-                //     var elements = _.zipObject(keys, _.map(keys, function(id) {
-                //         return content.document.getElementById(id);
-                //     }));
-                //     console.log(elements);
-                //     _.assign(ctrlApi, elements);
-                //
-                //     deferred.resolve(true);
-                // };
-                //
+                // get document elements
+                function attatchDomElements() {
+                    var keys = [
+                        'findInput',
+                        'findHighlightAll',
+                        'findNext',
+                        'findPrevious',
+                        'presentationMode'
+                    ];
+                    var elements = _.zipObject(keys, _.map(keys, function(id) {
+                        return document.getElementById(id);
+                    }));
+                    console.log(elements);
+                    _.assign(ctrlApi, elements);
+
+                    deferred.resolve(true);
+                }
+
                 return deferred.promise;
             },
 
             // Action Methods
             find: function(q) {
                 this.findInput.value = q;
-                $ctrl.PDFViewer.findBar.dispatchEvent('');
+                PDFViewerApplication.findBar.dispatchEvent('');
             },
             nextMatch: function() {
-                $ctrl.PDFViewer.findBar.dispatchEvent('again', false);
+                PDFViewerApplication.findBar.dispatchEvent('again', false);
             },
             prevMatch: function() {
                 this.findPrevious.click();
-                $ctrl.PDFViewer.findBar.dispatchEvent('again', true);
+                PDFViewerApplication.findBar.dispatchEvent('again', true);
             },
             highlightAll: function(highlight) {
                 this.findHighlightAll.checked = highlight;
-                $ctrl.PDFViewer.findBar.dispatchEvent('highlightallchange');
+                PDFViewerApplication.findBar.dispatchEvent('highlightallchange');
+            },
+            enterFullscreen: function() {
+                this.presentationMode.click();
             }
         };
 
