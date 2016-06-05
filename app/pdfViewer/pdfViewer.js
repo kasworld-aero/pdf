@@ -32,7 +32,6 @@
         $ctrl.fileUrl = buildUrl();
 
 
-
         // Update on data change
         $ctrl.$onChanges = function(changesObj) {
             console.log('PDF Viewer changed: ', changesObj);
@@ -70,6 +69,7 @@
             return $sce.trustAsResourceUrl(url);
         }
 
+
         // Viewer API
         var ctrlApi = {
 
@@ -93,15 +93,35 @@
                             'css/viewer.css',
                             'js/pdf/compatibility.js',
                             'js/pdf/l10n.js',
-                            'js/pdf/pdf.js'
+                            'js/pdf/pdf.js',
+                            'js/pdf/viewer.js'
                         ]
-                    }).then(function() {
-                        $ocLazyLoad.load('js/pdf/viewer.js').then(attatchDomElements);
-                    })
+                    }).then(getDomElements)
                 );
 
+
+                /* Init Helper Functions */
+
+                // needed to create custom link element for l10n resource
+                function loadl10n(href, callback) {
+                    var link = document.createElement('link');
+                    var loaded = false;
+                    link.setAttribute('rel', 'resource');
+                    link.setAttribute('type', 'application/l10n');
+                    link.setAttribute('href', href);
+                    if (callback) {
+                      link.onload = function() {
+                        if (!loaded) {
+                          callback();
+                        }
+                        loaded = true;
+                      };
+                    }
+                    document.getElementsByTagName('head')[0].appendChild(link);
+                }
+
                 // get document elements
-                function attatchDomElements() {
+                function getDomElements() {
                     var keys = [
                         'findInput',
                         'findHighlightAll',
@@ -121,7 +141,8 @@
                 return deferred.promise;
             },
 
-            // Action Methods
+
+            // API Action Methods
             find: function(q) {
                 this.findInput.value = q;
                 PDFViewerApplication.findBar.dispatchEvent('');
@@ -151,24 +172,6 @@
             // findNext();
             // cycleFind();
         });
-
-        function loadl10n(href, callback) {
-            var link = document.createElement('link');
-            var loaded = false;
-            link.setAttribute('rel', 'resource');
-            link.setAttribute('type', 'application/l10n');
-            link.setAttribute('href', href);
-            if (callback) {
-              link.onload = function() {
-                if (!loaded) {
-                  callback();
-                }
-                loaded = true;
-              };
-            }
-            document.getElementsByTagName('head')[0].appendChild(link);
-        }
-
 
 
         /* DEMO STUFF */

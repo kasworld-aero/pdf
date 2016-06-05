@@ -1,3 +1,4 @@
+// PDF Viewer Overrides
 pdf-viewer {
 	div.main {
 		background-color: #F7F7F7;
@@ -6,26 +7,22 @@ pdf-viewer {
 		background-color: #1ABC9C;
 		background-image: none;
 	}
-	div[dir='ltr'] .toolbarButton.pageUp::before, div[dir='ltr'] .toolbarButton.pageDown::before {
-		content: '\f106';
-		font-family: FontAwesome;
-		font-weight: normal;
-		font-style: normal;
-		display: inline-block;
-		text-decoration: inherit;
-		font-size: 4rem;
-	    margin: 10px 3px;
-	}
-	div[dir='ltr'] .toolbarButton.pageDown::before {
-		content: '\f107';
-	}
 	#scaleSelectContainer {
 		margin-top: 6px;
+	}
+	.toolbarButton {
+		padding: 3px 0px 0px;
+		height: 21px;
 	}
 	.textLayer .highlight.selected {
 		background-color: #1ABC9C;
 	}
 	.textLayer .highlight {
 		background-color: #9B59B6;
+	}
+	input[type=checkbox]+label, input[type=radio]+label {
+		&:after, &:before {
+			content: initial;
+		}
 	}
 }

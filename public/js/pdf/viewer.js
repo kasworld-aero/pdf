@@ -9368,7 +9368,14 @@ outerContainer
     pdfjsWebLibs.pdfjsWebApp.PDFViewerApplication.run(config);
   }
 
-  webViewerLoad();
+  function checkForPDFJS() {
+    if (PDFJS) {
+      webViewerLoad();
+    }
+  }
+  setTimeout(checkForPDFJS, 100);
+
+  // wait for PDFJS to load before loading the web viewer
   // document.addEventListener('DOMContentLoaded', webViewerLoad, true);
 }());
 /* jshint ignore:end */
