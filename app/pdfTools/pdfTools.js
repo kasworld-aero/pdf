@@ -8,6 +8,8 @@
             search: '&',
             fullscreen: '&',
             highlight: '&',
+            next: '&',
+            prev: '&',
         }
     };
 
@@ -24,7 +26,6 @@
             $ctrl.searchQuery = $ctrl.keywords[index];
             $ctrl.search({query: $ctrl.searchQuery});
         };
-
         $ctrl.onChecked = function(){
             $ctrl.highlight({ highlightAll: $ctrl.highlightAll });
         };

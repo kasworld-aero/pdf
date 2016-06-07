@@ -37,6 +37,12 @@
 		$ctrl.fullscreen = function() {
 			$ctrl.isFullscreen  = !$ctrl.isFullscreen;
 		};
+		$ctrl.nextMatch = function() {
+			$ctrl.toggleNext = !$ctrl.toggleNext;
+		};
+		$ctrl.prevMatch = function() {
+			$ctrl.togglePrev = !$ctrl.togglePrev;
+		};
 		$ctrl.updateHighlight = function(highlightAll) {
 			$ctrl.highlightAll = highlightAll;
 			console.log('Highlight from Main: ', $ctrl.highlightAll);
@@ -64,6 +70,8 @@
             search: '&',
             fullscreen: '&',
             highlight: '&',
+            next: '&',
+            prev: '&',
         }
     };
 
@@ -80,7 +88,6 @@
             $ctrl.searchQuery = $ctrl.keywords[index];
             $ctrl.search({query: $ctrl.searchQuery});
         };
-
         $ctrl.onChecked = function(){
             $ctrl.highlight({ highlightAll: $ctrl.highlightAll });
         };
@@ -98,23 +105,23 @@
         templateUrl: 'tpl/pdf-viewer.tpl.html',
         controller: pdfViewerCtrl,
         bindings: {
-            baseUrl: '<',
             file: '<',
             fullscreen: '<',
             highlight: '<',
             search: '<',
+            next: '<',
+            prev: '<',
             onUpdate: '&'
         }
     };
 
-    pdfViewerCtrl.$inject = ['$element', '$ocLazyLoad', '$q',  '$sce'];
+    pdfViewerCtrl.$inject = ['$element', '$ocLazyLoad', '$q', '$sce'];
 
     function pdfViewerCtrl($element, $ocLazyLoad, $q, $sce) {
         var $ctrl = this;
         window.pdfFileUrl = $ctrl.file;
 
         // Attribute Properties with defaults
-        $ctrl.baseUrl = $ctrl.baseUrl || '/pdfjs/web/viewer.html';
         $ctrl.fullscreen = $ctrl.fullscreen || false;
         $ctrl.height = $ctrl.height || '800px';
         $ctrl.highlight = $ctrl.highlight || false;
@@ -123,35 +130,41 @@
         // Update on data change
         $ctrl.$onChanges = function(changesObj) {
             // console.log('PDF Viewer changed: ', changesObj);
-            update(changesObj);
+            updateViewer(changesObj);
         };
 
-        function update(changes) {
+        function updateViewer(changes) {
             if (changes.file) {
                 updateUrl();
             }
 
             if ($ctrl.ready) {
-                if (changes.search) {
+                if (angular.isDefined(changes.search)) {
                     $ctrl.find($ctrl.search);
                 }
 
-                if (changes.highlight) {
+                if (angular.isDefined(changes.highlight)) {
                     $ctrl.highlightAll($ctrl.highlight);
                 }
 
-                if (changes.fullscreen) {
+                if (angular.isDefined(changes.fullscreen)) {
                     $ctrl.enterFullscreen();
+                }
+
+                if (angular.isDefined(changes.next)) {
+                    $ctrl.nextMatch();
+                }
+
+                if (angular.isDefined(changes.prev)) {
+                    $ctrl.prevMatch();
                 }
             }
 
-            if ($ctrl.onUpdate) {
-                $ctrl.onUpdate();
-            }
+            $ctrl.onUpdate();
         }
 
         function updateUrl() {
-            if ($ctrl.file && PDFViewerApplication)  {
+            if ($ctrl.file && window.PDFViewerApplication) {
                 PDFViewerApplication.openFileViaURL($ctrl.file);
             }
         }
@@ -197,12 +210,12 @@
                     link.setAttribute('type', 'application/l10n');
                     link.setAttribute('href', href);
                     if (callback) {
-                      link.onload = function() {
-                        if (!loaded) {
-                          callback();
-                        }
-                        loaded = true;
-                      };
+                        link.onload = function() {
+                            if (!loaded) {
+                                callback();
+                            }
+                            loaded = true;
+                        };
                     }
                     document.getElementsByTagName('head')[0].appendChild(link);
                 }
@@ -212,8 +225,6 @@
                     var keys = [
                         'findInput',
                         'findHighlightAll',
-                        'findNext',
-                        'findPrevious',
                         'presentationMode'
                     ];
                     var elements = _.zipObject(keys, _.map(keys, function(id) {
@@ -238,7 +249,6 @@
                 PDFViewerApplication.findBar.dispatchEvent('again', false);
             },
             prevMatch: function() {
-                this.findPrevious.click();
                 PDFViewerApplication.findBar.dispatchEvent('again', true);
             },
             highlightAll: function(highlight) {
@@ -254,45 +264,7 @@
         _.assign($ctrl, ctrlApi);
         $ctrl.init().then(function(isReady) {
             $ctrl.ready = isReady;
-
-            // DEMO
-            // findNext();
-            // cycleFind();
-            // cycleFiles();
         });
-
-
-        /* DEMO STUFF */
-        function cycleFind() {
-            var find = ['nonlinear', 'vibration', 'duffing'],
-                index = 0,
-                i = 0;
-            setInterval(function() {
-                $ctrl.find(find[index]);
-                index = i++ % find.length;
-                console.log(find[index], index);
-            }, 2000);
-        }
-
-        function findNext() {
-            $ctrl.find('nonlinear');
-            setInterval(function() {
-                $ctrl.prevMatch();
-            }, 2000);
-        }
-
-        function cycleFiles() {
-            var fileList = [
-                'Abstract NSRC Workshop Evans+figure.pdf',
-                'jbc1132801.pdf',
-                'LDRD_Report_FY2014_UrbanVS_vu3.pdf',
-                'Weaver_AAG_2013.pdf'
-            ], index = 0, i = 1;
-            setInterval(function() {
-                PDFViewerApplication.openFileViaURL('/test_pdfs/'+fileList[index]);
-                index = i++ % fileList.length;
-            },5000);
-        }
 
     }
 

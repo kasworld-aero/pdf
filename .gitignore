@@ -45,3 +45,6 @@ node_modules
 
 # Test PDFs #
 public/test_pdfs/*.pdf
+
+# Test Coverage #
+coverage

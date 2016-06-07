@@ -17,6 +17,12 @@
 		$ctrl.fullscreen = function() {
 			$ctrl.isFullscreen  = !$ctrl.isFullscreen;
 		};
+		$ctrl.nextMatch = function() {
+			$ctrl.toggleNext = !$ctrl.toggleNext;
+		};
+		$ctrl.prevMatch = function() {
+			$ctrl.togglePrev = !$ctrl.togglePrev;
+		};
 		$ctrl.updateHighlight = function(highlightAll) {
 			$ctrl.highlightAll = highlightAll;
 			console.log('Highlight from Main: ', $ctrl.highlightAll);
