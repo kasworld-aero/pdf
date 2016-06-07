@@ -26,7 +26,6 @@
         };
 
         $ctrl.onChecked = function(){
-            console.log($ctrl.highlightAll);
             $ctrl.highlight({ highlightAll: $ctrl.highlightAll });
         };
     }
