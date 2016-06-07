@@ -5,6 +5,10 @@ pdf-viewer #toolbarContainer {
   background-image: none; }
 pdf-viewer #scaleSelectContainer {
   margin-top: 6px; }
+pdf-viewer #viewerContainer {
+  top: 0; }
+pdf-viewer .toolbar {
+  display: none; }
 pdf-viewer .toolbarButton {
   padding: 3px 0px 0px;
   height: 21px; }
