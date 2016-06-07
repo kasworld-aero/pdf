@@ -10,6 +10,12 @@ pdf-viewer {
 	#scaleSelectContainer {
 		margin-top: 6px;
 	}
+	#viewerContainer {
+		top: 0;
+	}
+	.toolbar {
+		display: none;
+	}
 	.toolbarButton {
 		padding: 3px 0px 0px;
 		height: 21px;

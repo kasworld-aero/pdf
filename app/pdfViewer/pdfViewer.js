@@ -19,28 +19,24 @@
 
     function pdfViewerCtrl($element, $ocLazyLoad, $q, $sce) {
         var $ctrl = this;
+        window.pdfFileUrl = $ctrl.file;
 
         // Attribute Properties with defaults
         $ctrl.baseUrl = $ctrl.baseUrl || '/pdfjs/web/viewer.html';
         $ctrl.fullscreen = $ctrl.fullscreen || false;
-        $ctrl.file = $ctrl.file || '/pdfjs/web/compressed.tracemonkey-pldi-09.pdf';
         $ctrl.height = $ctrl.height || '800px';
         $ctrl.highlight = $ctrl.highlight || false;
         $ctrl.onUpdate = $ctrl.onUpdate || function() {};
 
-        // Computed Properties
-        $ctrl.fileUrl = buildUrl();
-
-
         // Update on data change
         $ctrl.$onChanges = function(changesObj) {
-            console.log('PDF Viewer changed: ', changesObj);
+            // console.log('PDF Viewer changed: ', changesObj);
             update(changesObj);
         };
 
         function update(changes) {
             if (changes.file) {
-                $ctrl.fileUrl = buildUrl();
+                updateUrl();
             }
 
             if ($ctrl.ready) {
@@ -62,11 +58,10 @@
             }
         }
 
-        // construct a TRUSTED URL for the iframe
-        function buildUrl() {
-            var url = $ctrl.baseUrl + '?file=' + encodeURIComponent($ctrl.file);
-            console.log(url);
-            return $sce.trustAsResourceUrl(url);
+        function updateUrl() {
+            if ($ctrl.file && PDFViewerApplication)  {
+                PDFViewerApplication.openFileViaURL($ctrl.file);
+            }
         }
 
 
@@ -171,6 +166,7 @@
             // DEMO
             // findNext();
             // cycleFind();
+            // cycleFiles();
         });
 
 
@@ -191,6 +187,19 @@
             setInterval(function() {
                 $ctrl.prevMatch();
             }, 2000);
+        }
+
+        function cycleFiles() {
+            var fileList = [
+                'Abstract NSRC Workshop Evans+figure.pdf',
+                'jbc1132801.pdf',
+                'LDRD_Report_FY2014_UrbanVS_vu3.pdf',
+                'Weaver_AAG_2013.pdf'
+            ], index = 0, i = 1;
+            setInterval(function() {
+                PDFViewerApplication.openFileViaURL('/test_pdfs/'+fileList[index]);
+                index = i++ % fileList.length;
+            },5000);
         }
 
     }
