@@ -1,4 +1,10 @@
+.pdf-viewer-container {
+  display: flex;
+  height: 100vh; }
+
 pdf-viewer {
+  flex: 1 1 auto;
+  position: relative;
   /* -ms-a */
   /* outer/inner center provides horizontal center */
   /* TODO: file FF bug to support ::-moz-selection:window-inactive
@@ -112,7 +118,8 @@ pdf-viewer {
     border: 9px solid transparent;
     background-clip: content-box;
     border-image: url("images/shadow.png") 9 9 repeat;
-    background-color: white; }
+    background-color: white;
+    box-sizing: content-box; }
   pdf-viewer .pdfViewer.removePageBorders .page {
     margin: 0 auto 10px;
     border: none; }
@@ -147,15 +154,13 @@ pdf-viewer {
   pdf-viewer * {
     padding: 0;
     margin: 0; }
-    pdf-viewer *, pdf-viewer * :before, pdf-viewer *, pdf-viewer * :after {
-      box-sizing: content-box; }
   pdf-viewer div {
     height: auto; }
   pdf-viewer div.main {
-    height: 100vh;
+    position: absolute;
+    height: 100%;
     width: 100%;
     overflow: hidden;
-    /* Font size is needed to make the activity bar the correct size. */
     font-size: 10px;
     background-color: #404040;
     background-image: url("images/texture.png"); }
@@ -1384,7 +1389,8 @@ pdf-viewer {
         border: none;
         box-shadow: none;
         background-clip: content-box;
-        background-color: white; }
+        background-color: white;
+        box-sizing: content-box; }
       pdf-viewer .page[data-loaded] {
         display: block; }
       pdf-viewer .fileInput {

@@ -1,5 +1,2 @@
-pdf-viewer .toolbarButton {
-  padding: 3px 0px 0px;
-  height: 21px; }
 pdf-viewer input[type=checkbox] + label:after, pdf-viewer input[type=checkbox] + label:before, pdf-viewer input[type=radio] + label:after, pdf-viewer input[type=radio] + label:before {
   content: initial; }

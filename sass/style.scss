@@ -1,10 +1,15 @@
-// PDF Viewer Overrides
+//
+// .pdf-viewer-container {
+//     display: flex;
+//     height: 100vh;
+// }
+
 pdf-viewer {
 	// fixes for seirra style conflicts;
-	.toolbarButton {
-		padding: 3px 0px 0px;
-		height: 21px;
-	}
+	// .toolbarButton {
+	// 	padding: 3px 0px 0px;
+	// 	height: 21px;
+	// }
 	input[type=checkbox]+label, input[type=radio]+label {
 		&:after, &:before {
 			content: initial;

@@ -120,11 +120,16 @@
         }
     };
 
-    pdfViewerCtrl.$inject = ['$log', '$ocLazyLoad', '$q', 'pdfViewerService'];
+    pdfViewerCtrl.$inject = ['$element', '$log', 'pdfViewerService'];
 
-    function pdfViewerCtrl($log, $ocLazyLoad, $q, pdfViewerService) {
+    function pdfViewerCtrl($element, $log, pdfViewerService) {
         var $ctrl = this;
         window.pdfViewerFileUrl = $ctrl.file || '';
+
+        var parent = $element.parent();
+        if (parent && !parent.hasClass('pdf-viewer-container')) {
+            parent.addClass('pdf-viewer-container');
+        }
 
         /****************************************
          *      Controller Attributes           *
@@ -141,7 +146,7 @@
              highlightAll: highlightAll,
              enterFullscreen: enterFullscreen
          });
-         
+
         /****************************************
          *      Lifecycle Hooks                 *
          ****************************************/

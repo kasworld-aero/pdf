@@ -1,4 +1,12 @@
+.pdf-viewer-container {
+    display: flex;
+    height: 100vh;
+}
+
 pdf-viewer {
+	flex: 1 1 auto;
+	position: relative;
+
 	.loadingInProgress {
 		height: 100%;
 	}
@@ -132,6 +140,7 @@ pdf-viewer {
 		background-clip: content-box;
 		border-image: url("images/shadow.png") 9 9 repeat;
 		background-color: white;
+		box-sizing: content-box;
 	}
 	.pdfViewer.removePageBorders .page {
 		margin: 0 auto 10px;
@@ -176,19 +185,16 @@ pdf-viewer {
 	* {
 		padding: 0;
 		margin: 0;
-
-		&, :before, &, :after {
-			box-sizing: content-box;
-		}
 	}
+
 	div{
 		height: auto;
 	}
 	div.main {
-		height: 100vh;
+		position: absolute;
+		height: 100%;
 		width: 100%;
 	    overflow: hidden;
-		/* Font size is needed to make the activity bar the correct size. */
 		font-size: 10px;
 		background-color: #404040;
 		background-image: url("images/texture.png");
@@ -1728,6 +1734,7 @@ pdf-viewer {
 			box-shadow: none;
 			background-clip: content-box;
 			background-color: white;
+			box-sizing: content-box;
 		}
 		.page[data-loaded] {
 			display: block;
