@@ -4,7 +4,8 @@
     pdfViewerService.$inject = ['$log', '$ocLazyLoad', '$q'];
 
     function pdfViewerService($log, $ocLazyLoad, $q) {
-        var service = {
+        var baseUrl = 'js/pdf/',
+        service = {
             load: load,
         };
 
@@ -32,7 +33,7 @@
 
         function loadl10n() {
             var deferred = $q.defer();
-            var href = 'js/pdf/locale/locale.properties';
+            var href = baseUrl + 'locale/locale.properties';
 
             var link = document.createElement('link');
             link.setAttribute('rel', 'resource');
@@ -56,15 +57,15 @@
         function loadPDFJS() {
             return $ocLazyLoad.load({
                 files: [
-                    'js/pdf/compatibility.js',
-                    'js/pdf/l10n.js',
-                    'js/pdf/pdf.js',
+                    baseUrl + 'compatibility.js',
+                    baseUrl + 'l10n.js',
+                    baseUrl + 'pdf.js',
                 ]
             });
         }
 
         function loadViewerJS() {
-            return $ocLazyLoad.load('js/pdf/viewer.js');
+            return $ocLazyLoad.load(baseUrl + 'viewer.js');
         }
     }
 
