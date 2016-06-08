@@ -154,6 +154,7 @@ pdf-viewer {
   pdf-viewer div.main {
     height: 100vh;
     width: 100%;
+    overflow: hidden;
     /* Font size is needed to make the activity bar the correct size. */
     font-size: 10px;
     background-color: #404040;
