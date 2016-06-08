@@ -15,9 +15,9 @@
         }
     };
 
-    pdfViewerCtrl.$inject = ['$log', '$ocLazyLoad', '$q', 'pdfViewerService'];
+    pdfViewerCtrl.$inject = ['$log', 'pdfViewerService'];
 
-    function pdfViewerCtrl($log, $ocLazyLoad, $q, pdfViewerService) {
+    function pdfViewerCtrl($log, pdfViewerService) {
         var $ctrl = this;
         window.pdfViewerFileUrl = $ctrl.file || '';
 
@@ -36,7 +36,7 @@
              highlightAll: highlightAll,
              enterFullscreen: enterFullscreen
          });
-         
+
         /****************************************
          *      Lifecycle Hooks                 *
          ****************************************/
