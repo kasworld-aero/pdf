@@ -134,16 +134,14 @@
         /****************************************
          *      Controller API                  *
          ****************************************/
-         var api = {
+         angular.extend($ctrl, {
              find: find,
              nextMatch: nextMatch,
              previousMatch: previousMatch,
              highlightAll: highlightAll,
              enterFullscreen: enterFullscreen
-         };
-
-        angular.extend($ctrl, api);
-
+         });
+         
         /****************************************
          *      Lifecycle Hooks                 *
          ****************************************/
