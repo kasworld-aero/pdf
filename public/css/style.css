@@ -1,20 +1,5 @@
-pdf-viewer div.main {
-  background-color: #F7F7F7; }
-pdf-viewer #toolbarContainer {
-  background-color: #1ABC9C;
-  background-image: none; }
-pdf-viewer #scaleSelectContainer {
-  margin-top: 6px; }
-pdf-viewer #viewerContainer {
-  top: 0; }
-pdf-viewer .toolbar {
-  display: none; }
 pdf-viewer .toolbarButton {
   padding: 3px 0px 0px;
   height: 21px; }
-pdf-viewer .textLayer .highlight.selected {
-  background-color: #1ABC9C; }
-pdf-viewer .textLayer .highlight {
-  background-color: #9B59B6; }
 pdf-viewer input[type=checkbox] + label:after, pdf-viewer input[type=checkbox] + label:before, pdf-viewer input[type=radio] + label:after, pdf-viewer input[type=radio] + label:before {
   content: initial; }

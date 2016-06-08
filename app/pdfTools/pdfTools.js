@@ -2,14 +2,14 @@
     'use strict';
 
     var pdfTools = {
-        templateUrl: 'tpl/pdf-tools.tpl.html',
+        templateUrl: 'tpl/pdfTools.tpl.html',
         controller: pdfToolsCtrl,
         bindings: {
             search: '&',
             fullscreen: '&',
             highlight: '&',
             next: '&',
-            prev: '&',
+            previous: '&',
         }
     };
 

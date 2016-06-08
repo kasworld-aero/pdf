@@ -1,9 +1,9 @@
 (function() {
     'use strict';
 
-    pdfViewerService.$inject = ['$ocLazyLoad', '$q'];
+    pdfViewerService.$inject = ['$log', '$ocLazyLoad', '$q'];
 
-    function pdfViewerService($ocLazyLoad, $q) {
+    function pdfViewerService($log, $ocLazyLoad, $q) {
         var service = {
             load: load,
         };
@@ -11,7 +11,6 @@
         return service;
 
         function load() {
-            console.log('loading');
             return loadl10n()
                 .then(function() {
                     return loadCSS();
@@ -25,8 +24,9 @@
                 .then(function() {
                     return 'finished loading viewer dependencies';
                 })
-                .catch(function(err) {
-                    console.error('error while trying to load resource dependencies for pdfViewer', err);
+                .catch(function(error) {
+                    $log.error('Error while trying to load resource dependencies for pdfViewer');
+                    $log.error(error);
                 });
         }
 

@@ -5,7 +5,7 @@
     "use strict";
 
     function load() {
-        var DEFAULT_URL = 'js/pdf/compressed.tracemonkey-pldi-09.pdf';
+        var DEFAULT_URL = '';
 
         var pdfjsWebLibs = {
             pdfjsWebPDFJS: window.pdfjsDistBuildPdf
@@ -8471,11 +8471,12 @@
                 }
 
                 function webViewerInitialized() {
+                    /*----  No longer parsing the URL for file location ----*/
                     // var queryString = document.location.search.substring(1);
                     // var params = parseQueryString(queryString);
                     // var file = 'file' in params ? params.file : DEFAULT_URL;
 
-                    var file = 'pdfFileUrl' in window ? window.pdfFileUrl : DEFAULT_URL;
+                    var file = 'pdfViewerFileUrl' in window ? window.pdfViewerFileUrl : DEFAULT_URL;
                     validateFileURL(file);
 
                     var waitForBeforeOpening = [];

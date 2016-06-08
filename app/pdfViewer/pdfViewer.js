@@ -1,9 +1,8 @@
 (function() {
     'use strict';
 
-    require('lodash');
     var pdfViewer = {
-        templateUrl: 'tpl/pdf-viewer.tpl.html',
+        templateUrl: 'tpl/pdfViewer.tpl.html',
         controller: pdfViewerCtrl,
         bindings: {
             file: '<',
@@ -16,18 +15,29 @@
         }
     };
 
-    pdfViewerCtrl.$inject = ['$ocLazyLoad', '$q', 'pdfViewerService'];
+    pdfViewerCtrl.$inject = ['$log', '$ocLazyLoad', '$q', 'pdfViewerService'];
 
-    function pdfViewerCtrl($ocLazyLoad, $q, pdfViewerService) {
+    function pdfViewerCtrl($log, $ocLazyLoad, $q, pdfViewerService) {
         var $ctrl = this;
+        window.pdfViewerFileUrl = $ctrl.file || '';
 
         /****************************************
          *      Controller Attributes           *
          ****************************************/
+        $ctrl.ready = false;
 
         /****************************************
          *      Controller API                  *
          ****************************************/
+         var api = {
+             find: find,
+             nextMatch: nextMatch,
+             previousMatch: previousMatch,
+             highlightAll: highlightAll,
+             enterFullscreen: enterFullscreen
+         };
+
+        angular.extend($ctrl, api);
 
         /****************************************
          *      Lifecycle Hooks                 *
@@ -36,9 +46,7 @@
 
         function init() {
             console.log('👊 activating component');
-
             pdfViewerService.load().then(function(msg) {
-                console.log(msg);
                 getDomElements();
                 $ctrl.ready = true;
             });
@@ -46,90 +54,78 @@
         }
 
         $ctrl.$onChanges = function(changesObj) {
+
             if (changesObj.file) {
-                updateUrl();
+                window.pdfViewerFileUrl = $ctrl.file;
+                if (window.PDFViewerApplication) {
+                    PDFViewerApplication.openFileViaURL($ctrl.file);
+                }
             }
 
             if ($ctrl.ready) {
-                if (angular.isDefined(changesObj.search)) {
+                if (typeof changesObj.search !== 'undefined') {
                     $ctrl.find($ctrl.search);
                 }
 
-                if (angular.isDefined(changesObj.highlight)) {
+                if (typeof changesObj.highlight !== 'undefined') {
                     $ctrl.highlightAll($ctrl.highlight);
                 }
 
-                if (angular.isDefined(changesObj.fullscreen)) {
+                if (typeof changesObj.fullscreen !== 'undefined') {
                     $ctrl.enterFullscreen();
                 }
 
-                if (angular.isDefined(changesObj.next)) {
+                if (typeof changesObj.next !== 'undefined') {
                     $ctrl.nextMatch();
                 }
 
-                if (angular.isDefined(changesObj.prev)) {
-                    $ctrl.prevMatch();
+                if (typeof changesObj.previous !== 'undefined') {
+                    $ctrl.previousMatch();
                 }
 
                 $ctrl.onUpdate();
             }
         };
 
-        function updateUrl() {
-            if ($ctrl.file && window.PDFViewerApplication) {
-                PDFViewerApplication.openFileViaURL($ctrl.file);
-            }
-        }
-
         /****************************************
          *      API Functions                   *
          ****************************************/
-        var api = {
-            find: find,
-            nextMatch: nextMatch,
-            previousMatch: previousMatch,
-            highlightAll: highlightAll,
-            enterFullscreen: enterFullscreen
-        };
-
-         function find(query) {
+        function find(query) {
             this.findInput.value = query;
             PDFViewerApplication.findBar.dispatchEvent('');
-         }
+        }
 
-         function nextMatch() {
+        function nextMatch() {
             PDFViewerApplication.findBar.dispatchEvent('again', false);
-         }
+        }
 
-         function previousMatch() {
+        function previousMatch() {
             PDFViewerApplication.findBar.dispatchEvent('again', true);
-         }
+        }
 
-         function highlightAll(highlight) {
+        function highlightAll(highlight) {
             this.findHighlightAll.checked = highlight;
             PDFViewerApplication.findBar.dispatchEvent('highlightallchange');
-         }
+        }
 
-         function enterFullscreen() {
+        function enterFullscreen() {
             $ctrl.presentationMode.click();
-         }
-
-         angular.extend($ctrl, api);
+        }
 
         /****************************************
          *      Private Functions               *
          ****************************************/
-
-        // get document elements
         function getDomElements() {
-            var keys = [
-                'findInput',
-                'findHighlightAll',
-                'presentationMode'
-            ];
-            var elements = _.zipObject(keys, _.map(keys, function(id) {
-                return document.getElementById(id);
-            }));
+            var elements = {
+                'findInput': null,
+                'findHighlightAll': null,
+                'presentationMode': null
+            };
+
+            Object.keys(elements).forEach(function(key) {
+                elements[key] = document.getElementById(key);
+            });
+
             angular.extend($ctrl, elements);
         }
 
