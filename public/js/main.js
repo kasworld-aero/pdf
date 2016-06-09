@@ -3,23 +3,19 @@
 	'use strict';
 
 	require('angular');
-	require('oclazyload');
+	require('../src/pdf_viewer.js');
 	var pdfMain = require('./pdfMain/pdfMain.js');
 	var pdfTools = require('./pdfTools/pdfTools.js');
-	var pdfViewer = require('./pdfViewer/pdfViewer.js');
-	var pdfViewerService = require('./pdfViewer/pdfViewerService.js');
 
-	var pdfApp = angular.module('pdfApp', ['oc.lazyLoad']);
+	var pdfApp = angular.module('pdfApp', ['oc.lazyLoad', 'pdf.viewer']);
 
 	pdfApp
 		.value('$routerRootComponent', 'pdfApp')
 		.component('pdfMain', pdfMain)
-		.component('pdfTools', pdfTools)
-		.service('pdfViewerService', pdfViewerService)
-		.component('pdfViewer', pdfViewer);
+		.component('pdfTools', pdfTools);
 }());
 
-},{"./pdfMain/pdfMain.js":2,"./pdfTools/pdfTools.js":3,"./pdfViewer/pdfViewer.js":4,"./pdfViewer/pdfViewerService.js":5,"angular":7,"oclazyload":8}],2:[function(require,module,exports){
+},{"../src/pdf_viewer.js":9,"./pdfMain/pdfMain.js":2,"./pdfTools/pdfTools.js":3,"angular":5}],2:[function(require,module,exports){
 (function() {
     'use strict';
 
@@ -103,221 +99,6 @@
 }());
 
 },{}],4:[function(require,module,exports){
-(function() {
-    'use strict';
-
-    var pdfViewer = {
-        templateUrl: 'tpl/pdfViewer.tpl.html',
-        controller: pdfViewerCtrl,
-        bindings: {
-            file: '<',
-            fullscreen: '<',
-            highlight: '<',
-            search: '<',
-            next: '<',
-            previous: '<',
-            onUpdate: '&'
-        }
-    };
-
-    pdfViewerCtrl.$inject = ['$element', '$log', 'pdfViewerService'];
-
-    function pdfViewerCtrl($element, $log, pdfViewerService) {
-        var $ctrl = this;
-        window.pdfViewerFileUrl = $ctrl.file || '';
-
-        var parent = $element.parent();
-        if (parent && !parent.hasClass('pdf-viewer-container')) {
-            parent.addClass('pdf-viewer-container');
-        }
-
-        /****************************************
-         *      Controller Attributes           *
-         ****************************************/
-        $ctrl.ready = false;
-
-        /****************************************
-         *      Controller API                  *
-         ****************************************/
-         angular.extend($ctrl, {
-             find: find,
-             nextMatch: nextMatch,
-             previousMatch: previousMatch,
-             highlightAll: highlightAll,
-             enterFullscreen: enterFullscreen
-         });
-
-        /****************************************
-         *      Lifecycle Hooks                 *
-         ****************************************/
-        $ctrl.$onInit = init;
-
-        function init() {
-            console.log('👊 activating component');
-            pdfViewerService.load().then(function(msg) {
-                getDomElements();
-                $ctrl.ready = true;
-            });
-
-        }
-
-        $ctrl.$onChanges = function(changesObj) {
-
-            if (changesObj.file) {
-                window.pdfViewerFileUrl = $ctrl.file;
-                if (window.PDFViewerApplication) {
-                    PDFViewerApplication.openFileViaURL($ctrl.file);
-                }
-            }
-
-            if ($ctrl.ready) {
-                if (typeof changesObj.search !== 'undefined') {
-                    $ctrl.find($ctrl.search);
-                }
-
-                if (typeof changesObj.highlight !== 'undefined') {
-                    $ctrl.highlightAll($ctrl.highlight);
-                }
-
-                if (typeof changesObj.fullscreen !== 'undefined') {
-                    $ctrl.enterFullscreen();
-                }
-
-                if (typeof changesObj.next !== 'undefined') {
-                    $ctrl.nextMatch();
-                }
-
-                if (typeof changesObj.previous !== 'undefined') {
-                    $ctrl.previousMatch();
-                }
-
-                $ctrl.onUpdate();
-            }
-        };
-
-        /****************************************
-         *      API Functions                   *
-         ****************************************/
-        function find(query) {
-            this.findInput.value = query;
-            PDFViewerApplication.findBar.dispatchEvent('');
-        }
-
-        function nextMatch() {
-            PDFViewerApplication.findBar.dispatchEvent('again', false);
-        }
-
-        function previousMatch() {
-            PDFViewerApplication.findBar.dispatchEvent('again', true);
-        }
-
-        function highlightAll(highlight) {
-            this.findHighlightAll.checked = highlight;
-            PDFViewerApplication.findBar.dispatchEvent('highlightallchange');
-        }
-
-        function enterFullscreen() {
-            $ctrl.presentationMode.click();
-        }
-
-        /****************************************
-         *      Private Functions               *
-         ****************************************/
-        function getDomElements() {
-            var elements = {
-                'findInput': null,
-                'findHighlightAll': null,
-                'presentationMode': null
-            };
-
-            Object.keys(elements).forEach(function(key) {
-                elements[key] = document.getElementById(key);
-            });
-
-            angular.extend($ctrl, elements);
-        }
-
-    }
-
-    module.exports = pdfViewer;
-}());
-
-},{}],5:[function(require,module,exports){
-(function() {
-    'use strict';
-
-    pdfViewerService.$inject = ['$log', '$ocLazyLoad', '$q'];
-
-    function pdfViewerService($log, $ocLazyLoad, $q) {
-        var baseUrl = 'js/pdf/',
-        service = {
-            load: load,
-        };
-
-        return service;
-
-        function load() {
-            return loadl10n()
-                .then(function() {
-                    return loadCSS();
-                })
-                .then(function() {
-                    return loadPDFJS();
-                })
-                .then(function() {
-                    return loadViewerJS();
-                })
-                .then(function() {
-                    return 'finished loading viewer dependencies';
-                })
-                .catch(function(error) {
-                    $log.error('Error while trying to load resource dependencies for pdfViewer');
-                    $log.error(error);
-                });
-        }
-
-        function loadl10n() {
-            var deferred = $q.defer();
-            var href = baseUrl + 'locale/locale.properties';
-
-            var link = document.createElement('link');
-            link.setAttribute('rel', 'resource');
-            link.setAttribute('type', 'application/l10n');
-            link.setAttribute('href', href);
-            document.getElementsByTagName('head')[0].appendChild(link);
-            deferred.resolve();
-
-            return deferred.promise;
-        }
-
-        function loadCSS() {
-            return $ocLazyLoad.load({
-                insertBefore: '#load_css_before',
-                files: [
-                    'css/viewer.css',
-                ]
-            });
-        }
-
-        function loadPDFJS() {
-            return $ocLazyLoad.load({
-                files: [
-                    baseUrl + 'compatibility.js',
-                    baseUrl + 'l10n.js',
-                    baseUrl + 'pdf.js',
-                ]
-            });
-        }
-
-        function loadViewerJS() {
-            return $ocLazyLoad.load(baseUrl + 'viewer.js');
-        }
-    }
-
-    module.exports = pdfViewerService;
-})();
-
-},{}],6:[function(require,module,exports){
 /**
  * @license AngularJS v1.5.6
  * (c) 2010-2016 Google, Inc. http://angularjs.org
@@ -31341,11 +31122,11 @@ $provide.value("$locale", {
 })(window);
 
 !window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
-},{}],7:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 require('./angular');
 module.exports = angular;
 
-},{"./angular":6}],8:[function(require,module,exports){
+},{"./angular":4}],6:[function(require,module,exports){
 /**
  * oclazyload - Load modules on demand (lazy load) with angularJS
  * @version v1.0.9
@@ -32684,4 +32465,237 @@ if (!Array.prototype.indexOf) {
         return -1;
     };
 }
-},{}]},{},[1]);
+},{}],7:[function(require,module,exports){
+(function() {
+    'use strict';
+
+    var pdfViewer = {
+        templateUrl: 'tpl/pdfViewer.tpl.html',
+        controller: pdfViewerCtrl,
+        bindings: {
+            file: '<',
+            fullscreen: '<',
+            highlight: '<',
+            search: '<',
+            next: '<',
+            previous: '<',
+            onUpdate: '&'
+        }
+    };
+
+    pdfViewerCtrl.$inject = ['$element', '$log', 'pdfViewerService'];
+
+    function pdfViewerCtrl($element, $log, pdfViewerService) {
+        var $ctrl = this;
+        window.pdfViewerFileUrl = $ctrl.file || '';
+
+        var parent = $element.parent();
+        if (parent && !parent.hasClass('pdf-viewer-container')) {
+            parent.addClass('pdf-viewer-container');
+        }
+
+        /****************************************
+         *      Controller Attributes           *
+         ****************************************/
+        $ctrl.ready = false;
+
+        /****************************************
+         *      Controller API                  *
+         ****************************************/
+        angular.extend($ctrl, {
+            find: find,
+            nextMatch: nextMatch,
+            previousMatch: previousMatch,
+            highlightAll: highlightAll,
+            enterFullscreen: enterFullscreen
+        });
+
+        /****************************************
+         *      Lifecycle Hooks                 *
+         ****************************************/
+        $ctrl.$onInit = init;
+
+        function init() {
+            console.log('👊 activating component');
+            pdfViewerService.load().then(function(msg) {
+                getDomElements();
+                $ctrl.ready = true;
+            });
+
+        }
+
+        $ctrl.$onChanges = function(changesObj) {
+
+            if (changesObj.file) {
+                window.pdfViewerFileUrl = $ctrl.file;
+                if (window.PDFViewerApplication) {
+                    PDFViewerApplication.openFileViaURL($ctrl.file);
+                }
+            }
+
+            if ($ctrl.ready) {
+                if (typeof changesObj.search !== 'undefined') {
+                    $ctrl.find($ctrl.search);
+                }
+
+                if (typeof changesObj.highlight !== 'undefined') {
+                    $ctrl.highlightAll($ctrl.highlight);
+                }
+
+                if (typeof changesObj.fullscreen !== 'undefined') {
+                    $ctrl.enterFullscreen();
+                }
+
+                if (typeof changesObj.next !== 'undefined') {
+                    $ctrl.nextMatch();
+                }
+
+                if (typeof changesObj.previous !== 'undefined') {
+                    $ctrl.previousMatch();
+                }
+
+                $ctrl.onUpdate();
+            }
+        };
+
+        /****************************************
+         *      API Functions                   *
+         ****************************************/
+        function find(query) {
+            this.findInput.value = query;
+            PDFViewerApplication.findBar.dispatchEvent('');
+        }
+
+        function nextMatch() {
+            PDFViewerApplication.findBar.dispatchEvent('again', false);
+        }
+
+        function previousMatch() {
+            PDFViewerApplication.findBar.dispatchEvent('again', true);
+        }
+
+        function highlightAll(highlight) {
+            this.findHighlightAll.checked = highlight;
+            PDFViewerApplication.findBar.dispatchEvent('highlightallchange');
+        }
+
+        function enterFullscreen() {
+            $ctrl.presentationMode.click();
+        }
+
+        /****************************************
+         *      Private Functions               *
+         ****************************************/
+        function getDomElements() {
+            var elements = {
+                'findInput': null,
+                'findHighlightAll': null,
+                'presentationMode': null
+            };
+
+            Object.keys(elements).forEach(function(key) {
+                elements[key] = document.getElementById(key);
+            });
+
+            angular.extend($ctrl, elements);
+        }
+
+    }
+
+    module.exports = pdfViewer;
+}());
+
+},{}],8:[function(require,module,exports){
+(function() {
+    'use strict';
+
+    pdfViewerService.$inject = ['$log', '$ocLazyLoad', '$q'];
+
+    function pdfViewerService($log, $ocLazyLoad, $q) {
+        var baseUrl = 'js/pdf/',
+        service = {
+            load: load,
+        };
+
+        return service;
+
+        function load() {
+            return loadl10n()
+                .then(function() {
+                    return loadCSS();
+                })
+                .then(function() {
+                    return loadPDFJS();
+                })
+                .then(function() {
+                    return loadViewerJS();
+                })
+                .then(function() {
+                    return 'finished loading viewer dependencies';
+                })
+                .catch(function(error) {
+                    $log.error('Error while trying to load resource dependencies for pdfViewer');
+                    $log.error(error);
+                });
+        }
+
+        function loadl10n() {
+            var deferred = $q.defer();
+            var href = baseUrl + 'locale/locale.properties';
+
+            var link = document.createElement('link');
+            link.setAttribute('rel', 'resource');
+            link.setAttribute('type', 'application/l10n');
+            link.setAttribute('href', href);
+            document.getElementsByTagName('head')[0].appendChild(link);
+            deferred.resolve();
+
+            return deferred.promise;
+        }
+
+        function loadCSS() {
+            return $ocLazyLoad.load({
+                insertBefore: '#load_css_before',
+                files: [
+                    'css/viewer.css',
+                ]
+            });
+        }
+
+        function loadPDFJS() {
+            return $ocLazyLoad.load({
+                files: [
+                    baseUrl + 'compatibility.js',
+                    baseUrl + 'l10n.js',
+                    baseUrl + 'pdf.js',
+                ]
+            });
+        }
+
+        function loadViewerJS() {
+            return $ocLazyLoad.load(baseUrl + 'viewer.js');
+        }
+    }
+
+    module.exports = pdfViewerService;
+})();
+
+},{}],9:[function(require,module,exports){
+(function() {
+    'use strict';
+
+    require('angular');
+    require('oclazyload');
+	var pdfViewer = require('./pdfViewer');
+	var pdfViewerService = require('./pdfViewerService');
+
+    var mainModule = angular.module('pdf.viewer', ['oc.lazyLoad']);
+
+    mainModule
+        .service('pdfViewerService', pdfViewerService)
+        .component('pdfViewer', pdfViewer);
+
+	module.exports = mainModule;
+}());
+
+},{"./pdfViewer":7,"./pdfViewerService":8,"angular":5,"oclazyload":6}]},{},[1]);

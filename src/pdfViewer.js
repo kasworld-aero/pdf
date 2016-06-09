@@ -34,13 +34,13 @@
         /****************************************
          *      Controller API                  *
          ****************************************/
-         angular.extend($ctrl, {
-             find: find,
-             nextMatch: nextMatch,
-             previousMatch: previousMatch,
-             highlightAll: highlightAll,
-             enterFullscreen: enterFullscreen
-         });
+        angular.extend($ctrl, {
+            find: find,
+            nextMatch: nextMatch,
+            previousMatch: previousMatch,
+            highlightAll: highlightAll,
+            enterFullscreen: enterFullscreen
+        });
 
         /****************************************
          *      Lifecycle Hooks                 *
