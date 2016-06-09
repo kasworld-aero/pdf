@@ -1,6 +1,11 @@
 (function() {
     'use strict';
 
+    angular
+        .module('pdf.viewer')
+        .service('pdfViewerService', pdfViewerService);
+
+
     pdfViewerService.$inject = ['$log', '$ocLazyLoad', '$q'];
 
     function pdfViewerService($log, $ocLazyLoad, $q) {
@@ -68,6 +73,4 @@
             return $ocLazyLoad.load(baseUrl + 'viewer.js');
         }
     }
-
-    module.exports = pdfViewerService;
 })();
