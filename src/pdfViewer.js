@@ -3,28 +3,27 @@
 
     angular
         .module('pdf.viewer')
-        .component('pdfViewer', pdfViewer);
+        .component('pdfViewer', {
+            templateUrl: 'src/pdfViewer.tpl.html',
+            controller: pdfViewerCtrl,
+            bindings: {
+                file: '<',
+                fullscreen: '<',
+                highlight: '<',
+                search: '<',
+                next: '<',
+                previous: '<',
+                onUpdate: '&'
+            }
+        });
 
-    var pdfViewer = {
-        templateUrl: 'tpl/pdfViewer.tpl.html',
-        controller: pdfViewerCtrl,
-        bindings: {
-            file: '<',
-            fullscreen: '<',
-            highlight: '<',
-            search: '<',
-            next: '<',
-            previous: '<',
-            onUpdate: '&'
-        }
-    };
+    pdfViewerCtrl.$inject = ['$element', '$log', '$window', 'pdfViewerService'];
 
-    pdfViewerCtrl.$inject = ['$element', '$log', 'pdfViewerService'];
-
-    function pdfViewerCtrl($element, $log, pdfViewerService) {
+    function pdfViewerCtrl($element, $log, $window, pdfViewerService) {
         var $ctrl = this;
-        window.pdfViewerFileUrl = $ctrl.file || '';
+        $window.pdfViewerFileUrl = $ctrl.file || '';
 
+        // Add container class if class is not already on parent
         var parent = $element.parent();
         if (parent && !parent.hasClass('pdf-viewer-container')) {
             parent.addClass('pdf-viewer-container');
@@ -53,18 +52,18 @@
 
         function init() {
             console.log('👊 activating component');
-            pdfViewerService.load().then(function(msg) {
-                getDomElements();
-                $ctrl.ready = true;
-            });
-
+            pdfViewerService.load()
+                .then(function(msg) {
+                    getDomElements();
+                    $ctrl.ready = true;
+                });
         }
 
         $ctrl.$onChanges = function(changesObj) {
 
             if (changesObj.file) {
-                window.pdfViewerFileUrl = $ctrl.file;
-                if (window.PDFViewerApplication) {
+                $window.pdfViewerFileUrl = $ctrl.file;
+                if ($window.PDFViewerApplication) {
                     PDFViewerApplication.openFileViaURL($ctrl.file);
                 }
             }
@@ -98,7 +97,7 @@
          *      API Functions                   *
          ****************************************/
         function find(query) {
-            this.findInput.value = query;
+            $ctrl.findInput.value = query;
             PDFViewerApplication.findBar.dispatchEvent('');
         }
 
@@ -111,7 +110,7 @@
         }
 
         function highlightAll(highlight) {
-            this.findHighlightAll.checked = highlight;
+            $ctrl.findHighlightAll.checked = highlight;
             PDFViewerApplication.findBar.dispatchEvent('highlightallchange');
         }
 

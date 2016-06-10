@@ -2,7 +2,7 @@
 	'use strict';
 
 	require('angular');
-	require('../src/pdf.viewer');
+	require('../dist/pdfViewer');
 	var pdfMain = require('./pdfMain/pdfMain.js');
 	var pdfTools = require('./pdfTools/pdfTools.js');
 

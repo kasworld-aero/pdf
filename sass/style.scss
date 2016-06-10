@@ -1,43 +1,9 @@
-//
-// .pdf-viewer-container {
-//     display: flex;
-//     height: 100vh;
-// }
 
+// Fix conflicting styles with Sierra
 pdf-viewer {
-	// fixes for seirra style conflicts;
-	// .toolbarButton {
-	// 	padding: 3px 0px 0px;
-	// 	height: 21px;
-	// }
 	input[type=checkbox]+label, input[type=radio]+label {
 		&:after, &:before {
 			content: initial;
 		}
 	}
-
-	// Custom Testing Styles
-	// div.main {
-	// 	background-color: #F7F7F7;
-	// }
-	// #toolbarContainer {
-	// 	background-color: #1ABC9C;
-	// 	background-image: none;
-	// }
-	// #scaleSelectContainer {
-	// 	margin-top: 6px;
-	// }
-	// #viewerContainer {
-	// 	top: 0;
-	// }
-	// .toolbar {
-	// 	display: none;
-	// }
-
-	// .textLayer .highlight.selected {
-	// 	background-color: #1ABC9C;
-	// }
-	// .textLayer .highlight {
-	// 	background-color: #9B59B6;
-	// }
 }
