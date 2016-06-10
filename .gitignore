@@ -48,3 +48,6 @@ public/test_pdfs/*.pdf
 
 # Test Coverage #
 coverage
+
+# Design Assets #
+*.sketch
