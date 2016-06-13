@@ -328,7 +328,7 @@ pdf-viewer {
     position: relative;
     left: 0;
     right: 0;
-    z-index: 9999;
+    z-index: 1;
     cursor: default; }
   pdf-viewer #toolbarContainer {
     width: 100%; }
