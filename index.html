@@ -15,7 +15,7 @@
     <body>
 
         <main>
-            <div class="container">
+            <div class="container intro">
                 <section class="section">
                     <div class="align-center">
                         <img class="main-logo" src="images/logo.png" alt="Angular PDF Viewer logo">
@@ -24,10 +24,15 @@
                             <h2 class="text-medium">Mozilla pdf.js web viewer as an Angular 1.5+ Component</h2>
                             <p><a class="button button-big block-mobile" href="https://github.com/sierra-library/sierra/archive/master.zip">Download ZIP</a> or <a class="button button-big button-primary block-mobile" href="https://github.com/sierra-library/sierra">Visit github</a></p>
                         </div>
+                        <a href="#angular-pdf-viewer" du-smooth-scroll class="scroll-arrow">
+                          <i class="fa fa-angle-down"></i>
+                        </a>
                     </div>
                 </section>
             </div>
-            <pdf-main></pdf-main>
+            <div id="angular-pdf-viewer" class="background-dark">
+                <pdf-main></pdf-main>
+            </div>
         </main>
     </body>
 </html>
