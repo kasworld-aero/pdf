@@ -7427,7 +7427,7 @@
                     preferencePdfBugEnabled: false,
                     preferenceShowPreviousViewOnLoad: true,
                     preferenceDefaultZoomValue: '',
-                    isViewerEmbedded: (window.parent !== window),
+                    isViewerEmbedded: true,
                     url: '',
                     externalServices: DefaultExernalServices,
                     openFileViaURL: webViewerOpenFileViaURL,

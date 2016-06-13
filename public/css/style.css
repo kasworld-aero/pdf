@@ -1,2 +1,33 @@
-pdf-viewer input[type=checkbox] + label:after, pdf-viewer input[type=checkbox] + label:before, pdf-viewer input[type=radio] + label:after, pdf-viewer input[type=radio] + label:before {
+.intro {
+  position: relative;
+  height: 100vh; }
+
+a.scroll-arrow {
+  font-size: 35px;
+  color: white;
+  width: 50px;
+  line-height: 52px;
+  border-radius: 50%;
+  height: 50px;
+  border: 1px solid white;
+  display: block;
+  margin: 0 auto;
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  z-index: 1029;
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+  transform: translateX(-50%);
+  opacity: 0.9; }
+  a.scroll-arrow i {
+    width: 100%; }
+    a.scroll-arrow i:before {
+      content: "\f107"; }
+
+pdf-viewer input[type=checkbox] + label:after, pdf-viewer input[type=checkbox] + label:before,
+pdf-viewer input[type=radio] + label:after,
+pdf-viewer input[type=radio] + label:before {
   content: initial; }
