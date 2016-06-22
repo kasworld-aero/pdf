@@ -13,7 +13,7 @@
         var $ctrl = this;
 
         $ctrl.searchQuery = '';
-        $ctrl.fileUrl = 'test_pdfs/duffing.pdf';
+        $ctrl.fileUrl = 'test_pdfs/2014_ChemexBrewGuide.pdf';
         $ctrl.isFullscreen = false;
         $ctrl.toggleNext = false;
         $ctrl.togglePrevious = false;
