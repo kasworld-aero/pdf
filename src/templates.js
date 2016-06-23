@@ -5,7 +5,8 @@ catch(err) { app = angular.module("pdf.viewer", []); }
 app.run(["$templateCache", function($templateCache) {
 "use strict";
 
-$templateCache.put("src/pdfViewer.tpl.html","<div dir=\"ltr\" class=\"main\">\n" +
+$templateCache.put("src/pdfViewer.tpl.html","\n" +
+    "<div dir=\"ltr\" class=\"main\">\n" +
     "  <section tabindex=\"1\" class=\"loadingInProgress\">\n" +
     "    <div id=\"outerContainer\">\n" +
     "\n" +

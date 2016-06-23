@@ -6,7 +6,6 @@ a.scroll-arrow {
   font-size: 35px;
   color: white;
   width: 50px;
-  line-height: 52px;
   border-radius: 50%;
   height: 50px;
   border: 1px solid white;
@@ -23,7 +22,7 @@ a.scroll-arrow {
   transform: translateX(-50%);
   opacity: 0.9; }
   a.scroll-arrow i {
-    width: 100%; }
+    line-height: 50px; }
     a.scroll-arrow i:before {
       content: "\f107"; }
 

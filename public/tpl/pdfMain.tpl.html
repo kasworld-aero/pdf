@@ -1,16 +1,12 @@
-<div class="background-dark">
-    <div class="row">
-        <div class="col-xs-12 col-sm-4">
-            <div class="container">
-                <pdf-tools search="$ctrl.search(query)" next="$ctrl.nextMatch()" prev="$ctrl.prevMatch()" fullscreen="$ctrl.fullscreen()" highlight="$ctrl.updateHighlight(highlightAll)"></pdf-tools>
-            </div>
+<div class="row">
+    <div class="col-xs-12 col-sm-4">
+        <div class="container">
+            <pdf-tools search="$ctrl.search(query)" next="$ctrl.nextMatch()" prev="$ctrl.prevMatch()" fullscreen="$ctrl.fullscreen()" highlight="$ctrl.updateHighlight(highlightAll)"></pdf-tools>
         </div>
-        <div class="col-xs-12 col-sm-8">
-            <div>
-                <pdf-viewer file="$ctrl.fileUrl" search="$ctrl.searchQuery"
-                next="$ctrl.toggleNext" prev="$ctrl.togglePrev"
-                highlight="$ctrl.highlightAll" fullscreen="$ctrl.isFullscreen" on-update="$ctrl.viewerUpdated()"></pdf-viewer>
-            </div>
-        </div>
+    </div>
+    <div class="col-xs-12 col-sm-8">
+        <pdf-viewer file="$ctrl.fileUrl" search="$ctrl.searchQuery"
+        next="$ctrl.toggleNext" prev="$ctrl.togglePrev"
+        highlight="$ctrl.highlightAll" fullscreen="$ctrl.isFullscreen" on-update="$ctrl.viewerUpdated()"></pdf-viewer>
     </div>
 </div>

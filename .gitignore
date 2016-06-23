@@ -43,9 +43,6 @@ node_modules
 .sass-cache
 .sass-cache/*
 
-# Test PDFs #
-public/test_pdfs/*.pdf
-
 # Test Coverage #
 coverage
 

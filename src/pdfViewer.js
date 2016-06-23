@@ -4,7 +4,7 @@
     angular
         .module('pdf.viewer')
         .component('pdfViewer', {
-            templateUrl: 'src/pdfViewer.tpl.html',
+            template: ['$templateCache', function($templateCache) { return $templateCache.get('src/pdfViewer.tpl.html');}],
             controller: pdfViewerCtrl,
             bindings: {
                 file: '<',
