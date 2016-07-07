@@ -69,23 +69,23 @@
             }
 
             if ($ctrl.ready) {
-                if (typeof changesObj.search !== 'undefined') {
+                if (changesObj.search) {
                     $ctrl.find($ctrl.search);
                 }
 
-                if (typeof changesObj.highlight !== 'undefined') {
+                if (changesObj.highlight) {
                     $ctrl.highlightAll($ctrl.highlight);
                 }
 
-                if (typeof changesObj.fullscreen !== 'undefined') {
+                if (changesObj.fullscreen) {
                     $ctrl.enterFullscreen();
                 }
 
-                if (typeof changesObj.next !== 'undefined') {
+                if (changesObj.next) {
                     $ctrl.nextMatch();
                 }
 
-                if (typeof changesObj.previous !== 'undefined') {
+                if (changesObj.previous) {
                     $ctrl.previousMatch();
                 }
 
