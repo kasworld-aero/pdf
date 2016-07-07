@@ -69,7 +69,7 @@ gulp.task('app', ['sass', 'static', 'browserify'], function() {
 
 gulp.task('watch', function() {
     gulp.watch('app/**/*.js', ['browserify']);
-    gulp.watch('src/**/*.*', ['tpl', 'js']);
+    gulp.watch('src/**/*.*', ['dist', 'browserify']);
     gulp.watch('app/**/*.html', ['static']);
     gulp.watch('sass/*.scss', ['sass']);
 });

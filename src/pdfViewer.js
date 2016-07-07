@@ -48,16 +48,9 @@
         /****************************************
          *      Lifecycle Hooks                 *
          ****************************************/
-        $ctrl.$onInit = init;
-
-        function init() {
+        $ctrl.$onInit = function() {
             console.log('👊 activating component');
-            pdfViewerService.load()
-                .then(function(msg) {
-                    getDomElements();
-                    $ctrl.ready = true;
-                });
-        }
+        };
 
         $ctrl.$onChanges = function(changesObj) {
 
@@ -91,6 +84,15 @@
 
                 $ctrl.onUpdate();
             }
+        };
+
+        $ctrl.$postLink = function() {
+            pdfViewerService.load()
+                .then(function(msg) {
+                    getDomElements();
+                    $ctrl.ready = true;
+                    $window.pdfViewerReady = true;
+                });
         };
 
         /****************************************

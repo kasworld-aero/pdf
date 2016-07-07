@@ -9533,12 +9533,11 @@
         }
 
         webViewerLoad();
-        // document.addEventListener('DOMContentLoaded', webViewerLoad, true);
     }
 
     // wait for PDFJS to load before loading the web viewer
     function checkForPDFJS() {
-        if (PDFJS) {
+        if (PDFJS && window.pdfViewerReady) {
             load();
         }
     }

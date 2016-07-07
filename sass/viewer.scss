@@ -1,12 +1,10 @@
 .pdf-viewer-container {
-    display: flex;
-    height: 100vh;
+	display: flex;
+	height: 100vh;
 }
-
 pdf-viewer {
 	flex: 1 1 auto;
 	position: relative;
-
 	.loadingInProgress {
 		height: 100%;
 	}
@@ -186,16 +184,14 @@ pdf-viewer {
 		padding: 0;
 		margin: 0;
 	}
-
-	div{
+	div {
 		height: auto;
 	}
 	div.main {
 		position: absolute;
 		height: 100%;
 		width: 100%;
-	    overflow: hidden;
-		font-size: 10px;
+		overflow: hidden;
 		background-color: #404040;
 		background-image: url("images/texture.png");
 	}
@@ -1802,11 +1798,9 @@ pdf-viewer {
 			top: 32px;
 			z-index: 100;
 		}
-
 		.loadingInProgress #sidebarContainer {
 			top: 37px;
 		}
-
 		#sidebarContent {
 			top: 32px;
 			background-color: hsla(0,0%,0%,.7);
@@ -1825,7 +1819,6 @@ pdf-viewer {
 			float: right;
 			right: 205px;
 		}
-
 		#outerContainer .hiddenLargeView,
 		#outerContainer .hiddenMediumView {
 			display: inherit;

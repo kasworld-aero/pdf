@@ -1,3 +1,14 @@
+@import 'custom';
+
+html {
+	font-family: 'Helvetica', sans-serif;
+	font-size: 14px;
+}
+
+body {
+	margin: 0;
+}
+
 .intro {
 	position: relative;
 	height: 100vh;
@@ -31,12 +42,12 @@ a.scroll-arrow {
 	}
 }
 // Fix conflicting styles with Sierra
-pdf-viewer {
-	input[type=checkbox]+label,
-	input[type=radio]+label {
-		&:after,
-		&:before {
-			content: initial;
-		}
-	}
-}
+// pdf-viewer {
+// 	input[type=checkbox]+label,
+// 	input[type=radio]+label {
+// 		&:after,
+// 		&:before {
+// 			content: initial;
+// 		}
+// 	}
+// }
