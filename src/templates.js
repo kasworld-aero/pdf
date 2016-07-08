@@ -6,26 +6,11 @@ app.run(["$templateCache", function($templateCache) {
 "use strict";
 
 $templateCache.put("src/pdfViewer.tpl.html","<div dir=\"ltr\"\n" +
-    "    class=\"main\">\n" +
+    "    class=\"viewer\">\n" +
     "    <section tabindex=\"1\"\n" +
     "        class=\"loadingInProgress\">\n" +
-    "        <div id=\"outerContainer\">\n" +
-    "\n" +
-    "            <div id=\"sidebarContainer\">\n" +
-    "                <div id=\"sidebarContent\">\n" +
-    "                    <div id=\"thumbnailView\">\n" +
-    "                    </div>\n" +
-    "                    <div id=\"outlineView\"\n" +
-    "                        class=\"hidden\">\n" +
-    "                    </div>\n" +
-    "                    <div id=\"attachmentsView\"\n" +
-    "                        class=\"hidden\">\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "            <!-- sidebarContainer -->\n" +
-    "\n" +
-    "            <div id=\"mainContainer\">\n" +
+    "        <div id=\"outerContainer\"\n" +
+    "            class=\"outer\">\n" +
     "\n" +
     "            <div class=\"toolbar\"\n" +
     "                id=\"toolbarViewer\">\n" +
@@ -202,8 +187,10 @@ $templateCache.put("src/pdfViewer.tpl.html","<div dir=\"ltr\"\n" +
     "                        <span id=\"findMsg\"></span>\n" +
     "                    </div>\n" +
     "                    <div class=\"toolbar__item\">\n" +
-    "                        <div class=\"input\">\n" +
-    "                            <input id=\"findInput\" type=\"text\" />\n" +
+    "                        <div class=\"search\">\n" +
+    "                            <input id=\"findInput\"\n" +
+    "                                type=\"text\" />\n" +
+    "                            <i class=\"search__pending fa fa-refresh fa-spin\"></i>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
     "                    <div class=\"toolbar__item\">\n" +
@@ -231,304 +218,324 @@ $templateCache.put("src/pdfViewer.tpl.html","<div dir=\"ltr\"\n" +
     "\n" +
     "            <div id=\"loadingBar\"\n" +
     "                class=\"loading\">\n" +
-    "                <div class=\"progress\">\n" +
+    "                <div class=\"progress loading__progress\">\n" +
     "                </div>\n" +
     "            </div>\n" +
     "            <!-- Loading Bar -->\n" +
     "\n" +
-    "\n" +
-    "            <menu type=\"context\"\n" +
-    "                id=\"viewerContextMenu\">\n" +
-    "                <menuitem id=\"contextFirstPage\"\n" +
-    "                    label=\"First Page\"\n" +
-    "                    data-l10n-id=\"first_page\"></menuitem>\n" +
-    "                <menuitem id=\"contextLastPage\"\n" +
-    "                    label=\"Last Page\"\n" +
-    "                    data-l10n-id=\"last_page\"></menuitem>\n" +
-    "                <menuitem id=\"contextPageRotateCw\"\n" +
-    "                    label=\"Rotate Clockwise\"\n" +
-    "                    data-l10n-id=\"page_rotate_cw\"></menuitem>\n" +
-    "                <menuitem id=\"contextPageRotateCcw\"\n" +
-    "                    label=\"Rotate Counter-Clockwise\"\n" +
-    "                    data-l10n-id=\"page_rotate_ccw\"></menuitem>\n" +
-    "            </menu>\n" +
-    "\n" +
-    "            <div id=\"viewerContainer\"\n" +
-    "                tabindex=\"0\">\n" +
-    "                <div id=\"viewer\"\n" +
-    "                    class=\"pdfViewer\"></div>\n" +
+    "            <div id=\"sidebarContainer\"\n" +
+    "                class=\"sidebar\">\n" +
+    "                <div id=\"sidebarContent\"\n" +
+    "                    class=\"sidebar__content\">\n" +
+    "                    <div id=\"thumbnailView\">\n" +
+    "                    </div>\n" +
+    "                    <div id=\"outlineView\"\n" +
+    "                        class=\"hidden\">\n" +
+    "                    </div>\n" +
+    "                    <div id=\"attachmentsView\"\n" +
+    "                        class=\"hidden\">\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
     "            </div>\n" +
+    "            <!-- sidebarContainer -->\n" +
     "\n" +
-    "            <div id=\"errorWrapper\"\n" +
-    "                hidden=\"true\">\n" +
-    "                <div id=\"errorMessageLeft\">\n" +
-    "                    <span id=\"errorMessage\"></span>\n" +
-    "                    <button id=\"errorShowMore\"\n" +
-    "                        data-l10n-id=\"error_more_info\">\n" +
-    "                        More Information\n" +
-    "                    </button>\n" +
-    "                    <button id=\"errorShowLess\"\n" +
-    "                        data-l10n-id=\"error_less_info\"\n" +
-    "                        hidden=\"true\">\n" +
-    "                        Less Information\n" +
-    "                    </button>\n" +
+    "            <div id=\"mainContainer\"\n" +
+    "                class=\"main\">\n" +
+    "\n" +
+    "\n" +
+    "                <menu type=\"context\"\n" +
+    "                    id=\"viewerContextMenu\">\n" +
+    "                    <menuitem id=\"contextFirstPage\"\n" +
+    "                        label=\"First Page\"\n" +
+    "                        data-l10n-id=\"first_page\"></menuitem>\n" +
+    "                    <menuitem id=\"contextLastPage\"\n" +
+    "                        label=\"Last Page\"\n" +
+    "                        data-l10n-id=\"last_page\"></menuitem>\n" +
+    "                    <menuitem id=\"contextPageRotateCw\"\n" +
+    "                        label=\"Rotate Clockwise\"\n" +
+    "                        data-l10n-id=\"page_rotate_cw\"></menuitem>\n" +
+    "                    <menuitem id=\"contextPageRotateCcw\"\n" +
+    "                        label=\"Rotate Counter-Clockwise\"\n" +
+    "                        data-l10n-id=\"page_rotate_ccw\"></menuitem>\n" +
+    "                </menu>\n" +
+    "\n" +
+    "                <div id=\"viewerContainer\"\n" +
+    "                    tabindex=\"0\">\n" +
+    "                    <div id=\"viewer\"\n" +
+    "                        class=\"pdfViewer\"></div>\n" +
     "                </div>\n" +
-    "                <div id=\"errorMessageRight\">\n" +
-    "                    <button id=\"errorClose\"\n" +
-    "                        data-l10n-id=\"error_close\">\n" +
-    "                        Close\n" +
-    "                    </button>\n" +
+    "\n" +
+    "                <div id=\"errorWrapper\"\n" +
+    "                    hidden=\"true\">\n" +
+    "                    <div id=\"errorMessageLeft\">\n" +
+    "                        <span id=\"errorMessage\"></span>\n" +
+    "                        <button id=\"errorShowMore\"\n" +
+    "                            data-l10n-id=\"error_more_info\">\n" +
+    "                            More Information\n" +
+    "                        </button>\n" +
+    "                        <button id=\"errorShowLess\"\n" +
+    "                            data-l10n-id=\"error_less_info\"\n" +
+    "                            hidden=\"true\">\n" +
+    "                            Less Information\n" +
+    "                        </button>\n" +
+    "                    </div>\n" +
+    "                    <div id=\"errorMessageRight\">\n" +
+    "                        <button id=\"errorClose\"\n" +
+    "                            data-l10n-id=\"error_close\">\n" +
+    "                            Close\n" +
+    "                        </button>\n" +
+    "                    </div>\n" +
+    "                    <div class=\"clearBoth\"></div>\n" +
+    "                    <textarea id=\"errorMoreInfo\"\n" +
+    "                        hidden=\"true\"\n" +
+    "                        readonly=\"readonly\"></textarea>\n" +
     "                </div>\n" +
-    "                <div class=\"clearBoth\"></div>\n" +
-    "                <textarea id=\"errorMoreInfo\"\n" +
-    "                    hidden=\"true\"\n" +
-    "                    readonly=\"readonly\"></textarea>\n" +
+    "            </div>\n" +
+    "            <!-- mainContainer -->\n" +
+    "\n" +
+    "            <div id=\"overlayContainer\"\n" +
+    "                class=\"hidden\">\n" +
+    "                <div id=\"passwordOverlay\"\n" +
+    "                    class=\"container hidden\">\n" +
+    "                    <div class=\"dialog\">\n" +
+    "                        <div class=\"row\">\n" +
+    "                            <p id=\"passwordText\"\n" +
+    "                                data-l10n-id=\"password_label\">Enter the password to open this PDF file:</p>\n" +
+    "                        </div>\n" +
+    "                        <div class=\"row\">\n" +
+    "                            <!-- The type=\"password\" attribute is set via script, to prevent warnings in Firefox for all http:// documents. -->\n" +
+    "                            <input id=\"password\"\n" +
+    "                                class=\"toolbarField\">\n" +
+    "                        </div>\n" +
+    "                        <div class=\"buttonRow\">\n" +
+    "                            <button id=\"passwordCancel\"\n" +
+    "                                class=\"overlayButton\"><span data-l10n-id=\"password_cancel\">Cancel</span></button>\n" +
+    "                            <button id=\"passwordSubmit\"\n" +
+    "                                class=\"overlayButton\"><span data-l10n-id=\"password_ok\">OK</span></button>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "                <div id=\"documentPropertiesOverlay\"\n" +
+    "                    class=\"container hidden\">\n" +
+    "                    <div class=\"dialog\">\n" +
+    "                        <div class=\"row\">\n" +
+    "                            <span data-l10n-id=\"document_properties_file_name\">File name:</span>\n" +
+    "                            <p id=\"fileNameField\">-</p>\n" +
+    "                        </div>\n" +
+    "                        <div class=\"row\">\n" +
+    "                            <span data-l10n-id=\"document_properties_file_size\">File size:</span>\n" +
+    "                            <p id=\"fileSizeField\">-</p>\n" +
+    "                        </div>\n" +
+    "                        <div class=\"separator\"></div>\n" +
+    "                        <div class=\"row\">\n" +
+    "                            <span data-l10n-id=\"document_properties_title\">Title:</span>\n" +
+    "                            <p id=\"titleField\">-</p>\n" +
+    "                        </div>\n" +
+    "                        <div class=\"row\">\n" +
+    "                            <span data-l10n-id=\"document_properties_author\">Author:</span>\n" +
+    "                            <p id=\"authorField\">-</p>\n" +
+    "                        </div>\n" +
+    "                        <div class=\"row\">\n" +
+    "                            <span data-l10n-id=\"document_properties_subject\">Subject:</span>\n" +
+    "                            <p id=\"subjectField\">-</p>\n" +
+    "                        </div>\n" +
+    "                        <div class=\"row\">\n" +
+    "                            <span data-l10n-id=\"document_properties_keywords\">Keywords:</span>\n" +
+    "                            <p id=\"keywordsField\">-</p>\n" +
+    "                        </div>\n" +
+    "                        <div class=\"row\">\n" +
+    "                            <span data-l10n-id=\"document_properties_creation_date\">Creation Date:</span>\n" +
+    "                            <p id=\"creationDateField\">-</p>\n" +
+    "                        </div>\n" +
+    "                        <div class=\"row\">\n" +
+    "                            <span data-l10n-id=\"document_properties_modification_date\">Modification Date:</span>\n" +
+    "                            <p id=\"modificationDateField\">-</p>\n" +
+    "                        </div>\n" +
+    "                        <div class=\"row\">\n" +
+    "                            <span data-l10n-id=\"document_properties_creator\">Creator:</span>\n" +
+    "                            <p id=\"creatorField\">-</p>\n" +
+    "                        </div>\n" +
+    "                        <div class=\"separator\"></div>\n" +
+    "                        <div class=\"row\">\n" +
+    "                            <span data-l10n-id=\"document_properties_producer\">PDF Producer:</span>\n" +
+    "                            <p id=\"producerField\">-</p>\n" +
+    "                        </div>\n" +
+    "                        <div class=\"row\">\n" +
+    "                            <span data-l10n-id=\"document_properties_version\">PDF Version:</span>\n" +
+    "                            <p id=\"versionField\">-</p>\n" +
+    "                        </div>\n" +
+    "                        <div class=\"row\">\n" +
+    "                            <span data-l10n-id=\"document_properties_page_count\">Page Count:</span>\n" +
+    "                            <p id=\"pageCountField\">-</p>\n" +
+    "                        </div>\n" +
+    "                        <div class=\"buttonRow\">\n" +
+    "                            <button id=\"documentPropertiesClose\"\n" +
+    "                                class=\"overlayButton\"><span data-l10n-id=\"document_properties_close\">Close</span></button>\n" +
+    "                        </div>\n" +
+    "                    </div>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "            <!-- overlayContainer -->\n" +
+    "\n" +
+    "        </div>\n" +
+    "        <!-- outerContainer -->\n" +
+    "        <div id=\"printContainer\"></div>\n" +
+    "        <div id=\"mozPrintCallback-shim\"\n" +
+    "            hidden>\n" +
+    "            <style>\n" +
+    "                @media print {\n" +
+    "                    #printContainer div {\n" +
+    "                        page-break-after: always;\n" +
+    "                        page-break-inside: avoid;\n" +
+    "                    }\n" +
+    "                }\n" +
+    "            </style>\n" +
+    "            <style scoped>\n" +
+    "                #mozPrintCallback-shim {\n" +
+    "                    position: fixed;\n" +
+    "                    top: 0;\n" +
+    "                    left: 0;\n" +
+    "                    height: 100%;\n" +
+    "                    width: 100%;\n" +
+    "                    z-index: 9999999;\n" +
+    "                    display: block;\n" +
+    "                    text-align: center;\n" +
+    "                    background-color: rgba(0, 0, 0, 0.5);\n" +
+    "                }\n" +
+    "\n" +
+    "                #mozPrintCallback-shim[hidden] {\n" +
+    "                    display: none;\n" +
+    "                }\n" +
+    "\n" +
+    "                @media print {\n" +
+    "                    #mozPrintCallback-shim {\n" +
+    "                        display: none;\n" +
+    "                    }\n" +
+    "                }\n" +
+    "\n" +
+    "                #mozPrintCallback-shim .mozPrintCallback-dialog-box {\n" +
+    "                    display: inline-block;\n" +
+    "                    margin: -50px auto 0;\n" +
+    "                    position: relative;\n" +
+    "                    top: 45%;\n" +
+    "                    left: 0;\n" +
+    "                    min-width: 220px;\n" +
+    "                    max-width: 400px;\n" +
+    "                    padding: 9px;\n" +
+    "                    border: 1px solid hsla(0, 0%, 0%, .5);\n" +
+    "                    border-radius: 2px;\n" +
+    "                    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);\n" +
+    "                    background-color: #474747;\n" +
+    "                    color: hsl(0, 0%, 85%);\n" +
+    "                    font-size: 16px;\n" +
+    "                    line-height: 20px;\n" +
+    "                }\n" +
+    "\n" +
+    "                #mozPrintCallback-shim .progress-row {\n" +
+    "                    clear: both;\n" +
+    "                    padding: 1em 0;\n" +
+    "                }\n" +
+    "\n" +
+    "                #mozPrintCallback-shim progress {\n" +
+    "                    width: 100%;\n" +
+    "                }\n" +
+    "\n" +
+    "                #mozPrintCallback-shim .relative-progress {\n" +
+    "                    clear: both;\n" +
+    "                    float: right;\n" +
+    "                }\n" +
+    "\n" +
+    "                #mozPrintCallback-shim .progress-actions {\n" +
+    "                    clear: both;\n" +
+    "                }\n" +
+    "            </style>\n" +
+    "            <div class=\"mozPrintCallback-dialog-box\">\n" +
+    "                <!-- TODO: Localise the following strings -->\n" +
+    "                Preparing document for printing...\n" +
+    "                <div class=\"progress-row\">\n" +
+    "                    <progress value=\"0\"\n" +
+    "                        max=\"100\"></progress>\n" +
+    "                    <span class=\"relative-progress\">0%</span>\n" +
+    "                </div>\n" +
+    "                <div class=\"progress-actions\">\n" +
+    "                    <input type=\"button\"\n" +
+    "                        value=\"Cancel\"\n" +
+    "                        class=\"mozPrintCallback-cancel\">\n" +
+    "                </div>\n" +
     "            </div>\n" +
     "        </div>\n" +
-    "        <!-- mainContainer -->\n" +
-    "\n" +
-    "        <div id=\"overlayContainer\"\n" +
-    "            class=\"hidden\">\n" +
-    "            <div id=\"passwordOverlay\"\n" +
-    "                class=\"container hidden\">\n" +
-    "                <div class=\"dialog\">\n" +
-    "                    <div class=\"row\">\n" +
-    "                        <p id=\"passwordText\"\n" +
-    "                            data-l10n-id=\"password_label\">Enter the password to open this PDF file:</p>\n" +
-    "                    </div>\n" +
-    "                    <div class=\"row\">\n" +
-    "                        <!-- The type=\"password\" attribute is set via script, to prevent warnings in Firefox for all http:// documents. -->\n" +
-    "                        <input id=\"password\"\n" +
-    "                            class=\"toolbarField\">\n" +
-    "                    </div>\n" +
-    "                    <div class=\"buttonRow\">\n" +
-    "                        <button id=\"passwordCancel\"\n" +
-    "                            class=\"overlayButton\"><span data-l10n-id=\"password_cancel\">Cancel</span></button>\n" +
-    "                        <button id=\"passwordSubmit\"\n" +
-    "                            class=\"overlayButton\"><span data-l10n-id=\"password_ok\">OK</span></button>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "            <div id=\"documentPropertiesOverlay\"\n" +
-    "                class=\"container hidden\">\n" +
-    "                <div class=\"dialog\">\n" +
-    "                    <div class=\"row\">\n" +
-    "                        <span data-l10n-id=\"document_properties_file_name\">File name:</span>\n" +
-    "                        <p id=\"fileNameField\">-</p>\n" +
-    "                    </div>\n" +
-    "                    <div class=\"row\">\n" +
-    "                        <span data-l10n-id=\"document_properties_file_size\">File size:</span>\n" +
-    "                        <p id=\"fileSizeField\">-</p>\n" +
-    "                    </div>\n" +
-    "                    <div class=\"separator\"></div>\n" +
-    "                    <div class=\"row\">\n" +
-    "                        <span data-l10n-id=\"document_properties_title\">Title:</span>\n" +
-    "                        <p id=\"titleField\">-</p>\n" +
-    "                    </div>\n" +
-    "                    <div class=\"row\">\n" +
-    "                        <span data-l10n-id=\"document_properties_author\">Author:</span>\n" +
-    "                        <p id=\"authorField\">-</p>\n" +
-    "                    </div>\n" +
-    "                    <div class=\"row\">\n" +
-    "                        <span data-l10n-id=\"document_properties_subject\">Subject:</span>\n" +
-    "                        <p id=\"subjectField\">-</p>\n" +
-    "                    </div>\n" +
-    "                    <div class=\"row\">\n" +
-    "                        <span data-l10n-id=\"document_properties_keywords\">Keywords:</span>\n" +
-    "                        <p id=\"keywordsField\">-</p>\n" +
-    "                    </div>\n" +
-    "                    <div class=\"row\">\n" +
-    "                        <span data-l10n-id=\"document_properties_creation_date\">Creation Date:</span>\n" +
-    "                        <p id=\"creationDateField\">-</p>\n" +
-    "                    </div>\n" +
-    "                    <div class=\"row\">\n" +
-    "                        <span data-l10n-id=\"document_properties_modification_date\">Modification Date:</span>\n" +
-    "                        <p id=\"modificationDateField\">-</p>\n" +
-    "                    </div>\n" +
-    "                    <div class=\"row\">\n" +
-    "                        <span data-l10n-id=\"document_properties_creator\">Creator:</span>\n" +
-    "                        <p id=\"creatorField\">-</p>\n" +
-    "                    </div>\n" +
-    "                    <div class=\"separator\"></div>\n" +
-    "                    <div class=\"row\">\n" +
-    "                        <span data-l10n-id=\"document_properties_producer\">PDF Producer:</span>\n" +
-    "                        <p id=\"producerField\">-</p>\n" +
-    "                    </div>\n" +
-    "                    <div class=\"row\">\n" +
-    "                        <span data-l10n-id=\"document_properties_version\">PDF Version:</span>\n" +
-    "                        <p id=\"versionField\">-</p>\n" +
-    "                    </div>\n" +
-    "                    <div class=\"row\">\n" +
-    "                        <span data-l10n-id=\"document_properties_page_count\">Page Count:</span>\n" +
-    "                        <p id=\"pageCountField\">-</p>\n" +
-    "                    </div>\n" +
-    "                    <div class=\"buttonRow\">\n" +
-    "                        <button id=\"documentPropertiesClose\"\n" +
-    "                            class=\"overlayButton\"><span data-l10n-id=\"document_properties_close\">Close</span></button>\n" +
-    "                    </div>\n" +
-    "                </div>\n" +
-    "            </div>\n" +
-    "        </div>\n" +
-    "        <!-- overlayContainer -->\n" +
-    "\n" +
+    "    </section>\n" +
     "</div>\n" +
-    "<!-- outerContainer -->\n" +
-    "<div id=\"printContainer\"></div>\n" +
-    "<div id=\"mozPrintCallback-shim\"\n" +
-    "    hidden>\n" +
-    "    <style>\n" +
-    "        @media print {\n" +
-    "            #printContainer div {\n" +
-    "                page-break-after: always;\n" +
-    "                page-break-inside: avoid;\n" +
-    "            }\n" +
-    "        }\n" +
-    "    </style>\n" +
-    "    <style scoped>\n" +
-    "        #mozPrintCallback-shim {\n" +
-    "            position: fixed;\n" +
-    "            top: 0;\n" +
-    "            left: 0;\n" +
-    "            height: 100%;\n" +
-    "            width: 100%;\n" +
-    "            z-index: 9999999;\n" +
-    "            display: block;\n" +
-    "            text-align: center;\n" +
-    "            background-color: rgba(0, 0, 0, 0.5);\n" +
-    "        }\n" +
     "\n" +
-    "        #mozPrintCallback-shim[hidden] {\n" +
-    "            display: none;\n" +
-    "        }\n" +
+    "<div class=\"hidden\">\n" +
+    "    <!-- <div id=\"secondaryToolbar\"></div> -->\n" +
+    "    <div id=\"secondaryToolbarButtonContainer\"></div>\n" +
+    "    <div id=\"secondaryPresentationMode\"></div>\n" +
+    "    <div id=\"presentation_mode\"></div>\n" +
+    "    <div id=\"secondaryOpenFile\"></div>\n" +
+    "    <div id=\"open_file\"></div>\n" +
+    "    <div id=\"secondaryPrint\"></div>\n" +
+    "    <!-- <div id=\"print\"></div> -->\n" +
+    "    <div id=\"secondaryDownload\"></div>\n" +
+    "    <!-- <div id=\"download\"></div> -->\n" +
+    "    <div id=\"secondaryViewBookmark\"></div>\n" +
+    "    <div id=\"bookmark\"></div>\n" +
+    "    <!-- <div id=\"firstPage\"></div> -->\n" +
+    "    <!-- <div id=\"first_page\"></div> -->\n" +
+    "    <!-- <div id=\"lastPage\"></div> -->\n" +
+    "    <div id=\"last_page\"></div>\n" +
+    "    <!-- <div id=\"pageRotateCw\"></div> -->\n" +
+    "    <!-- <div id=\"pageRotateCcw\"></div> -->\n" +
+    "    <div id=\"toggleHandTool\"></div>\n" +
+    "    <div id=\"hand_tool_enable\"></div>\n" +
+    "    <div id=\"documentProperties\"></div>\n" +
+    "    <div id=\"document_properties\"></div>\n" +
+    "    <!-- <div id=\"toolbarContainer\"></div> -->\n" +
+    "    <!-- <div id=\"toolbarViewer\"></div> -->\n" +
+    "    <div id=\"toolbarViewerLeft\"></div>\n" +
+    "    <!-- <div id=\"sidebarToggle\"></div> -->\n" +
+    "    <div id=\"toggle_sidebar\"></div>\n" +
+    "    <!-- <div id=\"viewFind\"></div> -->\n" +
+    "    <!-- <div id=\"findbar\"></div> -->\n" +
+    "    <!-- <div id=\"previous\"></div> -->\n" +
+    "    <!-- <div id=\"previous\"></div> -->\n" +
+    "    <!-- <div id=\"next\"></div> -->\n" +
+    "    <!-- <div id=\"next\"></div> -->\n" +
+    "    <!-- <div id=\"pageNumberLabel\"></div> -->\n" +
+    "    <!-- <div id=\"pageNumber\"></div> -->\n" +
+    "    <!-- <div id=\"numPages\"></div> -->\n" +
+    "    <div id=\"toolbarViewerRight\"></div>\n" +
+    "    <!-- <div id=\"presentationMode\"></div> -->\n" +
+    "    <!-- <div id=\"presentation_mode\"></div> -->\n" +
+    "    <div id=\"openFile\"></div>\n" +
+    "    <!-- <div id=\"print\"></div> -->\n" +
+    "    <!-- <div id=\"print\"></div> -->\n" +
+    "    <!-- <div id=\"download\"></div> -->\n" +
+    "    <!-- <div id=\"download\"></div> -->\n" +
+    "    <div id=\"viewBookmark\"></div>\n" +
+    "    <!-- <div id=\"bookmark\"></div> -->\n" +
+    "    <!-- <div id=\"secondaryToolbarToggle\"></div> -->\n" +
+    "    <div id=\"tools\"></div>\n" +
+    "    <div id=\"toolbarViewerMiddle\"></div>\n" +
+    "    <!-- <div id=\"zoomIn\"></div> -->\n" +
+    "    <!-- <div id=\"scaleSelectContainer\"></div> -->\n" +
+    "    <!-- <div id=\"scaleSelect\"></div> -->\n" +
+    "    <div id=\"pageAutoOption\"></div>\n" +
+    "    <div id=\"pageActualOption\"></div>\n" +
+    "    <div id=\"pageFitOption\"></div>\n" +
+    "    <div id=\"pageWidthOption\"></div>\n" +
+    "    <div id=\"customScaleOption\"></div>\n" +
+    "    <!-- <div id=\"loadingBar\"></div> -->\n" +
+    "    <div id=\"findHighlightAll\"></div>\n" +
+    "    <div id=\"findMatchCase\"></div>\n" +
+    "    <!-- <div id=\"findResultsCount\"></div> -->\n" +
+    "    <!-- <div id=\"findMsg\"></div> -->\n" +
     "\n" +
-    "        @media print {\n" +
-    "            #mozPrintCallback-shim {\n" +
-    "                display: none;\n" +
-    "            }\n" +
-    "        }\n" +
-    "\n" +
-    "        #mozPrintCallback-shim .mozPrintCallback-dialog-box {\n" +
-    "            display: inline-block;\n" +
-    "            margin: -50px auto 0;\n" +
-    "            position: relative;\n" +
-    "            top: 45%;\n" +
-    "            left: 0;\n" +
-    "            min-width: 220px;\n" +
-    "            max-width: 400px;\n" +
-    "            padding: 9px;\n" +
-    "            border: 1px solid hsla(0, 0%, 0%, .5);\n" +
-    "            border-radius: 2px;\n" +
-    "            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);\n" +
-    "            background-color: #474747;\n" +
-    "            color: hsl(0, 0%, 85%);\n" +
-    "            font-size: 16px;\n" +
-    "            line-height: 20px;\n" +
-    "        }\n" +
-    "\n" +
-    "        #mozPrintCallback-shim .progress-row {\n" +
-    "            clear: both;\n" +
-    "            padding: 1em 0;\n" +
-    "        }\n" +
-    "\n" +
-    "        #mozPrintCallback-shim progress {\n" +
-    "            width: 100%;\n" +
-    "        }\n" +
-    "\n" +
-    "        #mozPrintCallback-shim .relative-progress {\n" +
-    "            clear: both;\n" +
-    "            float: right;\n" +
-    "        }\n" +
-    "\n" +
-    "        #mozPrintCallback-shim .progress-actions {\n" +
-    "            clear: both;\n" +
-    "        }\n" +
-    "    </style>\n" +
-    "    <div class=\"mozPrintCallback-dialog-box\">\n" +
-    "        <!-- TODO: Localise the following strings -->\n" +
-    "        Preparing document for printing...\n" +
-    "        <div class=\"progress-row\">\n" +
-    "            <progress value=\"0\"\n" +
-    "                max=\"100\"></progress>\n" +
-    "            <span class=\"relative-progress\">0%</span>\n" +
-    "        </div>\n" +
-    "        <div class=\"progress-actions\">\n" +
-    "            <input type=\"button\"\n" +
-    "                value=\"Cancel\"\n" +
-    "                class=\"mozPrintCallback-cancel\">\n" +
-    "        </div>\n" +
-    "    </div>\n" +
+    "    <div id=\"toolbarSidebar\"></div>\n" +
+    "    <div id=\"viewThumbnail\"></div>\n" +
+    "    <div id=\"viewOutline\"></div>\n" +
+    "    <div id=\"viewAttachments\"></div>\n" +
     "</div>\n" +
-    "</section>\n" +
-    "</div>\n" +
-    "\n" +
-    "\n" +
-    "<!-- <div id=\"secondaryToolbar\"></div> -->\n" +
-    "<div id=\"secondaryToolbarButtonContainer\"></div>\n" +
-    "<div id=\"secondaryPresentationMode\"></div>\n" +
-    "<div id=\"presentation_mode\"></div>\n" +
-    "<div id=\"secondaryOpenFile\"></div>\n" +
-    "<div id=\"open_file\"></div>\n" +
-    "<div id=\"secondaryPrint\"></div>\n" +
-    "<!-- <div id=\"print\"></div> -->\n" +
-    "<div id=\"secondaryDownload\"></div>\n" +
-    "<!-- <div id=\"download\"></div> -->\n" +
-    "<div id=\"secondaryViewBookmark\"></div>\n" +
-    "<div id=\"bookmark\"></div>\n" +
-    "<!-- <div id=\"firstPage\"></div> -->\n" +
-    "<!-- <div id=\"first_page\"></div> -->\n" +
-    "<!-- <div id=\"lastPage\"></div> -->\n" +
-    "<div id=\"last_page\"></div>\n" +
-    "<!-- <div id=\"pageRotateCw\"></div> -->\n" +
-    "<!-- <div id=\"pageRotateCcw\"></div> -->\n" +
-    "<div id=\"toggleHandTool\"></div>\n" +
-    "<div id=\"hand_tool_enable\"></div>\n" +
-    "<div id=\"documentProperties\"></div>\n" +
-    "<div id=\"document_properties\"></div>\n" +
-    "<!-- <div id=\"toolbarContainer\"></div> -->\n" +
-    "<!-- <div id=\"toolbarViewer\"></div> -->\n" +
-    "<div id=\"toolbarViewerLeft\"></div>\n" +
-    "<!-- <div id=\"sidebarToggle\"></div> -->\n" +
-    "<div id=\"toggle_sidebar\"></div>\n" +
-    "<!-- <div id=\"viewFind\"></div> -->\n" +
-    "<!-- <div id=\"findbar\"></div> -->\n" +
-    "<!-- <div id=\"previous\"></div> -->\n" +
-    "<!-- <div id=\"previous\"></div> -->\n" +
-    "<!-- <div id=\"next\"></div> -->\n" +
-    "<!-- <div id=\"next\"></div> -->\n" +
-    "<!-- <div id=\"pageNumberLabel\"></div> -->\n" +
-    "<!-- <div id=\"pageNumber\"></div> -->\n" +
-    "<!-- <div id=\"numPages\"></div> -->\n" +
-    "<div id=\"toolbarViewerRight\"></div>\n" +
-    "<!-- <div id=\"presentationMode\"></div> -->\n" +
-    "<!-- <div id=\"presentation_mode\"></div> -->\n" +
-    "<div id=\"openFile\"></div>\n" +
-    "<!-- <div id=\"print\"></div> -->\n" +
-    "<!-- <div id=\"print\"></div> -->\n" +
-    "<!-- <div id=\"download\"></div> -->\n" +
-    "<!-- <div id=\"download\"></div> -->\n" +
-    "<div id=\"viewBookmark\"></div>\n" +
-    "<!-- <div id=\"bookmark\"></div> -->\n" +
-    "<!-- <div id=\"secondaryToolbarToggle\"></div> -->\n" +
-    "<div id=\"tools\"></div>\n" +
-    "<div id=\"toolbarViewerMiddle\"></div>\n" +
-    "<!-- <div id=\"zoomIn\"></div> -->\n" +
-    "<!-- <div id=\"scaleSelectContainer\"></div> -->\n" +
-    "<!-- <div id=\"scaleSelect\"></div> -->\n" +
-    "<div id=\"pageAutoOption\"></div>\n" +
-    "<div id=\"pageActualOption\"></div>\n" +
-    "<div id=\"pageFitOption\"></div>\n" +
-    "<div id=\"pageWidthOption\"></div>\n" +
-    "<div id=\"customScaleOption\"></div>\n" +
-    "<!-- <div id=\"loadingBar\"></div> -->\n" +
-    "<div id=\"findHighlightAll\"></div>\n" +
-    "<div id=\"findMatchCase\"></div>\n" +
-    "<!-- <div id=\"findResultsCount\"></div> -->\n" +
-    "<!-- <div id=\"findMsg\"></div> -->\n" +
-    "\n" +
-    "<div id=\"toolbarSidebar\"></div>\n" +
-    "<div id=\"viewThumbnail\"></div>\n" +
-    "<div id=\"viewOutline\"></div>\n" +
-    "<div id=\"viewAttachments\"></div>\n" +
     "")
 }]);
 })();

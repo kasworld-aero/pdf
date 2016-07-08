@@ -309,76 +309,76 @@ pdf-viewer {
 		height: 100%;
 		position: relative;
 	}
-	#sidebarContainer {
-		position: absolute;
-		top: 0;
-		bottom: 0;
-		width: 200px;
-		visibility: hidden;
-		-webkit-transition-duration: 200ms;
-		-webkit-transition-timing-function: ease;
-		transition-duration: 200ms;
-		transition-timing-function: ease;
-	}
-	div[dir='ltr'] #sidebarContainer {
-		-webkit-transition-property: left;
-		transition-property: left;
-		left: -200px;
-	}
-	div[dir='rtl'] #sidebarContainer {
-		-webkit-transition-property: right;
-		transition-property: right;
-		right: -200px;
-	}
-	#outerContainer.sidebarMoving > #sidebarContainer,
-	#outerContainer.sidebarOpen > #sidebarContainer {
-		visibility: visible;
-	}
-	div[dir='ltr'] #outerContainer.sidebarOpen > #sidebarContainer {
-		left: 0;
-	}
-	div[dir='rtl'] #outerContainer.sidebarOpen > #sidebarContainer {
-		right: 0;
-	}
-	#mainContainer {
-		position: absolute;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		left: 0;
-		min-width: 320px;
-		-webkit-transition-duration: 200ms;
-		-webkit-transition-timing-function: ease;
-		transition-duration: 200ms;
-		transition-timing-function: ease;
-	}
-	div[dir='ltr'] #outerContainer.sidebarOpen > #mainContainer {
-		-webkit-transition-property: left;
-		transition-property: left;
-		left: 200px;
-	}
-	div[dir='rtl'] #outerContainer.sidebarOpen > #mainContainer {
-		-webkit-transition-property: right;
-		transition-property: right;
-		right: 200px;
-	}
-	#sidebarContent {
-		top: 32px;
-		bottom: 0;
-		overflow: auto;
-		-webkit-overflow-scrolling: touch;
-		position: absolute;
-		width: 200px;
-		background-color: hsla(0,0%,0%,.1);
-	}
-	div[dir='ltr'] #sidebarContent {
-		left: 0;
-		box-shadow: inset -1px 0 0 hsla(0,0%,0%,.25);
-	}
-	div[dir='rtl'] #sidebarContent {
-		right: 0;
-		box-shadow: inset 1px 0 0 hsla(0,0%,0%,.25);
-	}
+	// #sidebarContainer {
+	// 	position: absolute;
+	// 	top: 0;
+	// 	bottom: 0;
+	// 	width: 200px;
+	// 	visibility: hidden;
+	// 	-webkit-transition-duration: 200ms;
+	// 	-webkit-transition-timing-function: ease;
+	// 	transition-duration: 200ms;
+	// 	transition-timing-function: ease;
+	// }
+	// div[dir='ltr'] #sidebarContainer {
+	// 	-webkit-transition-property: left;
+	// 	transition-property: left;
+	// 	left: -200px;
+	// }
+	// div[dir='rtl'] #sidebarContainer {
+	// 	-webkit-transition-property: right;
+	// 	transition-property: right;
+	// 	right: -200px;
+	// }
+	// #outerContainer.sidebarMoving > #sidebarContainer,
+	// #outerContainer.sidebarOpen > #sidebarContainer {
+	// 	visibility: visible;
+	// }
+	// div[dir='ltr'] #outerContainer.sidebarOpen > #sidebarContainer {
+	// 	left: 0;
+	// }
+	// div[dir='rtl'] #outerContainer.sidebarOpen > #sidebarContainer {
+	// 	right: 0;
+	// }
+	// #mainContainer {
+	// 	position: absolute;
+	// 	top: 0;
+	// 	right: 0;
+	// 	bottom: 0;
+	// 	left: 0;
+	// 	min-width: 320px;
+	// 	-webkit-transition-duration: 200ms;
+	// 	-webkit-transition-timing-function: ease;
+	// 	transition-duration: 200ms;
+	// 	transition-timing-function: ease;
+	// }
+	// div[dir='ltr'] #outerContainer.sidebarOpen > #mainContainer {
+	// 	-webkit-transition-property: left;
+	// 	transition-property: left;
+	// 	left: 200px;
+	// }
+	// div[dir='rtl'] #outerContainer.sidebarOpen > #mainContainer {
+	// 	-webkit-transition-property: right;
+	// 	transition-property: right;
+	// 	right: 200px;
+	// }
+	// #sidebarContent {
+	// 	top: 32px;
+	// 	bottom: 0;
+	// 	overflow: auto;
+	// 	-webkit-overflow-scrolling: touch;
+	// 	position: absolute;
+	// 	width: 200px;
+	// 	background-color: hsla(0,0%,0%,.1);
+	// }
+	// div[dir='ltr'] #sidebarContent {
+	// 	left: 0;
+	// 	box-shadow: inset -1px 0 0 hsla(0,0%,0%,.25);
+	// }
+	// div[dir='rtl'] #sidebarContent {
+	// 	right: 0;
+	// 	box-shadow: inset 1px 0 0 hsla(0,0%,0%,.25);
+	// }
 	#viewerContainer {
 		overflow: auto;
 		-webkit-overflow-scrolling: touch;
@@ -514,14 +514,14 @@ pdf-viewer {
 		-webkit-user-select: none;
 		-moz-user-select: none;
 	}
-	#findInput[data-status="pending"] {
-		background-image: url("images/loading-small.png");
-		background-repeat: no-repeat;
-		background-position: right;
-	}
-	div[dir='rtl'] #findInput[data-status="pending"] {
-		background-position: left;
-	}
+	// #findInput[data-status="pending"] {
+	// 	background-image: url("images/loading-small.png");
+	// 	background-repeat: no-repeat;
+	// 	background-position: right;
+	// }
+	// div[dir='rtl'] #findInput[data-status="pending"] {
+	// 	background-position: left;
+	// }
 	.secondaryToolbar {
 		padding: 6px;
 		height: auto;
