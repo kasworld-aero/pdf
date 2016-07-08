@@ -4,30 +4,40 @@
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
 }
+html {
+  font-size: 14px;
+}
+/* ------------ MAIN ------------ */
+.main {
+  background-color: #DADADA;
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
 /* ---------- TOOLBAR ----------  */
 .toolbar {
   display: flex;
+  position: relative;
   background: #EFEFEF;
   border-bottom: 1.5px solid #CACACA;
   color: #818181;
-  font-size: 0.8rem;
   height: 36px;
+  z-index: 2;
 }
 .toolbar--sub {
-  position: relative;
-  background-color: #E7E7E7;
-  box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.25);
-  border: none;
-}
-.toolbar--sub:before {
-  content: '';
   position: absolute;
   background-color: #E7E7E7;
-  top: -1px;
-  right: 14px;
-  width: 12px;
-  height: 10px;
-  border-radius: 2px;
+  top: 0;
+  right: 0;
+  left: 0;
+  box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.25);
+  transition: top 0.15s ease-in 0.25s;
+  z-index: 1;
+}
+.toolbar--sub.show {
+  top: 36px;
+  transition: top 0.15s ease-in;
 }
 .toolbar__left,
 .toolbar__center,
@@ -50,11 +60,11 @@
 .toolbar__item {
   margin: 0 2px;
 }
-.toolbar__item--title {
-  font-size: 1rem;
-}
 .toolbar__item--no-space {
   margin: 0;
+}
+.toolbar__item--title {
+  font-size: 1rem;
 }
 .toolbar__item--section {
   border-right: 1px solid lightgray;
@@ -67,6 +77,7 @@
   padding: 0 5px;
 }
 .toolbar__button {
+  position: relative;
   height: 28px;
   width: 28px;
   line-height: 30px;
@@ -96,11 +107,66 @@
   border-radius: 0;
   border-right: 1px solid lightgray;
 }
+.toolbar__button--dropdown:before {
+  content: "";
+  position: absolute;
+  background-color: #E7E7E7;
+  width: 14px;
+  height: 14px;
+  bottom: -6px;
+  left: 80px;
+  right: -25vw;
+  transform: rotate(45deg) translateX(50%);
+  transition: all 0.15s ease-in;
+  box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.15);
+}
+.toolbar__button--dropdown:after {
+  content: "";
+  position: absolute;
+  background-color: #E7E7E7;
+  border-radius: 2px;
+  width: 14px;
+  height: 14px;
+  bottom: -10px;
+  left: 80px;
+  right: -25vw;
+  transition: all 0.15s ease-in;
+  transform: rotate(45deg) translateX(50%);
+  z-index: 2;
+}
+.toolbar__button--dropdown.toggled:before {
+  left: calc(50% - 10px);
+  transition: all 0.25s ease-in 0.15s;
+}
+.toolbar__button--dropdown.toggled:after {
+  left: calc(50% - 10px);
+  transition: all 0.25s ease-in 0.15s;
+}
 .toolbar__page {
   display: inline-block;
 }
 .toolbar__page input {
   max-width: 20px;
+}
+.toolbar__page__total-pages {
+  padding: 0 5px;
+}
+/* --------- LOADBAR ------------ */
+.loading {
+  position: relative;
+  width: 100%;
+  height: 4px;
+  background-color: transparent;
+}
+.loading__progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 68%;
+  height: 100%;
+  background-color: #8ACD70;
+  overflow: hidden;
+  transition: width 200ms;
 }
 /* --------- SIDEBAR ------------ */
 /* ---------- INPUT ----------- */
@@ -116,6 +182,8 @@ input {
   appearance: none;
   background-color: transparent;
   border: 0;
+  line-height: 24px;
+  padding: 0 5px;
   color: #818181;
   position: relative;
   z-index: 2;
@@ -141,18 +209,10 @@ select {
 .select {
   background-color: #fff;
   display: inline-block;
-  margin-right: 10px;
+  margin-right: 0px;
   padding: 0;
   position: relative;
   border-radius: 2px;
-}
-.select.full-width {
-  margin-left: 0;
-  margin-right: 0;
-  width: 100%;
-}
-.select:last-child {
-  margin-right: 0;
 }
 .select .fa-angle-down {
   color: #818181;
@@ -160,7 +220,7 @@ select {
   height: 30px;
   margin-top: -12px;
   position: absolute;
-  right: 10px;
+  right: 5px;
   top: 50%;
   z-index: 1;
 }
@@ -168,13 +228,14 @@ select {
   appearance: none;
   background-color: transparent;
   border: 0;
+  height: 24px;
+  line-height: 24px;
+  padding: 0 5px;
   color: #818181;
-  height: 44px;
   margin-right: 20px;
-  padding-left: 10px;
-  padding-right: 30px;
   position: relative;
   width: 100%;
+  max-width: 70px;
   z-index: 2;
 }
 .select select:active,
@@ -190,40 +251,4 @@ select {
   background-color: #fff;
   color: #818181;
   height: 30px;
-}
-.select.select-small {
-  max-width: 70px;
-}
-.select.select-small select {
-  height: 24px;
-  line-height: 24px;
-  padding: 0 5px;
-  padding-right: 27px;
-}
-select::-ms-expand {
-  display: none;
-}
-.select-link {
-  border: 0;
-  color: #818181;
-}
-/* -------- TRIANGLE THING ------- */
-.triangle {
-  width: 20px;
-  height: 10px;
-  position: absolute;
-  top: -11px;
-  right: 8px;
-  overflow: hidden;
-}
-.triangle:before {
-  content: "";
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  background: #E7E7E7;
-  transform: rotate(45deg);
-  top: 5px;
-  left: 2.5px;
-  box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.15);
 }
