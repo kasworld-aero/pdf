@@ -2074,7 +2074,8 @@
                             this.isOpen = true;
                             this.toggleButton.classList.add('toggled');
 
-                            this.outerContainer.classList.add('sidebarMoving');
+                            // this.outerContainer.classList.add('sidebarMoving');
+                            // this.outerContainer.classList.add('sidebarOpen');
                             this.outerContainer.classList.add('sidebarOpen');
 
                             if (this.active === SidebarView.THUMBS) {
@@ -2091,7 +2092,8 @@
                             this.isOpen = false;
                             this.toggleButton.classList.remove('toggled');
 
-                            this.outerContainer.classList.add('sidebarMoving');
+                            // this.outerContainer.classList.add('sidebarMoving');
+                            // this.outerContainer.classList.remove('sidebarOpen');
                             this.outerContainer.classList.remove('sidebarOpen');
 
                             this._forceRendering();
@@ -4236,6 +4238,7 @@
                             this.opened = true;
                             this.toggleButton.classList.add('toggled');
                             this.toolbar.classList.add('show');
+                            PDFViewerApplication.pdfSidebar.outerContainer.classList.add('subToolbarOpen');
                         },
 
                         close: function SecondaryToolbar_close() {
@@ -4243,6 +4246,7 @@
                                 return;
                             }
                             this.opened = false;
+                            PDFViewerApplication.pdfSidebar.outerContainer.classList.remove('subToolbarOpen');
                             this.toolbar.classList.remove('show');
                             this.toggleButton.classList.remove('toggled');
                         },
@@ -4440,6 +4444,7 @@
                                 this.opened = true;
                                 this.toggleButton.classList.add('toggled');
                                 this.bar.classList.add('show');
+                                PDFViewerApplication.pdfSidebar.outerContainer.classList.add('subToolbarOpen');
                             }
                             this.findField.select();
                             this.findField.focus();
@@ -4452,6 +4457,7 @@
                             this.opened = false;
                             this.toggleButton.classList.remove('toggled');
                             this.bar.classList.remove('show');
+                            PDFViewerApplication.pdfSidebar.outerContainer.classList.remove('subToolbarOpen');
                             this.findController.active = false;
                         },
 
