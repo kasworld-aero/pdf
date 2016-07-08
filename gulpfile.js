@@ -9,8 +9,7 @@ var source = require('vinyl-source-stream');
 var html2js = require('gulp-html2js');
 
 
-// for pdfViewer module in dist
-gulp.task('src-tpl', function () {
+gulp.task('src-tpl', function() {
     gulp.src('src/*.html')
         .pipe(html2js('templates.js', {
             adapter: 'angular',
@@ -24,8 +23,6 @@ gulp.task('src-js', function() {
         .pipe(concat('pdfViewer.js'))
         .pipe(gulp.dest('dist/'));
 });
-
-gulp.task('dist', ['src-tpl', 'src-js']);
 
 
 
@@ -68,15 +65,16 @@ gulp.task('app', ['sass', 'static', 'browserify'], function() {
 });
 
 gulp.task('watch', function() {
+    gulp.watch('src/**/*.html', ['src-tpl']);
+    gulp.watch('src/**/*.js', ['src-js', 'browserify']);
     gulp.watch('app/**/*.js', ['browserify']);
-    gulp.watch('src/**/*.*', ['tpl', 'js']);
     gulp.watch('app/**/*.html', ['static']);
     gulp.watch('sass/*.scss', ['sass']);
 });
 
-gulp.task('default', ['connect', 'watch']);
+gulp.task('default', ['connect', 'src-tpl', 'src-js', 'app', 'watch']);
 
 
 
 // gh-pages
-gulp.task('gh-pages', ['dist', 'app']);
+gulp.task('gh-pages', ['src-tpl', 'src-js', 'app']);

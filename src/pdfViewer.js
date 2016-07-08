@@ -4,7 +4,9 @@
     angular
         .module('pdf.viewer')
         .component('pdfViewer', {
-            template: ['$templateCache', function($templateCache) { return $templateCache.get('src/pdfViewer.tpl.html');}],
+            template: ['$templateCache', function($templateCache) {
+                return $templateCache.get('src/pdfViewer.tpl.html');
+            }],
             controller: pdfViewerCtrl,
             bindings: {
                 file: '<',
@@ -17,9 +19,9 @@
             }
         });
 
-    pdfViewerCtrl.$inject = ['$element', '$log', '$window', 'pdfViewerService'];
+    pdfViewerCtrl.$inject = ['$element', '$log', '$window', '$timeout', 'pdfViewerService'];
 
-    function pdfViewerCtrl($element, $log, $window, pdfViewerService) {
+    function pdfViewerCtrl($element, $log, $window, $timeout, pdfViewerService) {
         var $ctrl = this;
         $window.pdfViewerFileUrl = $ctrl.file || '';
 
@@ -48,16 +50,9 @@
         /****************************************
          *      Lifecycle Hooks                 *
          ****************************************/
-        $ctrl.$onInit = init;
-
-        function init() {
+        $ctrl.$onInit = function() {
             console.log('👊 activating component');
-            pdfViewerService.load()
-                .then(function(msg) {
-                    getDomElements();
-                    $ctrl.ready = true;
-                });
-        }
+        };
 
         $ctrl.$onChanges = function(changesObj) {
 
@@ -91,6 +86,17 @@
 
                 $ctrl.onUpdate();
             }
+        };
+
+        $ctrl.$postLink = function() {
+            $timeout(function() {
+                pdfViewerService.load()
+                    .then(function(msg) {
+                        getDomElements();
+                        $ctrl.ready = true;
+                        $window.pdfViewerReady = true;
+                    });
+            }, 0);
         };
 
         /****************************************
@@ -128,9 +134,10 @@
                 'presentationMode': null
             };
 
-            Object.keys(elements).forEach(function(key) {
-                elements[key] = document.getElementById(key);
-            });
+            Object.keys(elements)
+                .forEach(function(key) {
+                    elements[key] = document.getElementById(key);
+                });
 
             angular.extend($ctrl, elements);
         }

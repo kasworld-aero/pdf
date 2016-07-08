@@ -156,19 +156,6 @@ pdf-viewer {
     margin: 0; }
   pdf-viewer div {
     height: auto; }
-  pdf-viewer div.main {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    overflow: hidden;
-    font-size: 10px;
-    background-color: #404040;
-    background-image: url("images/texture.png"); }
-  pdf-viewer button,
-  pdf-viewer input,
-  pdf-viewer select {
-    font: message-box;
-    outline: none; }
   pdf-viewer .hidden {
     display: none !important; }
   pdf-viewer [hidden] {
@@ -253,64 +240,6 @@ pdf-viewer {
     width: 100%;
     height: 100%;
     position: relative; }
-  pdf-viewer #sidebarContainer {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 200px;
-    visibility: hidden;
-    -webkit-transition-duration: 200ms;
-    -webkit-transition-timing-function: ease;
-    transition-duration: 200ms;
-    transition-timing-function: ease; }
-  pdf-viewer div[dir='ltr'] #sidebarContainer {
-    -webkit-transition-property: left;
-    transition-property: left;
-    left: -200px; }
-  pdf-viewer div[dir='rtl'] #sidebarContainer {
-    -webkit-transition-property: right;
-    transition-property: right;
-    right: -200px; }
-  pdf-viewer #outerContainer.sidebarMoving > #sidebarContainer,
-  pdf-viewer #outerContainer.sidebarOpen > #sidebarContainer {
-    visibility: visible; }
-  pdf-viewer div[dir='ltr'] #outerContainer.sidebarOpen > #sidebarContainer {
-    left: 0; }
-  pdf-viewer div[dir='rtl'] #outerContainer.sidebarOpen > #sidebarContainer {
-    right: 0; }
-  pdf-viewer #mainContainer {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    min-width: 320px;
-    -webkit-transition-duration: 200ms;
-    -webkit-transition-timing-function: ease;
-    transition-duration: 200ms;
-    transition-timing-function: ease; }
-  pdf-viewer div[dir='ltr'] #outerContainer.sidebarOpen > #mainContainer {
-    -webkit-transition-property: left;
-    transition-property: left;
-    left: 200px; }
-  pdf-viewer div[dir='rtl'] #outerContainer.sidebarOpen > #mainContainer {
-    -webkit-transition-property: right;
-    transition-property: right;
-    right: 200px; }
-  pdf-viewer #sidebarContent {
-    top: 32px;
-    bottom: 0;
-    overflow: auto;
-    -webkit-overflow-scrolling: touch;
-    position: absolute;
-    width: 200px;
-    background-color: rgba(0, 0, 0, 0.1); }
-  pdf-viewer div[dir='ltr'] #sidebarContent {
-    left: 0;
-    box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.25); }
-  pdf-viewer div[dir='rtl'] #sidebarContent {
-    right: 0;
-    box-shadow: inset 1px 0 0 rgba(0, 0, 0, 0.25); }
   pdf-viewer #viewerContainer {
     overflow: auto;
     -webkit-overflow-scrolling: touch;
@@ -324,12 +253,6 @@ pdf-viewer {
     box-shadow: inset 1px 0 0 rgba(255, 255, 255, 0.05); }
   pdf-viewer div[dir='rtl'] #viewerContainer {
     box-shadow: inset -1px 0 0 rgba(255, 255, 255, 0.05); }
-  pdf-viewer .toolbar {
-    position: relative;
-    left: 0;
-    right: 0;
-    z-index: 1;
-    cursor: default; }
   pdf-viewer #toolbarContainer {
     width: 100%; }
   pdf-viewer #toolbarSidebar {
@@ -358,47 +281,6 @@ pdf-viewer {
   pdf-viewer .secondaryToolbar,
   pdf-viewer div[dir='rtl'] #toolbarContainer {
     box-shadow: inset -1px 0 0 rgba(255, 255, 255, 0.08), inset 0 1px 1px rgba(0, 0, 0, 0.15), inset 0 -1px 0 rgba(255, 255, 255, 0.05), 0 1px 0 rgba(0, 0, 0, 0.15), 0 1px 1px rgba(0, 0, 0, 0.1); }
-  pdf-viewer #toolbarViewer {
-    height: 32px; }
-  pdf-viewer #loadingBar {
-    position: relative;
-    width: 100%;
-    height: 4px;
-    background-color: #333;
-    border-bottom: 1px solid #333; }
-  pdf-viewer #loadingBar .progress {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 0;
-    height: 100%;
-    background-color: #ddd;
-    overflow: hidden;
-    -webkit-transition: width 200ms;
-    transition: width 200ms; }
-@-webkit-keyframes progressIndeterminate {
-  0% {
-    left: -142px; }
-  100% {
-    left: 0; } }
-@keyframes progressIndeterminate {
-  0% {
-    left: -142px; }
-  100% {
-    left: 0; } }
-  pdf-viewer #loadingBar .progress.indeterminate {
-    background-color: #999;
-    -webkit-transition: none;
-    transition: none; }
-  pdf-viewer #loadingBar .progress.indeterminate .glimmer {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: calc(100% + 150px);
-    background: repeating-linear-gradient(135deg, #bbb 0, #999 5px, #999 45px, #ddd 55px, #ddd 95px, #bbb 100px);
-    -webkit-animation: progressIndeterminate 950ms linear infinite;
-    animation: progressIndeterminate 950ms linear infinite; }
   pdf-viewer .findbar,
   pdf-viewer .secondaryToolbar {
     top: 32px;
@@ -420,12 +302,6 @@ pdf-viewer {
   pdf-viewer .findbar label {
     -webkit-user-select: none;
     -moz-user-select: none; }
-  pdf-viewer #findInput[data-status="pending"] {
-    background-image: url("images/loading-small.png");
-    background-repeat: no-repeat;
-    background-position: right; }
-  pdf-viewer div[dir='rtl'] #findInput[data-status="pending"] {
-    background-position: left; }
   pdf-viewer .secondaryToolbar {
     padding: 6px;
     height: auto;
@@ -480,16 +356,8 @@ pdf-viewer {
   pdf-viewer div[dir='rtl'] .doorHanger:before {
     right: 13px;
     margin-right: -9px; }
-  pdf-viewer #findResultsCount {
-    background-color: #d9d9d9;
-    color: #525252;
-    text-align: center;
-    padding: 3px 4px; }
   pdf-viewer #findMsg {
-    font-style: italic;
-    color: #A6B7D0; }
-  pdf-viewer #findInput.notFound {
-    background-color: #ff6666; }
+    font-style: italic; }
   pdf-viewer div[dir='ltr'] #toolbarViewerLeft {
     margin-left: -1px; }
   pdf-viewer div[dir='rtl'] #toolbarViewerRight {
@@ -1274,10 +1142,6 @@ pdf-viewer {
         left: -2px; }
       pdf-viewer div[dir='rtl'] .secondaryToolbarButton::before {
         left: 186px; }
-      pdf-viewer #findInput[data-status="pending"],
-      pdf-viewer .toolbarField.pageNumber.visiblePageIsLoading {
-        background-image: url("images/loading-small@2x.png");
-        background-size: 16px 17px; }
       pdf-viewer .dropdownToolbarButton {
         background: url("images/toolbarButton-menuArrows@2x.png") no-repeat;
         background-size: 7px 16px; }

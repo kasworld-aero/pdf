@@ -2074,7 +2074,8 @@
                             this.isOpen = true;
                             this.toggleButton.classList.add('toggled');
 
-                            this.outerContainer.classList.add('sidebarMoving');
+                            // this.outerContainer.classList.add('sidebarMoving');
+                            // this.outerContainer.classList.add('sidebarOpen');
                             this.outerContainer.classList.add('sidebarOpen');
 
                             if (this.active === SidebarView.THUMBS) {
@@ -2091,7 +2092,8 @@
                             this.isOpen = false;
                             this.toggleButton.classList.remove('toggled');
 
-                            this.outerContainer.classList.add('sidebarMoving');
+                            // this.outerContainer.classList.add('sidebarMoving');
+                            // this.outerContainer.classList.remove('sidebarOpen');
                             this.outerContainer.classList.remove('sidebarOpen');
 
                             this._forceRendering();
@@ -4124,31 +4126,31 @@
                         this.buttons = [{
                             element: options.presentationModeButton,
                             eventName: 'presentationmode',
-                            close: true
+                            close: false
                         }, {
                             element: options.openFileButton,
                             eventName: 'openfile',
-                            close: true
+                            close: false
                         }, {
                             element: options.printButton,
                             eventName: 'print',
-                            close: true
+                            close: false
                         }, {
                             element: options.downloadButton,
                             eventName: 'download',
-                            close: true
+                            close: false
                         }, {
                             element: options.viewBookmarkButton,
                             eventName: null,
-                            close: true
+                            close: false
                         }, {
                             element: options.firstPageButton,
                             eventName: 'firstpage',
-                            close: true
+                            close: false
                         }, {
                             element: options.lastPageButton,
                             eventName: 'lastpage',
-                            close: true
+                            close: false
                         }, {
                             element: options.pageRotateCwButton,
                             eventName: 'rotatecw',
@@ -4160,11 +4162,11 @@
                         }, {
                             element: options.toggleHandToolButton,
                             eventName: 'togglehandtool',
-                            close: true
+                            close: false
                         }, {
                             element: options.documentPropertiesButton,
                             eventName: 'documentproperties',
-                            close: true
+                            close: false
                         }];
 
                         this.eventBus = eventBus;
@@ -4235,7 +4237,8 @@
                             }
                             this.opened = true;
                             this.toggleButton.classList.add('toggled');
-                            this.toolbar.classList.remove('hidden');
+                            this.toolbar.classList.add('show');
+                            PDFViewerApplication.pdfSidebar.outerContainer.classList.add('subToolbarOpen');
                         },
 
                         close: function SecondaryToolbar_close() {
@@ -4243,7 +4246,8 @@
                                 return;
                             }
                             this.opened = false;
-                            this.toolbar.classList.add('hidden');
+                            PDFViewerApplication.pdfSidebar.outerContainer.classList.remove('subToolbarOpen');
+                            this.toolbar.classList.remove('show');
                             this.toggleButton.classList.remove('toggled');
                         },
 
@@ -4298,6 +4302,7 @@
                         this.opened = false;
                         this.bar = options.bar || null;
                         this.toggleButton = options.toggleButton || null;
+                        this.closeButton = options.closeButton || null;
                         this.findField = options.findField || null;
                         this.highlightAll = options.highlightAllCheckbox || null;
                         this.caseSensitive = options.caseSensitiveCheckbox || null;
@@ -4318,6 +4323,10 @@
                         var self = this;
                         this.toggleButton.addEventListener('click', function() {
                             self.toggle();
+                        });
+
+                        this.closeButton.addEventListener('click', function() {
+                            self.close();
                         });
 
                         this.findField.addEventListener('input', function() {
@@ -4424,7 +4433,7 @@
                             }
 
                             // Create the match counter
-                            this.findResultsCount.textContent = matchCount.toLocaleString();
+                            this.findResultsCount.textContent = 'Found ' +  matchCount.toLocaleString() + ' results';
 
                             // Show the counter
                             this.findResultsCount.classList.remove('hidden');
@@ -4434,7 +4443,8 @@
                             if (!this.opened) {
                                 this.opened = true;
                                 this.toggleButton.classList.add('toggled');
-                                this.bar.classList.remove('hidden');
+                                this.bar.classList.add('show');
+                                PDFViewerApplication.pdfSidebar.outerContainer.classList.add('subToolbarOpen');
                             }
                             this.findField.select();
                             this.findField.focus();
@@ -4446,7 +4456,8 @@
                             }
                             this.opened = false;
                             this.toggleButton.classList.remove('toggled');
-                            this.bar.classList.add('hidden');
+                            this.bar.classList.remove('show');
+                            PDFViewerApplication.pdfSidebar.outerContainer.classList.remove('subToolbarOpen');
                             this.findController.active = false;
                         },
 
@@ -7428,6 +7439,7 @@
                     preferenceShowPreviousViewOnLoad: true,
                     preferenceDefaultZoomValue: '',
                     isViewerEmbedded: true,
+                    documentTitle: '',
                     url: '',
                     externalServices: DefaultExernalServices,
                     openFileViaURL: webViewerOpenFileViaURL,
@@ -7723,10 +7735,13 @@
                     },
 
                     setTitle: function pdfViewSetTitle(title) {
+                        this.appConfig.toolbar.documentTitle.textContent = title;
+
                         if (this.isViewerEmbedded) {
                             // Embedded PDF viewers should not be changing their parent page's title.
                             return;
                         }
+
                         document.title = title;
                     },
 
@@ -8944,15 +8959,20 @@
                         if (container.clientWidth === 0) {
                             container.setAttribute('style', 'display: inherit;');
                         }
-                        if (container.clientWidth > 0) {
-                            var select = PDFViewerApplication.appConfig.toolbar.scaleSelect;
-                            select.setAttribute('style', 'min-width: inherit;');
-                            var width = select.clientWidth + SCALE_SELECT_CONTAINER_PADDING;
-                            select.setAttribute('style', 'min-width: ' +
-                                (width + SCALE_SELECT_PADDING) + 'px;');
-                            container.setAttribute('style', 'min-width: ' + width + 'px; ' +
-                                'max-width: ' + width + 'px;');
-                        }
+
+                        /* -------------------------------------------------- */
+                        /* Not changing the Scale Select size for this viewer */
+                        /* -------------------------------------------------- */
+
+                        // if (container.clientWidth > 0) {
+                        //     var select = PDFViewerApplication.appConfig.toolbar.scaleSelect;
+                        //     select.setAttribute('style', 'min-width: inherit;');
+                        //     var width = select.clientWidth + SCALE_SELECT_CONTAINER_PADDING;
+                        //     select.setAttribute('style', 'min-width: ' +
+                        //         (width + SCALE_SELECT_PADDING) + 'px;');
+                        //     container.setAttribute('style', 'min-width: ' + width + 'px; ' +
+                        //         'max-width: ' + width + 'px;');
+                        // }
 
                         // Set the 'max-height' CSS property of the secondary toolbar.
                         var mainContainer = PDFViewerApplication.appConfig.mainContainer;
@@ -9437,6 +9457,7 @@
                     presentationModeButton: document.getElementById('presentationMode'),
                     download: document.getElementById('download'),
                     viewBookmark: document.getElementById('viewBookmark'),
+                    documentTitle: document.getElementById('documentTitle'),
                 },
                 secondaryToolbar: {
                     toolbar: document.getElementById('secondaryToolbar'),
@@ -9476,6 +9497,7 @@
                 findBar: {
                     bar: document.getElementById('findbar'),
                     toggleButton: document.getElementById('viewFind'),
+                    closeButton: document.getElementById('closeFind'),
                     findField: document.getElementById('findInput'),
                     highlightAllCheckbox: document.getElementById('findHighlightAll'),
                     caseSensitiveCheckbox: document.getElementById('findMatchCase'),
@@ -9533,12 +9555,11 @@
         }
 
         webViewerLoad();
-        // document.addEventListener('DOMContentLoaded', webViewerLoad, true);
     }
 
     // wait for PDFJS to load before loading the web viewer
     function checkForPDFJS() {
-        if (PDFJS) {
+        if (PDFJS && window.pdfViewerReady) {
             load();
         }
     }
