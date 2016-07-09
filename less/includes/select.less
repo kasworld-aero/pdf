@@ -1,0 +1,55 @@
+/* ---------- SELECT ----------  */
+
+// Disable arrow on selects
+select {
+  -moz-appearance: window;
+  -webkit-appearance: none;
+}
+
+.select {
+  background-color: #fff;
+  display: inline-block;
+  margin-right: 0px;
+  padding: 0;
+  position: relative;
+  border-radius: 2px;
+  // font awesome angle
+  .fa-angle-down {
+    color: @toolbar-text;
+    font-size: 25px;
+    height: 30px;
+    margin-top: -12px;
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    z-index: 1;
+  }
+  select {
+    appearance: none;
+    background-color: transparent;
+    border: 0;
+    height: 24px;
+    line-height: 24px;
+    padding: 0 5px;
+    color: @toolbar-text;
+    margin-right: 20px;
+    position: relative;
+    width: 100%;
+    max-width: 70px;
+    z-index: 2;
+    &:active,
+    &:focus {
+      border: 0;
+      outline: none;
+    }
+    &:active + i,
+    &:focus + i {
+      z-index: 2;
+    }
+    option {
+      background-color: #fff;
+      color: @toolbar-text;
+      height: 30px;
+    }
+  }
+}

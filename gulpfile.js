@@ -1,10 +1,11 @@
 var gulp = require('gulp');
+var path = require('path');
 var browserify = require('browserify');
 var concat = require('gulp-concat');
 var minify = require('gulp-minify');
 var connect = require('gulp-connect');
 var flatten = require('gulp-flatten');
-var sass = require('gulp-ruby-sass');
+var less = require('gulp-less');
 var source = require('vinyl-source-stream');
 var html2js = require('gulp-html2js');
 
@@ -34,10 +35,18 @@ gulp.task('connect', function() {
         livereload: true
     });
 });
+//
+// gulp.task('sass', function() {
+//     sass('sass/*.scss')
+//         .pipe(gulp.dest('public/css'));
+// });
 
-gulp.task('sass', function() {
-    sass('sass/*.scss')
-        .pipe(gulp.dest('public/css'));
+gulp.task('less', function () {
+  return gulp.src('./less/main.less')
+    .pipe(less({
+      paths: [ path.join(__dirname, 'less', 'includes') ]
+    }))
+    .pipe(gulp.dest('./public/css'));
 });
 
 gulp.task('browserify', function() {
@@ -53,7 +62,7 @@ gulp.task('static', function() {
         .pipe(gulp.dest('public/tpl'));
 });
 
-gulp.task('app', ['sass', 'static', 'browserify'], function() {
+gulp.task('app', ['less', 'static', 'browserify'], function() {
     gulp.src('public/js/main.js')
         .pipe(minify({
             ext:{
@@ -69,7 +78,7 @@ gulp.task('watch', function() {
     gulp.watch('src/**/*.js', ['src-js', 'browserify']);
     gulp.watch('app/**/*.js', ['browserify']);
     gulp.watch('app/**/*.html', ['static']);
-    gulp.watch('sass/*.scss', ['sass']);
+    gulp.watch('less/**/*.less', ['less']);
 });
 
 gulp.task('default', ['connect', 'src-tpl', 'src-js', 'app', 'watch']);

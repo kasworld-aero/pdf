@@ -1,0 +1,14 @@
+/* --------- SIDEBAR ------------ */
+
+.sidebar {
+  position: absolute;
+  top: @toolbar-height;
+  bottom: 0;
+  left: -@sidebar-width;
+  width: @sidebar-width;
+  background-color: @sidebar-bg;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.15);
+  transition: left 0.25s ease-in, top 0.15s ease-in 0.25s;
+  z-index: 1;
+  &__content {}
+}

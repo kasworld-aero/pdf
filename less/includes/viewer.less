@@ -1,0 +1,40 @@
+/* ----------- VIEWER ----------- */
+
+.viewer {
+  background-color: @pdf-viewer-bg;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+.outer {
+  &.subToolbarOpen {
+    .sidebar {
+      top: @toolbar-height * 2;
+      transition: top 0.15s ease-in;
+    }
+    .main {
+      top: @toolbar-height + @a-little-extra;
+      transition: top 0.15s ease-in;
+    }
+  }
+  &.sidebarOpen {
+    .sidebar {
+      left: 0;
+    }
+    .main {
+      left: @sidebar-width;
+    }
+  }
+}
+
+/* ---------- MAIN ------------ */
+
+.main {
+  position: absolute;
+  top: @a-little-extra;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  transition: left 0.25s ease-in, top 0.15s ease-in 0.25s;
+}

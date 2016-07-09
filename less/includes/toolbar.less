@@ -1,0 +1,145 @@
+/* ---------- TOOLBAR ----------  */
+
+.toolbar {
+  display: flex;
+  position: relative;
+  background: @toolbar-bg;
+  border-bottom: 1.5px solid @toolbar-border;
+  color: @toolbar-text;
+  height: @toolbar-height;
+  z-index: 3;
+  &--sub {
+    position: absolute;
+    background-color: @toolbar-sub-bg;
+    top: 0;
+    right: 0;
+    left: 0;
+    box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.25);
+    transition: top 0.15s ease-in 0.25s;
+    z-index: 2;
+    &.show {
+      top: @toolbar-height;
+      transition: top 0.15s ease-in;
+    }
+  }
+  &__left,
+  &__center,
+  &__right {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    text-align: center;
+  }
+  &__left {
+    // background-color: @blue;
+    justify-content: flex-start;
+  }
+  &__center {
+    // background-color: @orange;
+    justify-content: center;
+    margin: 0 auto;
+  }
+  &__right {
+    // background-color: @green;
+    justify-content: flex-end;
+  }
+  &__item {
+    // background-color: @light-blue;
+    margin: 0 2px;
+    &--no-space {
+      margin: 0;
+    }
+    &--title {
+      font-size: 1rem;
+    }
+    &--section {
+      .border-right();
+      padding: 0 8px;
+      .toolbar__button {
+        display: inline-block;
+      }
+    }
+  }
+  &__separator {
+    padding: 0 5px;
+  }
+  &__button {
+    position: relative;
+    height: 28px;
+    width: 28px;
+    line-height: 30px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.10s linear;
+    &:hover {
+      background-color: @btn-hover;
+    }
+    &:active {
+      background-color: @btn-active;
+      box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.3);
+      color: #fff;
+    }
+    &--text {
+      width: auto;
+      padding: 0 8px;
+      font-size: 0.8rem;
+      i {
+        padding-right: 5px;
+      }
+    }
+    &--full {
+      height: 32px;
+      line-height: 34px;
+      border-radius: 0;
+      .border-right();
+    }
+    &--dropdown {
+      &:before {
+        content: "";
+        position: absolute;
+        background-color: @toolbar-sub-bg;
+        width: 14px;
+        height: 14px;
+        bottom: -6px;
+        left: 80px;
+        right: -25vw;
+        transform: rotate(45deg) translateX(50%);
+        transition: all 0.15s ease-in;
+        box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.15);
+      }
+      &:after {
+        content: "";
+        position: absolute;
+        background-color: @toolbar-sub-bg;
+        border-radius: 2px;
+        width: 14px;
+        height: 14px;
+        bottom: -10px;
+        left: 80px;
+        right: -25vw;
+        transition: all 0.15s ease-in;
+        transform: rotate(45deg) translateX(50%);
+        z-index: 2;
+      }
+      &.toggled {
+        &:before {
+          left: ~"calc(50% - 10px)";
+          transition: all 0.25s ease-in 0.15s;
+        }
+        &:after {
+          left: ~"calc(50% - 10px)";
+          transition: all 0.25s ease-in 0.15s;
+        }
+      }
+    }
+  }
+  &__page {
+    display: inline-block;
+    & input {
+      max-width: 20px;
+    }
+    &__total-pages {
+      padding: 0 5px;
+    }
+  }
+}

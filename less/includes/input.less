@@ -1,0 +1,45 @@
+/* ---------- INPUT ----------- */
+
+// Disable webkit background color
+input:-webkit-autofill {
+  box-shadow: 0 0 0 1000px @toolbar-bg inset;
+}
+
+.input {
+  background-color: #fff;
+  display: inline-block;
+  margin-left: 10px;
+  padding: 0;
+  position: relative;
+  border-radius: 2px;
+}
+
+input {
+  appearance: none;
+  background-color: transparent;
+  border: 0;
+  line-height: 24px;
+  padding: 0 5px;
+  color: @toolbar-text;
+  position: relative;
+  z-index: 2;
+  &:active,
+  &:focus {
+    // background-color: darken(#fff, 5%);
+    border: 0;
+    outline: none;
+  }
+}
+
+// hide number spinner
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[data-status="pending"] {
+  .search__pending {
+    visibility: visible;
+  }
+}
