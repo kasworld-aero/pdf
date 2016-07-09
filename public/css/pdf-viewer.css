@@ -5,12 +5,14 @@
 .hidden {
   display: none !important;
 }
+/* -------- COMPONENT CONTAINER -------- */
 .pdf-viewer-container {
   display: flex;
   height: 100vh;
   font-size: 14px;
   font-weight: 300;
 }
+/* ---------- PDFJS DEFAULTS ----------- */
 pdf-viewer {
   flex: 1 1 auto;
   position: relative;
@@ -1714,13 +1716,6 @@ pdf-viewer .visibleSmallView {
   pdf-viewer #scaleSelectContainer {
     display: none;
   }
-}
-/* -------- CONTAINER -------- */
-.pdf-viewer-container {
-  display: flex;
-  height: 100vh;
-  font-size: 14px;
-  font-weight: 300;
 }
 /* ---------- INPUT ----------- */
 input:-webkit-autofill {
