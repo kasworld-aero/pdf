@@ -750,9 +750,9 @@ $templateCache.put("pdfViewer/pdfViewer.tpl.html","<div dir=\"ltr\"\n" +
 
         function loadCSS() {
             return $ocLazyLoad.load({
-                insertBefore: '#load_css_before',
+                // insertBefore: '#load_css_before',
                 files: [
-                    'css/viewer.css',
+                    'css/pdf-viewer.css',
                 ]
             });
         }

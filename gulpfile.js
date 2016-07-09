@@ -38,7 +38,7 @@ gulp.task('pdfViewer', ['tpl'], function(done) {
 /*         Stylesheet Build           */
 /**************************************/
 gulp.task('less', function () {
-  return gulp.src('./less/main.less')
+  return gulp.src('./less/*.less')
     .pipe(less({
       paths: [ path.join(__dirname, 'less', 'includes') ]
     }))
