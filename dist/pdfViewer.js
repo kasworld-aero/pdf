@@ -15,7 +15,7 @@ catch(err) { app = angular.module("pdf.viewer", []); }
 app.run(["$templateCache", function($templateCache) {
 "use strict";
 
-$templateCache.put("src/pdfViewer.tpl.html","<div dir=\"ltr\"\n" +
+$templateCache.put("pdfViewer/pdfViewer.tpl.html","<div dir=\"ltr\"\n" +
     "    class=\"viewer\">\n" +
     "    <section tabindex=\"1\"\n" +
     "        class=\"loadingInProgress\">\n" +
@@ -556,7 +556,7 @@ $templateCache.put("src/pdfViewer.tpl.html","<div dir=\"ltr\"\n" +
         .module('pdf.viewer')
         .component('pdfViewer', {
             template: ['$templateCache', function($templateCache) {
-                return $templateCache.get('src/pdfViewer.tpl.html');
+                return $templateCache.get('pdfViewer/pdfViewer.tpl.html');
             }],
             controller: pdfViewerCtrl,
             bindings: {

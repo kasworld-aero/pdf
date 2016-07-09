@@ -5,7 +5,7 @@
         .module('pdf.viewer')
         .component('pdfViewer', {
             template: ['$templateCache', function($templateCache) {
-                return $templateCache.get('src/pdfViewer.tpl.html');
+                return $templateCache.get('pdfViewer/pdfViewer.tpl.html');
             }],
             controller: pdfViewerCtrl,
             bindings: {

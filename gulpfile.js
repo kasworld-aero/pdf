@@ -1,46 +1,42 @@
 var gulp = require('gulp');
-var path = require('path');
 var browserify = require('browserify');
-var concat = require('gulp-concat');
-var minify = require('gulp-minify');
-var connect = require('gulp-connect');
-var flatten = require('gulp-flatten');
-var less = require('gulp-less');
+var path = require('path');
 var source = require('vinyl-source-stream');
-var html2js = require('gulp-html2js');
+var $ = require('gulp-load-plugins')();
+
+// idk why but gulp-load-plugins is not picking this one up
+var less = require('gulp-less');
 
 
-gulp.task('src-tpl', function() {
-    gulp.src('src/*.html')
-        .pipe(html2js('templates.js', {
+gulp.task('default', ['connect', 'app', 'watch']);
+
+
+/**************************************/
+/*          PDF Viewer Tasks          */
+/**************************************/
+gulp.task('tpl', function(done) {
+    gulp.src('pdfViewer/*.html')
+        .pipe($.html2js('pdfViewer.tpl.js', {
             adapter: 'angular',
             name: 'pdf.viewer'
         }))
-        .pipe(gulp.dest('src'));
+        .pipe(gulp.dest('tmp')
+        .on('end', done));
+    return done;
 });
 
-gulp.task('src-js', function() {
-    gulp.src(['src/index.js', 'src/templates.js', 'src/*.js'])
-        .pipe(concat('pdfViewer.js'))
-        .pipe(gulp.dest('dist/'));
+gulp.task('pdfViewer', ['tpl'], function(done) {
+    gulp.src(['pdfViewer/module.js', 'tmp/pdfViewer.tpl.js', 'pdfViewer/**/*.js'])
+        .pipe($.concat('pdfViewer.js'))
+        .pipe(gulp.dest('dist')
+        .on('end', done));
+    return done;
 });
 
 
-
-// for test app in app folder
-gulp.task('connect', function() {
-    connect.server({
-        root: 'public',
-        port: 8000,
-        livereload: true
-    });
-});
-//
-// gulp.task('sass', function() {
-//     sass('sass/*.scss')
-//         .pipe(gulp.dest('public/css'));
-// });
-
+/**************************************/
+/*         Stylesheet Build           */
+/**************************************/
 gulp.task('less', function () {
   return gulp.src('./less/main.less')
     .pipe(less({
@@ -49,7 +45,18 @@ gulp.task('less', function () {
     .pipe(gulp.dest('./public/css'));
 });
 
-gulp.task('browserify', function() {
+/**************************************/
+/*          Demo App Tasks            */
+/**************************************/
+gulp.task('connect', function() {
+    $.connect.server({
+        root: 'public',
+        port: 8000,
+        livereload: true
+    });
+});
+
+gulp.task('browserify', ['pdfViewer'], function() {
     browserify({ entries: ['app/app.js', 'dist/pdfViewer.js'] })
         .bundle()
         .pipe(source('main.js'))
@@ -58,32 +65,36 @@ gulp.task('browserify', function() {
 
 gulp.task('static', function() {
     gulp.src('app/*/*.html')
-        .pipe(flatten())
+        .pipe($.flatten())
         .pipe(gulp.dest('public/tpl'));
 });
 
-gulp.task('app', ['less', 'static', 'browserify'], function() {
-    gulp.src('public/js/main.js')
-        .pipe(minify({
-            ext:{
-                src:'.js',
-                min:'.min.js'
-            }
-        }))
-        .pipe(gulp.dest('public/js'));
+gulp.task('min', function() {
+  gulp.src('public/js/main.js')
+      .pipe($.minify({
+          ext:{
+              src:'.js',
+              min:'.min.js'
+          }
+      }))
+      .pipe(gulp.dest('public/js'));
 });
 
+gulp.task('app', ['less', 'static', 'browserify']);
+
+
+/**************************************/
+/*           Develop Watch            */
+/**************************************/
 gulp.task('watch', function() {
-    gulp.watch('src/**/*.html', ['src-tpl']);
-    gulp.watch('src/**/*.js', ['src-js', 'browserify']);
-    gulp.watch('app/**/*.js', ['browserify']);
-    gulp.watch('app/**/*.html', ['static']);
+    gulp.watch('pdfViewer/**/*.html', ['browserify']);
+    gulp.watch('pdfViewer/**/*.js', ['browserify']);
     gulp.watch('less/**/*.less', ['less']);
+    gulp.watch('app/**/*.html', ['static']);
+    gulp.watch('app/**/*.js', ['browserify']);
 });
 
-gulp.task('default', ['connect', 'src-tpl', 'src-js', 'app', 'watch']);
-
-
-
-// gh-pages
-gulp.task('gh-pages', ['src-tpl', 'src-js', 'app']);
+/**************************************/
+/*             Prod Build             */
+/**************************************/
+gulp.task('build', ['app', 'min']);

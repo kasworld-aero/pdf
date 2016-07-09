@@ -48,3 +48,6 @@ coverage
 
 # Design Assets #
 *.sketch
+
+# Temp Folder#
+tmp
