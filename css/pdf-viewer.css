@@ -7,15 +7,11 @@
 }
 /* -------- COMPONENT CONTAINER -------- */
 .pdf-viewer-container {
-  display: flex;
-  height: 100vh;
   font-size: 14px;
   font-weight: 300;
 }
 /* ---------- PDFJS DEFAULTS ----------- */
 pdf-viewer {
-  flex: 1 1 auto;
-  position: relative;
   /* -ms-a */
   /* outer/inner center provides horizontal center */
   /* TODO: file FF bug to support ::-moz-selection:window-inactive
@@ -62,7 +58,7 @@ pdf-viewer .textLayer .highlight.middle {
   border-radius: 0;
 }
 pdf-viewer .textLayer .highlight.selected {
-  background-color: #006400;
+  background-color: #ce7805;
 }
 pdf-viewer .textLayer::selection {
   background: #0000ff;
@@ -96,9 +92,6 @@ pdf-viewer .annotationLayer .linkAnnotation > a {
   left: 0;
   width: 100%;
   height: 100%;
-}
-pdf-viewer .annotationLayer .linkAnnotation > a {
-  background: url("data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7") 0 0 repeat;
 }
 pdf-viewer .annotationLayer .linkAnnotation > a:hover {
   opacity: 0.2;
@@ -140,11 +133,11 @@ pdf-viewer .annotationLayer .strikeoutAnnotation,
 pdf-viewer .annotationLayer .underlineAnnotation {
   cursor: pointer;
 }
-pdf-viewer .pdfViewer .canvasWrapper {
+pdf-viewer .main-viewer .canvasWrapper {
   overflow: hidden;
   box-shadow: 0 0 25px rgba(0, 0, 0, 0.35);
 }
-pdf-viewer .pdfViewer .page {
+pdf-viewer .main-viewer .page {
   direction: ltr;
   width: 816px;
   height: 1056px;
@@ -156,22 +149,22 @@ pdf-viewer .pdfViewer .page {
   background-color: white;
   box-sizing: content-box;
 }
-pdf-viewer .pdfViewer.removePageBorders .page {
+pdf-viewer .main-viewer.removePageBorders .page {
   margin: 0 auto 10px;
   border: none;
 }
-pdf-viewer .pdfViewer.singlePageView {
+pdf-viewer .main-viewer.singlePageView {
   display: inline-block;
 }
-pdf-viewer .pdfViewer.singlePageView .page {
+pdf-viewer .main-viewer.singlePageView .page {
   margin: 0;
   border: none;
 }
-pdf-viewer .pdfViewer .page canvas {
+pdf-viewer .main-viewer .page canvas {
   margin: 0;
   display: block;
 }
-pdf-viewer .pdfViewer .page .loadingIcon {
+pdf-viewer .main-viewer .page .loadingIcon {
   position: absolute;
   display: block;
   left: 0;
@@ -179,28 +172,21 @@ pdf-viewer .pdfViewer .page .loadingIcon {
   right: 0;
   bottom: 0;
 }
-pdf-viewer .pdfPresentationMode:-webkit-full-screen .pdfViewer .page {
+pdf-viewer .pdfPresentationMode:-webkit-full-screen .main-viewer .page {
   margin-bottom: 100%;
   border: 0;
 }
-pdf-viewer .pdfPresentationMode:-moz-full-screen .pdfViewer .page {
+pdf-viewer .pdfPresentationMode:-moz-full-screen .main-viewer .page {
   margin-bottom: 100%;
   border: 0;
 }
-pdf-viewer .pdfPresentationMode:-ms-fullscreen .pdfViewer .page {
+pdf-viewer .pdfPresentationMode:-ms-fullscreen .main-viewer .page {
   margin-bottom: 100% !important;
   border: 0;
 }
-pdf-viewer .pdfPresentationMode:fullscreen .pdfViewer .page {
+pdf-viewer .pdfPresentationMode:fullscreen .main-viewer .page {
   margin-bottom: 100%;
   border: 0;
-}
-pdf-viewer * {
-  padding: 0;
-  margin: 0;
-}
-pdf-viewer div {
-  height: auto;
 }
 pdf-viewer .hidden {
   display: none !important;
@@ -961,49 +947,26 @@ pdf-viewer .thumbnail:not([data-loaded]) {
   margin: -1px -1px 4px;
 }
 pdf-viewer .thumbnailImage {
-  border: 1px solid transparent;
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.5), 0 2px 8px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
   opacity: 0.8;
   z-index: 99;
-  background-color: white;
-  background-clip: content-box;
 }
 pdf-viewer .thumbnail:hover > .thumbnailSelectionRing > .thumbnailImage,
 pdf-viewer a:focus > .thumbnail > .thumbnailSelectionRing > .thumbnailImage {
   opacity: 0.9;
 }
-pdf-viewer .thumbnail:hover > .thumbnailSelectionRing,
-pdf-viewer a:focus > .thumbnail > .thumbnailSelectionRing {
-  background-color: rgba(255, 255, 255, 0.15);
-  background-image: linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0));
-  background-clip: padding-box;
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.05) inset, 0 0 1px rgba(255, 255, 255, 0.2) inset, 0 0 1px rgba(0, 0, 0, 0.2);
-  color: rgba(255, 255, 255, 0.9);
-}
 pdf-viewer .thumbnail.selected > .thumbnailSelectionRing > .thumbnailImage {
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.5);
-  opacity: 1;
-}
-pdf-viewer .thumbnail.selected > .thumbnailSelectionRing {
-  background-color: rgba(255, 255, 255, 0.3);
-  background-image: linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0));
-  background-clip: padding-box;
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.05) inset, 0 0 1px rgba(255, 255, 255, 0.1) inset, 0 0 1px rgba(0, 0, 0, 0.2);
-  color: #ffffff;
 }
 pdf-viewer #attachmentsView,
 pdf-viewer #outlineView {
   position: absolute;
-  width: 192px;
   top: 0;
   bottom: 0;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
   -webkit-user-select: none;
   -moz-user-select: none;
-}
-pdf-viewer #outlineView {
-  padding: 4px 4px 0;
 }
 pdf-viewer #attachmentsView {
   padding: 3px 4px 0;
@@ -1018,20 +981,8 @@ pdf-viewer div[dir='rtl'] .outlineWithDeepNesting > .outlineItem {
 }
 pdf-viewer .attachmentsItem > button,
 pdf-viewer .outlineItem > a {
-  text-decoration: none;
-  display: inline-block;
-  min-width: 95%;
-  min-width: calc(96%);
   /* Subtract the right padding (left, in RTL mode)
 		of the container. */
-  height: auto;
-  margin-bottom: 1px;
-  border-radius: 2px;
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 13px;
-  line-height: 15px;
-  -moz-user-select: none;
-  white-space: normal;
 }
 pdf-viewer .attachmentsItem > button {
   border: 0 none;
@@ -1039,15 +990,9 @@ pdf-viewer .attachmentsItem > button {
   cursor: pointer;
   width: 100%;
 }
-pdf-viewer div[dir='ltr'] .outlineItem > a {
-  padding: 2px 0 5px 4px;
-}
 pdf-viewer div[dir='ltr'] .attachmentsItem > button {
   padding: 2px 0 3px 7px;
   text-align: left;
-}
-pdf-viewer div[dir='rtl'] .outlineItem > a {
-  padding: 2px 4px 5px 0;
 }
 pdf-viewer div[dir='rtl'] .attachmentsItem > button {
   padding: 2px 7px 3px 0;
@@ -1060,15 +1005,8 @@ pdf-viewer .outlineItemToggler {
   color: rgba(255, 255, 255, 0.5);
 }
 pdf-viewer .outlineItemToggler::before {
-  content: url("images/treeitem-expanded.png");
   display: inline-block;
   position: absolute;
-}
-pdf-viewer div[dir='ltr'] .outlineItemToggler.outlineItemsHidden::before {
-  content: url("images/treeitem-collapsed.png");
-}
-pdf-viewer div[dir='rtl'] .outlineItemToggler.outlineItemsHidden::before {
-  content: url("images/treeitem-collapsed-rtl.png");
 }
 pdf-viewer .outlineItemToggler.outlineItemsHidden ~ .outlineItems {
   display: none;
@@ -1085,25 +1023,6 @@ pdf-viewer div[dir='ltr'] .outlineItemToggler::before {
 pdf-viewer div[dir='rtl'] .outlineItemToggler::before {
   left: 4px;
 }
-pdf-viewer .attachmentsItem > button:hover,
-pdf-viewer .outlineItem > a:hover,
-pdf-viewer .outlineItemToggler:hover,
-pdf-viewer .outlineItemToggler:hover + a,
-pdf-viewer .outlineItemToggler:hover ~ .outlineItems {
-  background-color: rgba(255, 255, 255, 0.02);
-  background-image: linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0));
-  background-clip: padding-box;
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.05) inset, 0 0 1px rgba(255, 255, 255, 0.2) inset, 0 0 1px rgba(0, 0, 0, 0.2);
-  border-radius: 2px;
-  color: rgba(255, 255, 255, 0.9);
-}
-pdf-viewer .outlineItem.selected {
-  background-color: rgba(255, 255, 255, 0.08);
-  background-image: linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0));
-  background-clip: padding-box;
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.05) inset, 0 0 1px rgba(255, 255, 255, 0.1) inset, 0 0 1px rgba(0, 0, 0, 0.2);
-  color: #ffffff;
-}
 pdf-viewer .noResults {
   font-size: 12px;
   color: rgba(255, 255, 255, 0.8);
@@ -1111,7 +1030,7 @@ pdf-viewer .noResults {
   cursor: default;
 }
 pdf-viewer ::selection {
-  background: rgba(0, 0, 255, 0.3);
+  background: rgba(206, 120, 5, 0.3);
 }
 pdf-viewer ::-moz-selection {
   background: rgba(0, 0, 255, 0.3);
@@ -1768,7 +1687,7 @@ select {
   left: 0;
 }
 .outer.sidebarOpen .main {
-  left: 160px;
+  left: 180px;
 }
 /* ---------- MAIN ------------ */
 .main {
@@ -1842,10 +1761,11 @@ select {
 }
 .toolbar__button {
   position: relative;
+  border-radius: 4px;
+  padding: 0;
   height: 28px;
   width: 28px;
   line-height: 30px;
-  border-radius: 4px;
   cursor: pointer;
   transition: all 0.10s linear;
 }
@@ -1883,8 +1803,8 @@ select {
   content: "";
   position: absolute;
   background-color: #E3DCD5;
-  width: 14px;
-  height: 14px;
+  width: 10px;
+  height: 10px;
   bottom: -6px;
   left: 80px;
   right: -25vw;
@@ -1897,9 +1817,9 @@ select {
   position: absolute;
   background-color: #E3DCD5;
   border-radius: 2px;
-  width: 14px;
-  height: 14px;
-  bottom: -10px;
+  width: 10px;
+  height: 10px;
+  bottom: -8px;
   left: 80px;
   right: -25vw;
   transition: all 0.15s ease-in;
@@ -1907,11 +1827,11 @@ select {
   z-index: 2;
 }
 .toolbar__button--dropdown.toggled:before {
-  left: calc(50% - 10px);
+  left: calc(50% - 8px);
   transition: all 0.25s ease-in 0.15s;
 }
 .toolbar__button--dropdown.toggled:after {
-  left: calc(50% - 10px);
+  left: calc(50% - 8px);
   transition: all 0.25s ease-in 0.15s;
 }
 .toolbar__page {
@@ -1928,10 +1848,9 @@ select {
   position: absolute;
   top: 36px;
   bottom: 0;
-  left: -160px;
-  width: 160px;
+  left: -180px;
+  width: 180px;
   background-color: #F8F6F4;
-  border: 1px solid #E1E1E1;
   box-shadow: 0px 2px 9px 0px rgba(0, 0, 0, 0.36);
   transition: left 0.25s ease-in, top 0.15s ease-in 0.25s;
   z-index: 1;
@@ -1939,7 +1858,6 @@ select {
 .sidebar__thumbnail-view {
   display: flex;
   flex-flow: column nowrap;
-  width: auto;
   position: absolute;
   right: 0;
   left: 0;
@@ -1949,6 +1867,7 @@ select {
 }
 .sidebar__thumbnail-view a {
   flex: 0 0 auto;
+  transition: background-color 0.15s linear;
 }
 .sidebar__thumbnail-view a:hover {
   background-color: #f3ede8;
@@ -1966,12 +1885,37 @@ select {
   background: #E4DCD5;
   border-radius: 50%;
   color: #3F393C;
+  font-size: 0.6rem;
   height: 20px;
   width: 20px;
   line-height: 20px;
   bottom: 4px;
   left: calc(50% - 20px / 2);
   text-align: center;
+}
+.sidebar__outline {
+  display: flex;
+  flex-flow: column nowrap;
+}
+.sidebar__outline-item {
+  transition: background-color 0.15s linear;
+}
+.sidebar__outline-item a {
+  display: block;
+  flex: 0 0 auto;
+  padding: 10px 5px;
+  padding: 12px 10px;
+  font-size: .75rem;
+  margin-right: 15px;
+  color: #40393C;
+  white-space: normal;
+  text-decoration: none;
+}
+.sidebar__outline-item:hover {
+  background-color: rgba(0, 0, 0, 0.15);
+}
+.sidebar__outline-item:active {
+  background-color: rgba(0, 0, 0, 0.35);
 }
 /* --------- SEARCH ----------- */
 .search {
@@ -2014,6 +1958,12 @@ select {
 @media (max-width: 770px) {
   .sidebar {
     background: rgba(255, 255, 255, 0.5);
+  }
+  .sidebar__thumbnail-view a:hover {
+    background-color: rgba(228, 222, 217, 0.25);
+  }
+  .sidebar__thumbnail-view a.selected {
+    background-color: rgba(228, 222, 217, 0.5);
   }
   .outer.sidebarOpen .main {
     left: 0;

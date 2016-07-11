@@ -1812,7 +1812,7 @@
                                     var item = levelData.items[i];
 
                                     var div = document.createElement('div');
-                                    div.className = 'outlineItem';
+                                    div.className = 'outlineItem sidebar__outline-item';
 
                                     var element = document.createElement('a');
                                     this._bindLink(element, item);
@@ -2005,6 +2005,10 @@
                             }
                             var isViewChanged = (view !== this.active);
                             var shouldForceRendering = false;
+
+                            if (!this.isOpen || (!isViewChanged && this.isOpen)) {
+                                this.toggle();
+                            }
 
                             switch (view) {
                                 case SidebarView.THUMBS:
@@ -9155,7 +9159,7 @@
                 window.addEventListener('mousewheel', handleMouseWheel);
 
                 window.addEventListener('click', function click(evt) {
-                    if (!PDFViewerApplication.secondaryToolbar.isOpen) {
+                    if (!PDFViewerApplication.secondaryToolbar.isOpen  && !PDFViewerApplication.findBar.opened) {
                         return;
                     }
                     var appConfig = PDFViewerApplication.appConfig;
@@ -9163,6 +9167,11 @@
                         (appConfig.toolbar.container.contains(evt.target) &&
                             evt.target !== appConfig.secondaryToolbar.toggleButton)) {
                         PDFViewerApplication.secondaryToolbar.close();
+                    }
+                    if (PDFViewerApplication.pdfViewer.containsElement(evt.target) ||
+                        (appConfig.toolbar.container.contains(evt.target) &&
+                            evt.target !== appConfig.findBar.toggleButton)) {
+                        PDFViewerApplication.findBar.close();
                     }
                 }, true);
 
