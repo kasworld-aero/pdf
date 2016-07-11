@@ -409,9 +409,9 @@ template {
 }
 main {
   display: block;
-  height: calc(100vh - 100px);
-  padding: 50px 100px;
-  background-color: #03A9F4;
+  /*  embeded */
+  /* fullscreen */
+  height: 100vh;
 }
 .pdf-viewer-container {
   height: 100%;
