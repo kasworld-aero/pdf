@@ -65,19 +65,28 @@
   }
   &__button {
     position: relative;
-    height: 28px;
-    width: 28px;
-    line-height: 30px;
+    height: @button-size;
+    width: @button-size;
+    line-height: @button-line-height;
     border-radius: 4px;
     cursor: pointer;
     transition: all 0.10s linear;
-    &:hover {
+    &:hover:enabled {
       background-color: @btn-hover;
     }
-    &:active {
+    &:active:enabled {
       background-color: @btn-active;
       box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.3);
       color: #fff;
+    }
+    &--bg {
+      @resize: 5px;
+      background-color: @btn-default-bg;
+      font-size: 0.8rem;
+      margin: 0;
+      height: @button-size - @resize;
+      width: @button-size - @resize;
+      line-height: @button-line-height - @resize;
     }
     &--text {
       width: auto;

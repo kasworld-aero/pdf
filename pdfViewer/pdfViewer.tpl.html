@@ -9,28 +9,29 @@
                 id="toolbarViewer">
                 <div class="toolbar__left">
                     <div class="toolbar__item">
-                        <div id="sidebarToggle"
+                        <button id="sidebarToggle"
                             class="toolbar__button"
                             title="Toggle Sidebar">
                             <i class="fa fa-th-large"></i>
-                        </div>
+                        </button>
                     </div>
                     <div class="toolbar__item">
-                        <div class="toolbar__button">
+                        <button id="viewOutline"
+                            class="toolbar__button">
                             <i class="fa fa-list"></i>
-                        </div>
+                        </button>
                     </div>
                     <div class="toolbar__separator">|</div>
                     <div class="toolbar__item">
-                        <div id="zoomIn"
+                        <button id="zoomIn"
                             class="toolbar__button">
                             <i class="fa fa-search-plus"></i>
-                        </div>
+                        </button>
                     </div>
                     <div class="toolbar__item">
-                        <div id="zoomOut"
+                        <button id="zoomOut"
                             class="toolbar__button"><i class="fa fa-search-minus"></i>
-                        </div>
+                        </button>
                     </div>
                     <div class="toolbar__item">
                         <div id="scaleSelectContainer"
@@ -75,10 +76,10 @@
                         </div>
                     </div>
                     <div class="toolbar__item">
-                        <div id="presentationMode"
+                        <button id="presentationMode"
                             class="toolbar__button">
                             <i class="fa fa-arrows-alt"></i>
-                        </div>
+                        </button>
                     </div>
                 </div>
                 <div class="toolbar__center">
@@ -88,26 +89,27 @@
                 </div>
                 <div class="toolbar__right">
                     <div class="toolbar__item">
-                        <div id="print"
+                        <button id="print"
                             class="toolbar__button">
                             <i class="fa fa-print"></i>
-                        </div>
+                        </button>
                     </div>
                     <div class="toolbar__item">
-                        <div id="download"
+                        <button id="download"
                             class="toolbar__button">
                             <i class="fa fa-download"></i>
-                        </div>
+                        </button>
                     </div>
                     <div class="toolbar__item">
-                        <div id="viewFind"
+                        <button id="viewFind"
                             class="toolbar__button toolbar__button--dropdown"
-                            title="Find in Document"><i class="fa fa-search"></i></div>
+                            title="Find in Document"><i class="fa fa-search"></i>
+                        </button>
                     </div>
                     <div class="toolbar__item">
-                        <div id="secondaryToolbarToggle"
+                        <button id="secondaryToolbarToggle"
                             class="toolbar__button toolbar__button--text toolbar__button--text toolbar__button--dropdown">more
-                        </div>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -118,27 +120,27 @@
                 class="toolbar toolbar--sub">
                 <div class="toolbar__left">
                     <div class="toolbar__item toolbar__item--no-space">
-                        <div id="firstPage"
+                        <button id="firstPage"
                             class="toolbar__button toolbar__button--text toolbar__button--full">
                             <i class="fa fa-chevron-up"></i> Go to first page
-                        </div>
+                        </button>
                     </div>
                     <div class="toolbar__item toolbar__item--no-space">
-                        <div id="lastPage"
+                        <button id="lastPage"
                             class="toolbar__button toolbar__button--text toolbar__button--full">
                             <i class="fa fa-chevron-down"></i> Go to last page
-                        </div>
+                        </button>
                     </div>
 
                     <div class="toolbar__item toolbar__item--section">
-                        <div id="previous"
-                            class="toolbar__button">
+                        <button id="previous"
+                            class="toolbar__button toolbar__button--bg">
                             <i class="fa fa-arrow-up"></i>
-                        </div>
-                        <div id="next"
-                            class="toolbar__button">
+                        </button>
+                        <button id="next"
+                            class="toolbar__button toolbar__button--bg">
                             <i class="fa fa-arrow-down"></i>
-                        </div>
+                        </button>
                         <div class="toolbar__page">
                             <label id="pageNumberLabel"
                                 for="pageNumber">Page</label>
@@ -153,16 +155,16 @@
                         </div>
                     </div>
                     <div class="toolbar__item">
-                        <div id="pageRotateCw"
+                        <button id="pageRotateCw"
                             class="toolbar__button">
                             <i class="fa fa-repeat"></i>
-                        </div>
+                        </button>
                     </div>
                     <div class="toolbar__item">
-                        <div id="pageRotateCcw"
+                        <button id="pageRotateCcw"
                             class="toolbar__button">
                             <i class="fa fa-undo"></i>
-                        </div>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -187,22 +189,22 @@
                         </div>
                     </div>
                     <div class="toolbar__item">
-                        <div id="findPrevious"
-                            class="toolbar__button">
+                        <button id="findPrevious"
+                            class="toolbar__button toolbar__button--bg">
                             <i class="fa fa-chevron-left"></i>
-                        </div>
+                        </button>
                     </div>
                     <div class="toolbar__item">
-                        <div id="findNext"
-                            class="toolbar__button">
+                        <button id="findNext"
+                            class="toolbar__button toolbar__button--bg">
                             <i class="fa fa-chevron-right"></i>
-                        </div>
+                        </button>
                     </div>
                     <div class="toolbar__item">
-                        <div id="closeFind"
+                        <button id="closeFind"
                             class="toolbar__button">
                             <i class="fa fa-close"></i>
-                        </div>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -218,9 +220,9 @@
 
             <div id="sidebarContainer"
                 class="sidebar">
-                <div id="sidebarContent"
-                    class="sidebar__content">
-                    <div id="thumbnailView">
+                <div id="sidebarContent">
+                    <div id="thumbnailView"
+                        class="sidebar__thumbnail-view">
                     </div>
                     <div id="outlineView"
                         class="hidden">
@@ -526,6 +528,6 @@
 
     <div id="toolbarSidebar"></div>
     <div id="viewThumbnail"></div>
-    <div id="viewOutline"></div>
+    <!-- <div id="viewOutline"></div> -->
     <div id="viewAttachments"></div>
 </div>

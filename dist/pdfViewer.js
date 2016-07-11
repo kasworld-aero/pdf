@@ -26,28 +26,29 @@ $templateCache.put("pdfViewer/pdfViewer.tpl.html","<div dir=\"ltr\"\n" +
     "                id=\"toolbarViewer\">\n" +
     "                <div class=\"toolbar__left\">\n" +
     "                    <div class=\"toolbar__item\">\n" +
-    "                        <div id=\"sidebarToggle\"\n" +
+    "                        <button id=\"sidebarToggle\"\n" +
     "                            class=\"toolbar__button\"\n" +
     "                            title=\"Toggle Sidebar\">\n" +
     "                            <i class=\"fa fa-th-large\"></i>\n" +
-    "                        </div>\n" +
+    "                        </button>\n" +
     "                    </div>\n" +
     "                    <div class=\"toolbar__item\">\n" +
-    "                        <div class=\"toolbar__button\">\n" +
+    "                        <button id=\"viewOutline\"\n" +
+    "                            class=\"toolbar__button\">\n" +
     "                            <i class=\"fa fa-list\"></i>\n" +
-    "                        </div>\n" +
+    "                        </button>\n" +
     "                    </div>\n" +
     "                    <div class=\"toolbar__separator\">|</div>\n" +
     "                    <div class=\"toolbar__item\">\n" +
-    "                        <div id=\"zoomIn\"\n" +
+    "                        <button id=\"zoomIn\"\n" +
     "                            class=\"toolbar__button\">\n" +
     "                            <i class=\"fa fa-search-plus\"></i>\n" +
-    "                        </div>\n" +
+    "                        </button>\n" +
     "                    </div>\n" +
     "                    <div class=\"toolbar__item\">\n" +
-    "                        <div id=\"zoomOut\"\n" +
+    "                        <button id=\"zoomOut\"\n" +
     "                            class=\"toolbar__button\"><i class=\"fa fa-search-minus\"></i>\n" +
-    "                        </div>\n" +
+    "                        </button>\n" +
     "                    </div>\n" +
     "                    <div class=\"toolbar__item\">\n" +
     "                        <div id=\"scaleSelectContainer\"\n" +
@@ -92,10 +93,10 @@ $templateCache.put("pdfViewer/pdfViewer.tpl.html","<div dir=\"ltr\"\n" +
     "                        </div>\n" +
     "                    </div>\n" +
     "                    <div class=\"toolbar__item\">\n" +
-    "                        <div id=\"presentationMode\"\n" +
+    "                        <button id=\"presentationMode\"\n" +
     "                            class=\"toolbar__button\">\n" +
     "                            <i class=\"fa fa-arrows-alt\"></i>\n" +
-    "                        </div>\n" +
+    "                        </button>\n" +
     "                    </div>\n" +
     "                </div>\n" +
     "                <div class=\"toolbar__center\">\n" +
@@ -105,26 +106,27 @@ $templateCache.put("pdfViewer/pdfViewer.tpl.html","<div dir=\"ltr\"\n" +
     "                </div>\n" +
     "                <div class=\"toolbar__right\">\n" +
     "                    <div class=\"toolbar__item\">\n" +
-    "                        <div id=\"print\"\n" +
+    "                        <button id=\"print\"\n" +
     "                            class=\"toolbar__button\">\n" +
     "                            <i class=\"fa fa-print\"></i>\n" +
-    "                        </div>\n" +
+    "                        </button>\n" +
     "                    </div>\n" +
     "                    <div class=\"toolbar__item\">\n" +
-    "                        <div id=\"download\"\n" +
+    "                        <button id=\"download\"\n" +
     "                            class=\"toolbar__button\">\n" +
     "                            <i class=\"fa fa-download\"></i>\n" +
-    "                        </div>\n" +
+    "                        </button>\n" +
     "                    </div>\n" +
     "                    <div class=\"toolbar__item\">\n" +
-    "                        <div id=\"viewFind\"\n" +
+    "                        <button id=\"viewFind\"\n" +
     "                            class=\"toolbar__button toolbar__button--dropdown\"\n" +
-    "                            title=\"Find in Document\"><i class=\"fa fa-search\"></i></div>\n" +
+    "                            title=\"Find in Document\"><i class=\"fa fa-search\"></i>\n" +
+    "                        </button>\n" +
     "                    </div>\n" +
     "                    <div class=\"toolbar__item\">\n" +
-    "                        <div id=\"secondaryToolbarToggle\"\n" +
+    "                        <button id=\"secondaryToolbarToggle\"\n" +
     "                            class=\"toolbar__button toolbar__button--text toolbar__button--text toolbar__button--dropdown\">more\n" +
-    "                        </div>\n" +
+    "                        </button>\n" +
     "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +
@@ -135,27 +137,27 @@ $templateCache.put("pdfViewer/pdfViewer.tpl.html","<div dir=\"ltr\"\n" +
     "                class=\"toolbar toolbar--sub\">\n" +
     "                <div class=\"toolbar__left\">\n" +
     "                    <div class=\"toolbar__item toolbar__item--no-space\">\n" +
-    "                        <div id=\"firstPage\"\n" +
+    "                        <button id=\"firstPage\"\n" +
     "                            class=\"toolbar__button toolbar__button--text toolbar__button--full\">\n" +
     "                            <i class=\"fa fa-chevron-up\"></i> Go to first page\n" +
-    "                        </div>\n" +
+    "                        </button>\n" +
     "                    </div>\n" +
     "                    <div class=\"toolbar__item toolbar__item--no-space\">\n" +
-    "                        <div id=\"lastPage\"\n" +
+    "                        <button id=\"lastPage\"\n" +
     "                            class=\"toolbar__button toolbar__button--text toolbar__button--full\">\n" +
     "                            <i class=\"fa fa-chevron-down\"></i> Go to last page\n" +
-    "                        </div>\n" +
+    "                        </button>\n" +
     "                    </div>\n" +
     "\n" +
     "                    <div class=\"toolbar__item toolbar__item--section\">\n" +
-    "                        <div id=\"previous\"\n" +
-    "                            class=\"toolbar__button\">\n" +
+    "                        <button id=\"previous\"\n" +
+    "                            class=\"toolbar__button toolbar__button--bg\">\n" +
     "                            <i class=\"fa fa-arrow-up\"></i>\n" +
-    "                        </div>\n" +
-    "                        <div id=\"next\"\n" +
-    "                            class=\"toolbar__button\">\n" +
+    "                        </button>\n" +
+    "                        <button id=\"next\"\n" +
+    "                            class=\"toolbar__button toolbar__button--bg\">\n" +
     "                            <i class=\"fa fa-arrow-down\"></i>\n" +
-    "                        </div>\n" +
+    "                        </button>\n" +
     "                        <div class=\"toolbar__page\">\n" +
     "                            <label id=\"pageNumberLabel\"\n" +
     "                                for=\"pageNumber\">Page</label>\n" +
@@ -170,16 +172,16 @@ $templateCache.put("pdfViewer/pdfViewer.tpl.html","<div dir=\"ltr\"\n" +
     "                        </div>\n" +
     "                    </div>\n" +
     "                    <div class=\"toolbar__item\">\n" +
-    "                        <div id=\"pageRotateCw\"\n" +
+    "                        <button id=\"pageRotateCw\"\n" +
     "                            class=\"toolbar__button\">\n" +
     "                            <i class=\"fa fa-repeat\"></i>\n" +
-    "                        </div>\n" +
+    "                        </button>\n" +
     "                    </div>\n" +
     "                    <div class=\"toolbar__item\">\n" +
-    "                        <div id=\"pageRotateCcw\"\n" +
+    "                        <button id=\"pageRotateCcw\"\n" +
     "                            class=\"toolbar__button\">\n" +
     "                            <i class=\"fa fa-undo\"></i>\n" +
-    "                        </div>\n" +
+    "                        </button>\n" +
     "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +
@@ -204,22 +206,22 @@ $templateCache.put("pdfViewer/pdfViewer.tpl.html","<div dir=\"ltr\"\n" +
     "                        </div>\n" +
     "                    </div>\n" +
     "                    <div class=\"toolbar__item\">\n" +
-    "                        <div id=\"findPrevious\"\n" +
-    "                            class=\"toolbar__button\">\n" +
+    "                        <button id=\"findPrevious\"\n" +
+    "                            class=\"toolbar__button toolbar__button--bg\">\n" +
     "                            <i class=\"fa fa-chevron-left\"></i>\n" +
-    "                        </div>\n" +
+    "                        </button>\n" +
     "                    </div>\n" +
     "                    <div class=\"toolbar__item\">\n" +
-    "                        <div id=\"findNext\"\n" +
-    "                            class=\"toolbar__button\">\n" +
+    "                        <button id=\"findNext\"\n" +
+    "                            class=\"toolbar__button toolbar__button--bg\">\n" +
     "                            <i class=\"fa fa-chevron-right\"></i>\n" +
-    "                        </div>\n" +
+    "                        </button>\n" +
     "                    </div>\n" +
     "                    <div class=\"toolbar__item\">\n" +
-    "                        <div id=\"closeFind\"\n" +
+    "                        <button id=\"closeFind\"\n" +
     "                            class=\"toolbar__button\">\n" +
     "                            <i class=\"fa fa-close\"></i>\n" +
-    "                        </div>\n" +
+    "                        </button>\n" +
     "                    </div>\n" +
     "                </div>\n" +
     "            </div>\n" +
@@ -235,9 +237,9 @@ $templateCache.put("pdfViewer/pdfViewer.tpl.html","<div dir=\"ltr\"\n" +
     "\n" +
     "            <div id=\"sidebarContainer\"\n" +
     "                class=\"sidebar\">\n" +
-    "                <div id=\"sidebarContent\"\n" +
-    "                    class=\"sidebar__content\">\n" +
-    "                    <div id=\"thumbnailView\">\n" +
+    "                <div id=\"sidebarContent\">\n" +
+    "                    <div id=\"thumbnailView\"\n" +
+    "                        class=\"sidebar__thumbnail-view\">\n" +
     "                    </div>\n" +
     "                    <div id=\"outlineView\"\n" +
     "                        class=\"hidden\">\n" +
@@ -543,7 +545,7 @@ $templateCache.put("pdfViewer/pdfViewer.tpl.html","<div dir=\"ltr\"\n" +
     "\n" +
     "    <div id=\"toolbarSidebar\"></div>\n" +
     "    <div id=\"viewThumbnail\"></div>\n" +
-    "    <div id=\"viewOutline\"></div>\n" +
+    "    <!-- <div id=\"viewOutline\"></div> -->\n" +
     "    <div id=\"viewAttachments\"></div>\n" +
     "</div>\n" +
     "")
