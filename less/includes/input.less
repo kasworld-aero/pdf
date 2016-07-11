@@ -5,7 +5,7 @@ input:-webkit-autofill {
   box-shadow: 0 0 0 1000px @toolbar-bg inset;
 }
 
-.input {
+&__input {
   background-color: #fff;
   display: inline-block;
   margin-left: 10px;
@@ -14,7 +14,7 @@ input:-webkit-autofill {
   border-radius: 2px;
 }
 
-input {
+& input {
   appearance: none;
   background-color: transparent;
   border: 0;
@@ -32,13 +32,13 @@ input {
 }
 
 // hide number spinner
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
+& input[type=number]::-webkit-inner-spin-button,
+& input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
-input[data-status="pending"] {
+& input[data-status="pending"] {
   .search__pending {
     visibility: visible;
   }

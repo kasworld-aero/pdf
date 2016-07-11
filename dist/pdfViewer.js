@@ -16,43 +16,43 @@ app.run(["$templateCache", function($templateCache) {
 "use strict";
 
 $templateCache.put("pdfViewer/pdfViewer.tpl.html","<div dir=\"ltr\"\n" +
-    "    class=\"viewer\">\n" +
+    "    class=\"pdf-viewer__viewer\">\n" +
     "    <section tabindex=\"1\"\n" +
     "        class=\"loadingInProgress\">\n" +
     "        <div id=\"outerContainer\"\n" +
-    "            class=\"outer\">\n" +
+    "            class=\"pdf-viewer__outer\">\n" +
     "\n" +
-    "            <div class=\"toolbar\"\n" +
+    "            <div class=\"pdf-viewer__toolbar\"\n" +
     "                id=\"toolbarViewer\">\n" +
-    "                <div class=\"toolbar__left\">\n" +
-    "                    <div class=\"toolbar__item\">\n" +
+    "                <div class=\"pdf-viewer__toolbar-left\">\n" +
+    "                    <div class=\"pdf-viewer__toolbar-item\">\n" +
     "                        <button id=\"viewThumbnail\"\n" +
-    "                            class=\"toolbar__button\"\n" +
+    "                            class=\"pdf-viewer__toolbar-button\"\n" +
     "                            title=\"Toggle Sidebar\">\n" +
     "                            <i class=\"fa fa-th-large\"></i>\n" +
     "                        </button>\n" +
     "                    </div>\n" +
-    "                    <div class=\"toolbar__item\">\n" +
+    "                    <div class=\"pdf-viewer__toolbar-item\">\n" +
     "                        <button id=\"viewOutline\"\n" +
-    "                            class=\"toolbar__button\">\n" +
+    "                            class=\"pdf-viewer__toolbar-button\">\n" +
     "                            <i class=\"fa fa-list\"></i>\n" +
     "                        </button>\n" +
     "                    </div>\n" +
-    "                    <div class=\"toolbar__separator\">|</div>\n" +
-    "                    <div class=\"toolbar__item\">\n" +
+    "                    <div class=\"pdf-viewer__toolbar-separator\">|</div>\n" +
+    "                    <div class=\"pdf-viewer__toolbar-item\">\n" +
     "                        <button id=\"zoomIn\"\n" +
-    "                            class=\"toolbar__button\">\n" +
+    "                            class=\"pdf-viewer__toolbar-button\">\n" +
     "                            <i class=\"fa fa-search-plus\"></i>\n" +
     "                        </button>\n" +
     "                    </div>\n" +
-    "                    <div class=\"toolbar__item\">\n" +
+    "                    <div class=\"pdf-viewer__toolbar-item\">\n" +
     "                        <button id=\"zoomOut\"\n" +
-    "                            class=\"toolbar__button\"><i class=\"fa fa-search-minus\"></i>\n" +
+    "                            class=\"pdf-viewer__toolbar-button\"><i class=\"fa fa-search-minus\"></i>\n" +
     "                        </button>\n" +
     "                    </div>\n" +
-    "                    <div class=\"toolbar__item\">\n" +
+    "                    <div class=\"pdf-viewer__toolbar-item\">\n" +
     "                        <div id=\"scaleSelectContainer\"\n" +
-    "                            class=\"select select-small\">\n" +
+    "                            class=\"pdf-viewer__select\">\n" +
     "                            <select name=\"zoom\"\n" +
     "                                id=\"scaleSelect\"\n" +
     "                                title=\"Zoom\">\n" +
@@ -100,40 +100,40 @@ $templateCache.put("pdfViewer/pdfViewer.tpl.html","<div dir=\"ltr\"\n" +
     "                            <i class=\"fa fa-angle-down\"></i>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
-    "                    <div class=\"toolbar__item\">\n" +
+    "                    <div class=\"pdf-viewer__toolbar-item\">\n" +
     "                        <button id=\"presentationMode\"\n" +
-    "                            class=\"toolbar__button\">\n" +
+    "                            class=\"pdf-viewer__toolbar-button\">\n" +
     "                            <i class=\"fa fa-arrows-alt\"></i>\n" +
     "                        </button>\n" +
     "                    </div>\n" +
     "                </div>\n" +
-    "                <div class=\"toolbar__center\">\n" +
-    "                    <div class=\"toolbar__item toolbar__item--title\">\n" +
-    "                        <span id=\"documentTitle\"></span>\n" +
+    "                <div class=\"pdf-viewer__toolbar-center\">\n" +
+    "                    <div id=\"documentTitle\"\n" +
+    "                        class=\"pdf-viewer__toolbar-item pdf-viewer__toolbar-item--title\">\n" +
     "                    </div>\n" +
     "                </div>\n" +
-    "                <div class=\"toolbar__right\">\n" +
-    "                    <div class=\"toolbar__item\">\n" +
+    "                <div class=\"pdf-viewer__toolbar-right\">\n" +
+    "                    <div class=\"pdf-viewer__toolbar-item\">\n" +
     "                        <button id=\"print\"\n" +
-    "                            class=\"toolbar__button\">\n" +
+    "                            class=\"pdf-viewer__toolbar-button\">\n" +
     "                            <i class=\"fa fa-print\"></i>\n" +
     "                        </button>\n" +
     "                    </div>\n" +
-    "                    <div class=\"toolbar__item\">\n" +
+    "                    <div class=\"pdf-viewer__toolbar-item\">\n" +
     "                        <button id=\"download\"\n" +
-    "                            class=\"toolbar__button\">\n" +
+    "                            class=\"pdf-viewer__toolbar-button\">\n" +
     "                            <i class=\"fa fa-download\"></i>\n" +
     "                        </button>\n" +
     "                    </div>\n" +
-    "                    <div class=\"toolbar__item\">\n" +
+    "                    <div class=\"pdf-viewer__item\">\n" +
     "                        <button id=\"viewFind\"\n" +
-    "                            class=\"toolbar__button toolbar__button--dropdown\"\n" +
+    "                            class=\"pdf-viewer__toolbar-button pdf-viewer__toolbar-button--dropdown\"\n" +
     "                            title=\"Find in Document\"><i class=\"fa fa-search\"></i>\n" +
     "                        </button>\n" +
     "                    </div>\n" +
-    "                    <div class=\"toolbar__item\">\n" +
+    "                    <div class=\"pdf-viewer__toolbar-item\">\n" +
     "                        <button id=\"secondaryToolbarToggle\"\n" +
-    "                            class=\"toolbar__button toolbar__button--text toolbar__button--text toolbar__button--dropdown\">more\n" +
+    "                            class=\"pdf-viewer__toolbar-button pdf-viewer__toolbar-button--text pdf-viewer__toolbar-button--text pdf-viewer__toolbar-button--dropdown\">more\n" +
     "                        </button>\n" +
     "                    </div>\n" +
     "                </div>\n" +
@@ -142,34 +142,34 @@ $templateCache.put("pdfViewer/pdfViewer.tpl.html","<div dir=\"ltr\"\n" +
     "\n" +
     "            <!--  MORE  -->\n" +
     "            <div id=\"secondaryToolbar\"\n" +
-    "                class=\"toolbar toolbar--sub\">\n" +
-    "                <div class=\"toolbar__left\">\n" +
-    "                    <div class=\"toolbar__item toolbar__item--no-space\">\n" +
+    "                class=\"pdf-viewer__toolbar pdf-viewer__toolbar--sub\">\n" +
+    "                <div class=\"pdf-viewer__toolbar-left\">\n" +
+    "                    <div class=\"pdf-viewer__toolbar-item pdf-viewer__toolbar-item--no-space\">\n" +
     "                        <button id=\"firstPage\"\n" +
-    "                            class=\"toolbar__button toolbar__button--text toolbar__button--full\">\n" +
+    "                            class=\"pdf-viewer__toolbar-button pdf-viewer__toolbar-button--text pdf-viewer__toolbar-button--full\">\n" +
     "                            <i class=\"fa fa-chevron-up\"></i> Go to first page\n" +
     "                        </button>\n" +
     "                    </div>\n" +
-    "                    <div class=\"toolbar__item toolbar__item--no-space\">\n" +
+    "                    <div class=\"pdf-viewer__toolbar-item pdf-viewer__toolbar-item--no-space\">\n" +
     "                        <button id=\"lastPage\"\n" +
-    "                            class=\"toolbar__button toolbar__button--text toolbar__button--full\">\n" +
+    "                            class=\"pdf-viewer__toolbar-button pdf-viewer__toolbar-button--text pdf-viewer__toolbar-button--full\">\n" +
     "                            <i class=\"fa fa-chevron-down\"></i> Go to last page\n" +
     "                        </button>\n" +
     "                    </div>\n" +
     "\n" +
-    "                    <div class=\"toolbar__item toolbar__item--section\">\n" +
+    "                    <div class=\"pdf-viewer__toolbar-item pdf-viewer__toolbar-item--section\">\n" +
     "                        <button id=\"previous\"\n" +
-    "                            class=\"toolbar__button toolbar__button--bg\">\n" +
+    "                            class=\"pdf-viewer__toolbar-button pdf-viewer__toolbar-button--bg\">\n" +
     "                            <i class=\"fa fa-arrow-up\"></i>\n" +
     "                        </button>\n" +
     "                        <button id=\"next\"\n" +
-    "                            class=\"toolbar__button toolbar__button--bg\">\n" +
+    "                            class=\"pdf-viewer__toolbar-button pdf-viewer__toolbar-button--bg\">\n" +
     "                            <i class=\"fa fa-arrow-down\"></i>\n" +
     "                        </button>\n" +
-    "                        <div class=\"toolbar__page\">\n" +
+    "                        <div class=\"pdf-viewer__toolbar-page\">\n" +
     "                            <label id=\"pageNumberLabel\"\n" +
     "                                for=\"pageNumber\">Page</label>\n" +
-    "                            <div class=\"input\">\n" +
+    "                            <div class=\"pdf-viewer__input\">\n" +
     "                                <input type=\"number\"\n" +
     "                                    name=\"pageNumber\"\n" +
     "                                    id=\"pageNumber\"\n" +
@@ -179,15 +179,15 @@ $templateCache.put("pdfViewer/pdfViewer.tpl.html","<div dir=\"ltr\"\n" +
     "                            <span id=\"numPages\"></span>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
-    "                    <div class=\"toolbar__item\">\n" +
+    "                    <div class=\"pdf-viewer__toolbar-item\">\n" +
     "                        <button id=\"pageRotateCw\"\n" +
-    "                            class=\"toolbar__button\">\n" +
+    "                            class=\"pdf-viewer__toolbar-button\">\n" +
     "                            <i class=\"fa fa-repeat\"></i>\n" +
     "                        </button>\n" +
     "                    </div>\n" +
-    "                    <div class=\"toolbar__item\">\n" +
+    "                    <div class=\"pdf-viewer__toolbar-item\">\n" +
     "                        <button id=\"pageRotateCcw\"\n" +
-    "                            class=\"toolbar__button\">\n" +
+    "                            class=\"pdf-viewer__toolbar-button\">\n" +
     "                            <i class=\"fa fa-undo\"></i>\n" +
     "                        </button>\n" +
     "                    </div>\n" +
@@ -197,37 +197,37 @@ $templateCache.put("pdfViewer/pdfViewer.tpl.html","<div dir=\"ltr\"\n" +
     "\n" +
     "\n" +
     "            <div id=\"findbar\"\n" +
-    "                class=\"toolbar toolbar--sub\">\n" +
-    "                <div class=\"toolbar__center\">\n" +
+    "                class=\"pdf-viewer__toolbar pdf-viewer__toolbar--sub\">\n" +
+    "                <div class=\"pdf-viewer__toolbar-center\">\n" +
     "                </div>\n" +
     "\n" +
-    "                <div class=\"toolbar__right\">\n" +
-    "                    <div class=\"toolbar__item toolbar__button--text\">\n" +
+    "                <div class=\"pdf-viewer__toolbar-right\">\n" +
+    "                    <div class=\"pdf-viewer__toolbar-item pdf-viewer__toolbar-button--text\">\n" +
     "                        <span id=\"findResultsCount\"></span>\n" +
     "                        <span id=\"findMsg\"></span>\n" +
     "                    </div>\n" +
-    "                    <div class=\"toolbar__item\">\n" +
-    "                        <div class=\"search\">\n" +
+    "                    <div class=\"pdf-viewer__toolbar-item\">\n" +
+    "                        <div class=\"pdf-viewer__search\">\n" +
     "                            <input id=\"findInput\"\n" +
     "                                type=\"text\" />\n" +
-    "                            <i class=\"search__pending fa fa-refresh fa-spin\"></i>\n" +
+    "                            <i class=\"pdf-viewer__pending fa fa-refresh fa-spin\"></i>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
-    "                    <div class=\"toolbar__item\">\n" +
+    "                    <div class=\"pdf-viewer__toolbar-item\">\n" +
     "                        <button id=\"findPrevious\"\n" +
-    "                            class=\"toolbar__button toolbar__button--bg\">\n" +
+    "                            class=\"pdf-viewer__toolbar-button pdf-viewer__toolbar-button--bg\">\n" +
     "                            <i class=\"fa fa-chevron-left\"></i>\n" +
     "                        </button>\n" +
     "                    </div>\n" +
-    "                    <div class=\"toolbar__item\">\n" +
+    "                    <div class=\"pdf-viewer__toolbar-item\">\n" +
     "                        <button id=\"findNext\"\n" +
-    "                            class=\"toolbar__button toolbar__button--bg\">\n" +
+    "                            class=\"pdf-viewer__toolbar-button pdf-viewer__toolbar-button--bg\">\n" +
     "                            <i class=\"fa fa-chevron-right\"></i>\n" +
     "                        </button>\n" +
     "                    </div>\n" +
-    "                    <div class=\"toolbar__item\">\n" +
+    "                    <div class=\"pdf-viewer__toolbar-item\">\n" +
     "                        <button id=\"closeFind\"\n" +
-    "                            class=\"toolbar__button\">\n" +
+    "                            class=\"pdf-viewer__toolbar-button\">\n" +
     "                            <i class=\"fa fa-close\"></i>\n" +
     "                        </button>\n" +
     "                    </div>\n" +
@@ -244,13 +244,13 @@ $templateCache.put("pdfViewer/pdfViewer.tpl.html","<div dir=\"ltr\"\n" +
     "            <!-- Loading Bar -->\n" +
     "\n" +
     "            <div id=\"sidebarContainer\"\n" +
-    "                class=\"sidebar\">\n" +
+    "                class=\"pdf-viewer__sidebar\">\n" +
     "                <div id=\"sidebarContent\">\n" +
     "                    <div id=\"thumbnailView\"\n" +
-    "                        class=\"sidebar__thumbnail-view\">\n" +
+    "                        class=\"pdf-viewer__thumbnail-view\">\n" +
     "                    </div>\n" +
     "                    <div id=\"outlineView\"\n" +
-    "                        class=\"sidebar__outline hidden\">\n" +
+    "                        class=\"pdf-viewer__outline hidden\">\n" +
     "                    </div>\n" +
     "                    <div id=\"attachmentsView\"\n" +
     "                        class=\"hidden\">\n" +
@@ -260,7 +260,7 @@ $templateCache.put("pdfViewer/pdfViewer.tpl.html","<div dir=\"ltr\"\n" +
     "            <!-- sidebarContainer -->\n" +
     "\n" +
     "            <div id=\"mainContainer\"\n" +
-    "                class=\"main\">\n" +
+    "                class=\"pdf-viewer__main\">\n" +
     "\n" +
     "                <menu type=\"context\"\n" +
     "                    id=\"viewerContextMenu\">\n" +

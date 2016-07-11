@@ -1,6 +1,6 @@
 /* --------- SIDEBAR ------------ */
 
-.sidebar {
+&__sidebar {
   position: absolute;
   top: @toolbar-height;
   bottom: 0;
@@ -10,71 +10,71 @@
   box-shadow: 0px 2px 9px 0px rgba(0,0,0,0.36);
   transition: left 0.25s ease-in, top 0.15s ease-in 0.25s;
   z-index: 1;
-  &__thumbnail-view {
-    display: flex;
-    flex-flow: column nowrap;
-    position: absolute;
-    right: 0;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    padding: 0;
+}
+&__thumbnail-view {
+  display: flex;
+  flex-flow: column nowrap;
+  position: absolute;
+  right: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  padding: 0;
 
-    a {
-      flex: 0 0 auto;
-      transition: background-color 0.15s linear;
-      
-      &:hover {
-        background-color: @select-bg-hover;
-      }
+  a {
+    flex: 0 0 auto;
+    transition: background-color 0.15s linear;
 
-      &:active, &.selected {
-        background-color: @select-bg;
-      }
+    &:hover {
+      background-color: @select-bg-hover;
+    }
+
+    &:active, &.selected {
+      background-color: @select-bg;
     }
   }
-  &__thumbnail-ring {
-    position: relative;
-    margin: 20px auto;
-  }
-  &__thumbnail-number {
-    position: absolute;
-    background: @page-number-bg;
-    border-radius: 50%;
-    color: @page-number-text;
-    font-size: 0.6rem;
-    height: @thumbnail-number-size;
-    width: @thumbnail-number-size;
-    line-height: @thumbnail-number-size;
-    bottom: 4px;
-    left: ~'calc(50% - @{thumbnail-number-size} / 2)';
-    text-align: center;
-  }
-  &__outline {
-    display: flex;
-    flex-flow: column nowrap;
+}
+&__thumbnail-ring {
+  position: relative;
+  margin: 20px auto;
+}
+&__thumbnail-number {
+  position: absolute;
+  background: @page-number-bg;
+  border-radius: 50%;
+  color: @page-number-text;
+  font-size: 0.6rem;
+  height: @thumbnail-number-size;
+  width: @thumbnail-number-size;
+  line-height: @thumbnail-number-size;
+  bottom: 4px;
+  left: ~'calc(50% - @{thumbnail-number-size} / 2)';
+  text-align: center;
+}
+&__outline {
+  display: flex;
+  flex-flow: column nowrap;
 
-    &-item {
-      transition: background-color 0.15s linear;
+  &-item {
+    transition: background-color 0.15s linear;
 
-      a {
-        display: block;
-        flex: 0 0 auto;
-        padding: 10px 5px;
-        padding: 12px 10px;
-        font-size: .75rem;
-        margin-right: 15px;
-        color: @toolbar-text;
-    		white-space: normal;
-    		text-decoration: none;
-      }
+    a {
+      display: block;
+      flex: 0 0 auto;
+      padding: 10px 5px;
+      padding: 12px 10px;
+      font-size: .75rem;
+      margin-right: 15px;
+      color: @toolbar-text;
+      white-space: normal;
+      text-decoration: none;
+    }
 
-      &:hover {
-        background-color: rgba(0, 0, 0, 0.15);
-      }
-      &:active {
-        background-color: rgba(0, 0, 0, 0.35);
-      }
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.15);
+    }
+    &:active {
+      background-color: rgba(0, 0, 0, 0.35);
     }
   }
 }

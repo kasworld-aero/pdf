@@ -110,7 +110,7 @@
                     /**
                      * @private
                      */
-                    _onmousedown: function GrabToPan__onmousedown(event) {
+                    _onmousedown: function GrabToPanpdfviewer__onmousedown(event) {
                         if (event.button !== 0 || this.ignoreTarget(event.target)) {
                             return;
                         }
@@ -1812,7 +1812,7 @@
                                     var item = levelData.items[i];
 
                                     var div = document.createElement('div');
-                                    div.className = 'outlineItem sidebar__outline-item';
+                                    div.className = 'outlineItem pdf-viewer__outline-item';
 
                                     var element = document.createElement('a');
                                     this._bindLink(element, item);
@@ -3807,7 +3807,7 @@
                         }
 
                         var ring = document.createElement('div');
-                        ring.className = 'thumbnailSelectionRing sidebar__thumbnail-ring';
+                        ring.className = 'thumbnailSelectionRing pdf-viewer__thumbnail-ring';
                         var borderAdjustment = 2 * THUMBNAIL_CANVAS_BORDER_WIDTH;
                         ring.style.width = this.canvasWidth + borderAdjustment + 'px';
                         ring.style.height = this.canvasHeight + borderAdjustment + 'px';
@@ -3945,7 +3945,7 @@
 
                             var pageNumber = document.createElement('div');
                             pageNumber.id = 'pageNumber' + this.id;
-                            pageNumber.className = 'sidebar__thumbnail-number';
+                            pageNumber.className = 'pdf-viewer__thumbnail-number';
                             pageNumber.innerHTML = this.id;
                             this.pageNumber = pageNumber;
 

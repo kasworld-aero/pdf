@@ -1,6 +1,6 @@
 /* ---------- TOOLBAR ----------  */
 
-.toolbar {
+&__toolbar {
   display: flex;
   position: relative;
   background: @toolbar-bg;
@@ -22,31 +22,36 @@
       transition: top 0.15s ease-in;
     }
   }
-  &__left,
-  &__center,
-  &__right {
+  &-left,
+  &-center,
+  &-right {
     display: flex;
     flex: 0 0 auto;
     align-items: center;
     text-align: center;
   }
-  &__left {
+  &-left {
     justify-content: flex-start;
   }
-  &__center {
+  &-center {
+    flex: 1 1 auto;
     justify-content: center;
     margin: 0 auto;
+    max-width: 50%;
   }
-  &__right {
+  &-right {
     justify-content: flex-end;
   }
-  &__item {
+  &-item {
     margin: 0 2px;
     &--no-space {
       margin: 0;
     }
     &--title {
       font-size: 1rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     &--section {
       .border-right();
@@ -56,10 +61,10 @@
       }
     }
   }
-  &__separator {
+  &-separator {
     padding: 0 5px;
   }
-  &__button {
+  &-button {
     position: relative;
     border-radius: 4px;
     padding: 0;
@@ -139,13 +144,13 @@
       }
     }
   }
-  &__page {
+  &-page {
     display: inline-block;
     & input {
       max-width: 20px;
     }
-    &__total-pages {
-      padding: 0 5px;
-    }
+  }
+  &-total-pages {
+    padding: 0 5px;
   }
 }

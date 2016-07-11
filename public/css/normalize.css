@@ -407,15 +407,3 @@ template {
 [hidden] {
   display: none;
 }
-main {
-  display: block;
-  height: calc(100vh - 100px);
-  padding: 50px 100px;
-  background-color: #03A9F4;
-}
-.pdf-viewer-container {
-  height: 100%;
-  width: 100%;
-  background-color: #03A9F4;
-  box-shadow: 2px 10px 25px rgba(0, 0, 0, 0.45);
-}

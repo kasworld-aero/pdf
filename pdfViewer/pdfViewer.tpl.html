@@ -1,41 +1,41 @@
 <div dir="ltr"
-    class="viewer">
+    class="pdf-viewer__viewer">
     <section tabindex="1"
         class="loadingInProgress">
         <div id="outerContainer"
-            class="outer">
+            class="pdf-viewer__outer">
 
-            <div class="toolbar"
+            <div class="pdf-viewer__toolbar"
                 id="toolbarViewer">
-                <div class="toolbar__left">
-                    <div class="toolbar__item">
+                <div class="pdf-viewer__toolbar-left">
+                    <div class="pdf-viewer__toolbar-item">
                         <button id="viewThumbnail"
-                            class="toolbar__button"
+                            class="pdf-viewer__toolbar-button"
                             title="Toggle Sidebar">
                             <i class="fa fa-th-large"></i>
                         </button>
                     </div>
-                    <div class="toolbar__item">
+                    <div class="pdf-viewer__toolbar-item">
                         <button id="viewOutline"
-                            class="toolbar__button">
+                            class="pdf-viewer__toolbar-button">
                             <i class="fa fa-list"></i>
                         </button>
                     </div>
-                    <div class="toolbar__separator">|</div>
-                    <div class="toolbar__item">
+                    <div class="pdf-viewer__toolbar-separator">|</div>
+                    <div class="pdf-viewer__toolbar-item">
                         <button id="zoomIn"
-                            class="toolbar__button">
+                            class="pdf-viewer__toolbar-button">
                             <i class="fa fa-search-plus"></i>
                         </button>
                     </div>
-                    <div class="toolbar__item">
+                    <div class="pdf-viewer__toolbar-item">
                         <button id="zoomOut"
-                            class="toolbar__button"><i class="fa fa-search-minus"></i>
+                            class="pdf-viewer__toolbar-button"><i class="fa fa-search-minus"></i>
                         </button>
                     </div>
-                    <div class="toolbar__item">
+                    <div class="pdf-viewer__toolbar-item">
                         <div id="scaleSelectContainer"
-                            class="select select-small">
+                            class="pdf-viewer__select">
                             <select name="zoom"
                                 id="scaleSelect"
                                 title="Zoom">
@@ -83,40 +83,40 @@
                             <i class="fa fa-angle-down"></i>
                         </div>
                     </div>
-                    <div class="toolbar__item">
+                    <div class="pdf-viewer__toolbar-item">
                         <button id="presentationMode"
-                            class="toolbar__button">
+                            class="pdf-viewer__toolbar-button">
                             <i class="fa fa-arrows-alt"></i>
                         </button>
                     </div>
                 </div>
-                <div class="toolbar__center">
-                    <div class="toolbar__item toolbar__item--title">
-                        <span id="documentTitle"></span>
+                <div class="pdf-viewer__toolbar-center">
+                    <div id="documentTitle"
+                        class="pdf-viewer__toolbar-item pdf-viewer__toolbar-item--title">
                     </div>
                 </div>
-                <div class="toolbar__right">
-                    <div class="toolbar__item">
+                <div class="pdf-viewer__toolbar-right">
+                    <div class="pdf-viewer__toolbar-item">
                         <button id="print"
-                            class="toolbar__button">
+                            class="pdf-viewer__toolbar-button">
                             <i class="fa fa-print"></i>
                         </button>
                     </div>
-                    <div class="toolbar__item">
+                    <div class="pdf-viewer__toolbar-item">
                         <button id="download"
-                            class="toolbar__button">
+                            class="pdf-viewer__toolbar-button">
                             <i class="fa fa-download"></i>
                         </button>
                     </div>
-                    <div class="toolbar__item">
+                    <div class="pdf-viewer__item">
                         <button id="viewFind"
-                            class="toolbar__button toolbar__button--dropdown"
+                            class="pdf-viewer__toolbar-button pdf-viewer__toolbar-button--dropdown"
                             title="Find in Document"><i class="fa fa-search"></i>
                         </button>
                     </div>
-                    <div class="toolbar__item">
+                    <div class="pdf-viewer__toolbar-item">
                         <button id="secondaryToolbarToggle"
-                            class="toolbar__button toolbar__button--text toolbar__button--text toolbar__button--dropdown">more
+                            class="pdf-viewer__toolbar-button pdf-viewer__toolbar-button--text pdf-viewer__toolbar-button--text pdf-viewer__toolbar-button--dropdown">more
                         </button>
                     </div>
                 </div>
@@ -125,34 +125,34 @@
 
             <!--  MORE  -->
             <div id="secondaryToolbar"
-                class="toolbar toolbar--sub">
-                <div class="toolbar__left">
-                    <div class="toolbar__item toolbar__item--no-space">
+                class="pdf-viewer__toolbar pdf-viewer__toolbar--sub">
+                <div class="pdf-viewer__toolbar-left">
+                    <div class="pdf-viewer__toolbar-item pdf-viewer__toolbar-item--no-space">
                         <button id="firstPage"
-                            class="toolbar__button toolbar__button--text toolbar__button--full">
+                            class="pdf-viewer__toolbar-button pdf-viewer__toolbar-button--text pdf-viewer__toolbar-button--full">
                             <i class="fa fa-chevron-up"></i> Go to first page
                         </button>
                     </div>
-                    <div class="toolbar__item toolbar__item--no-space">
+                    <div class="pdf-viewer__toolbar-item pdf-viewer__toolbar-item--no-space">
                         <button id="lastPage"
-                            class="toolbar__button toolbar__button--text toolbar__button--full">
+                            class="pdf-viewer__toolbar-button pdf-viewer__toolbar-button--text pdf-viewer__toolbar-button--full">
                             <i class="fa fa-chevron-down"></i> Go to last page
                         </button>
                     </div>
 
-                    <div class="toolbar__item toolbar__item--section">
+                    <div class="pdf-viewer__toolbar-item pdf-viewer__toolbar-item--section">
                         <button id="previous"
-                            class="toolbar__button toolbar__button--bg">
+                            class="pdf-viewer__toolbar-button pdf-viewer__toolbar-button--bg">
                             <i class="fa fa-arrow-up"></i>
                         </button>
                         <button id="next"
-                            class="toolbar__button toolbar__button--bg">
+                            class="pdf-viewer__toolbar-button pdf-viewer__toolbar-button--bg">
                             <i class="fa fa-arrow-down"></i>
                         </button>
-                        <div class="toolbar__page">
+                        <div class="pdf-viewer__toolbar-page">
                             <label id="pageNumberLabel"
                                 for="pageNumber">Page</label>
-                            <div class="input">
+                            <div class="pdf-viewer__input">
                                 <input type="number"
                                     name="pageNumber"
                                     id="pageNumber"
@@ -162,15 +162,15 @@
                             <span id="numPages"></span>
                         </div>
                     </div>
-                    <div class="toolbar__item">
+                    <div class="pdf-viewer__toolbar-item">
                         <button id="pageRotateCw"
-                            class="toolbar__button">
+                            class="pdf-viewer__toolbar-button">
                             <i class="fa fa-repeat"></i>
                         </button>
                     </div>
-                    <div class="toolbar__item">
+                    <div class="pdf-viewer__toolbar-item">
                         <button id="pageRotateCcw"
-                            class="toolbar__button">
+                            class="pdf-viewer__toolbar-button">
                             <i class="fa fa-undo"></i>
                         </button>
                     </div>
@@ -180,37 +180,37 @@
 
 
             <div id="findbar"
-                class="toolbar toolbar--sub">
-                <div class="toolbar__center">
+                class="pdf-viewer__toolbar pdf-viewer__toolbar--sub">
+                <div class="pdf-viewer__toolbar-center">
                 </div>
 
-                <div class="toolbar__right">
-                    <div class="toolbar__item toolbar__button--text">
+                <div class="pdf-viewer__toolbar-right">
+                    <div class="pdf-viewer__toolbar-item pdf-viewer__toolbar-button--text">
                         <span id="findResultsCount"></span>
                         <span id="findMsg"></span>
                     </div>
-                    <div class="toolbar__item">
-                        <div class="search">
+                    <div class="pdf-viewer__toolbar-item">
+                        <div class="pdf-viewer__search">
                             <input id="findInput"
                                 type="text" />
-                            <i class="search__pending fa fa-refresh fa-spin"></i>
+                            <i class="pdf-viewer__pending fa fa-refresh fa-spin"></i>
                         </div>
                     </div>
-                    <div class="toolbar__item">
+                    <div class="pdf-viewer__toolbar-item">
                         <button id="findPrevious"
-                            class="toolbar__button toolbar__button--bg">
+                            class="pdf-viewer__toolbar-button pdf-viewer__toolbar-button--bg">
                             <i class="fa fa-chevron-left"></i>
                         </button>
                     </div>
-                    <div class="toolbar__item">
+                    <div class="pdf-viewer__toolbar-item">
                         <button id="findNext"
-                            class="toolbar__button toolbar__button--bg">
+                            class="pdf-viewer__toolbar-button pdf-viewer__toolbar-button--bg">
                             <i class="fa fa-chevron-right"></i>
                         </button>
                     </div>
-                    <div class="toolbar__item">
+                    <div class="pdf-viewer__toolbar-item">
                         <button id="closeFind"
-                            class="toolbar__button">
+                            class="pdf-viewer__toolbar-button">
                             <i class="fa fa-close"></i>
                         </button>
                     </div>
@@ -227,13 +227,13 @@
             <!-- Loading Bar -->
 
             <div id="sidebarContainer"
-                class="sidebar">
+                class="pdf-viewer__sidebar">
                 <div id="sidebarContent">
                     <div id="thumbnailView"
-                        class="sidebar__thumbnail-view">
+                        class="pdf-viewer__thumbnail-view">
                     </div>
                     <div id="outlineView"
-                        class="sidebar__outline hidden">
+                        class="pdf-viewer__outline hidden">
                     </div>
                     <div id="attachmentsView"
                         class="hidden">
@@ -243,7 +243,7 @@
             <!-- sidebarContainer -->
 
             <div id="mainContainer"
-                class="main">
+                class="pdf-viewer__main">
 
                 <menu type="context"
                     id="viewerContextMenu">
