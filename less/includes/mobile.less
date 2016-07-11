@@ -3,6 +3,16 @@
 @media (max-width: 770px) {
   .sidebar {
     background: rgba(255, 255, 255, 0.5);
+    &__thumbnail-view {
+      a {
+        &:hover {
+          background-color: rgba(228,222,217,0.25);
+        }
+        &.selected {
+          background-color: rgba(228,222,217,0.50);
+        }
+      }
+    }
   }
   .outer {
     &.sidebarOpen .main {

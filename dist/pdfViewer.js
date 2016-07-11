@@ -26,7 +26,7 @@ $templateCache.put("pdfViewer/pdfViewer.tpl.html","<div dir=\"ltr\"\n" +
     "                id=\"toolbarViewer\">\n" +
     "                <div class=\"toolbar__left\">\n" +
     "                    <div class=\"toolbar__item\">\n" +
-    "                        <button id=\"sidebarToggle\"\n" +
+    "                        <button id=\"viewThumbnail\"\n" +
     "                            class=\"toolbar__button\"\n" +
     "                            title=\"Toggle Sidebar\">\n" +
     "                            <i class=\"fa fa-th-large\"></i>\n" +
@@ -56,11 +56,19 @@ $templateCache.put("pdfViewer/pdfViewer.tpl.html","<div dir=\"ltr\"\n" +
     "                            <select name=\"zoom\"\n" +
     "                                id=\"scaleSelect\"\n" +
     "                                title=\"Zoom\">\n" +
+    "                                <option id=\"pageFitOption\"\n" +
+    "                                title=\"\"\n" +
+    "                                value=\"page-fit\" data-l10n-id=\"page_scale_fit\">Page Fit</option>\n" +
+    "                                <option id=\"customScaleOption\"\n" +
+    "                                    title=\"\"\n" +
+    "                                    value=\"custom\"\n" +
+    "                                    hidden=\"true\"></option>\n" +
     "                                <option title=\"\"\n" +
     "                                    value=\"0.5\"\n" +
     "                                    data-l10n-id=\"page_scale_percent\"\n" +
     "                                    data-l10n-args='{ \"scale\": 50 }'>50%</option>\n" +
-    "                                <option value=\"0.75\"\n" +
+    "                                <option title=\"\"\n" +
+    "                                    value=\"0.75\"\n" +
     "                                    data-l10n-id=\"page_scale_percent\"\n" +
     "                                    data-l10n-args='{ \"scale\": 75 }'>75%</option>\n" +
     "                                <option title=\"\"\n" +
@@ -242,7 +250,7 @@ $templateCache.put("pdfViewer/pdfViewer.tpl.html","<div dir=\"ltr\"\n" +
     "                        class=\"sidebar__thumbnail-view\">\n" +
     "                    </div>\n" +
     "                    <div id=\"outlineView\"\n" +
-    "                        class=\"hidden\">\n" +
+    "                        class=\"sidebar__outline hidden\">\n" +
     "                    </div>\n" +
     "                    <div id=\"attachmentsView\"\n" +
     "                        class=\"hidden\">\n" +
@@ -253,7 +261,6 @@ $templateCache.put("pdfViewer/pdfViewer.tpl.html","<div dir=\"ltr\"\n" +
     "\n" +
     "            <div id=\"mainContainer\"\n" +
     "                class=\"main\">\n" +
-    "\n" +
     "\n" +
     "                <menu type=\"context\"\n" +
     "                    id=\"viewerContextMenu\">\n" +
@@ -274,7 +281,7 @@ $templateCache.put("pdfViewer/pdfViewer.tpl.html","<div dir=\"ltr\"\n" +
     "                <div id=\"viewerContainer\"\n" +
     "                    tabindex=\"0\">\n" +
     "                    <div id=\"viewer\"\n" +
-    "                        class=\"pdfViewer\"></div>\n" +
+    "                        class=\"main-viewer\"></div>\n" +
     "                </div>\n" +
     "\n" +
     "                <div id=\"errorWrapper\"\n" +
@@ -436,9 +443,7 @@ $templateCache.put("pdfViewer/pdfViewer.tpl.html","<div dir=\"ltr\"\n" +
     "                    padding: 9px;\n" +
     "                    border: 1px solid hsla(0, 0%, 0%, .5);\n" +
     "                    border-radius: 2px;\n" +
-    "                    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);\n" +
-    "                    background-color: #474747;\n" +
-    "                    color: hsl(0, 0%, 85%);\n" +
+    "                    background-color: #D8D6D3;\n" +
     "                    font-size: 16px;\n" +
     "                    line-height: 20px;\n" +
     "                }\n" +
@@ -480,72 +485,34 @@ $templateCache.put("pdfViewer/pdfViewer.tpl.html","<div dir=\"ltr\"\n" +
     "</div>\n" +
     "\n" +
     "<div class=\"hidden\">\n" +
-    "    <!-- <div id=\"secondaryToolbar\"></div> -->\n" +
     "    <div id=\"secondaryToolbarButtonContainer\"></div>\n" +
     "    <div id=\"secondaryPresentationMode\"></div>\n" +
     "    <div id=\"presentation_mode\"></div>\n" +
     "    <div id=\"secondaryOpenFile\"></div>\n" +
     "    <div id=\"open_file\"></div>\n" +
     "    <div id=\"secondaryPrint\"></div>\n" +
-    "    <!-- <div id=\"print\"></div> -->\n" +
     "    <div id=\"secondaryDownload\"></div>\n" +
-    "    <!-- <div id=\"download\"></div> -->\n" +
     "    <div id=\"secondaryViewBookmark\"></div>\n" +
     "    <div id=\"bookmark\"></div>\n" +
-    "    <!-- <div id=\"firstPage\"></div> -->\n" +
-    "    <!-- <div id=\"first_page\"></div> -->\n" +
-    "    <!-- <div id=\"lastPage\"></div> -->\n" +
     "    <div id=\"last_page\"></div>\n" +
-    "    <!-- <div id=\"pageRotateCw\"></div> -->\n" +
-    "    <!-- <div id=\"pageRotateCcw\"></div> -->\n" +
     "    <div id=\"toggleHandTool\"></div>\n" +
     "    <div id=\"hand_tool_enable\"></div>\n" +
     "    <div id=\"documentProperties\"></div>\n" +
     "    <div id=\"document_properties\"></div>\n" +
-    "    <!-- <div id=\"toolbarContainer\"></div> -->\n" +
-    "    <!-- <div id=\"toolbarViewer\"></div> -->\n" +
     "    <div id=\"toolbarViewerLeft\"></div>\n" +
-    "    <!-- <div id=\"sidebarToggle\"></div> -->\n" +
     "    <div id=\"toggle_sidebar\"></div>\n" +
-    "    <!-- <div id=\"viewFind\"></div> -->\n" +
-    "    <!-- <div id=\"findbar\"></div> -->\n" +
-    "    <!-- <div id=\"previous\"></div> -->\n" +
-    "    <!-- <div id=\"previous\"></div> -->\n" +
-    "    <!-- <div id=\"next\"></div> -->\n" +
-    "    <!-- <div id=\"next\"></div> -->\n" +
-    "    <!-- <div id=\"pageNumberLabel\"></div> -->\n" +
-    "    <!-- <div id=\"pageNumber\"></div> -->\n" +
-    "    <!-- <div id=\"numPages\"></div> -->\n" +
     "    <div id=\"toolbarViewerRight\"></div>\n" +
-    "    <!-- <div id=\"presentationMode\"></div> -->\n" +
-    "    <!-- <div id=\"presentation_mode\"></div> -->\n" +
     "    <div id=\"openFile\"></div>\n" +
-    "    <!-- <div id=\"print\"></div> -->\n" +
-    "    <!-- <div id=\"print\"></div> -->\n" +
-    "    <!-- <div id=\"download\"></div> -->\n" +
-    "    <!-- <div id=\"download\"></div> -->\n" +
     "    <div id=\"viewBookmark\"></div>\n" +
-    "    <!-- <div id=\"bookmark\"></div> -->\n" +
-    "    <!-- <div id=\"secondaryToolbarToggle\"></div> -->\n" +
     "    <div id=\"tools\"></div>\n" +
     "    <div id=\"toolbarViewerMiddle\"></div>\n" +
-    "    <!-- <div id=\"zoomIn\"></div> -->\n" +
-    "    <!-- <div id=\"scaleSelectContainer\"></div> -->\n" +
-    "    <!-- <div id=\"scaleSelect\"></div> -->\n" +
     "    <div id=\"pageAutoOption\"></div>\n" +
     "    <div id=\"pageActualOption\"></div>\n" +
-    "    <div id=\"pageFitOption\"></div>\n" +
     "    <div id=\"pageWidthOption\"></div>\n" +
-    "    <div id=\"customScaleOption\"></div>\n" +
-    "    <!-- <div id=\"loadingBar\"></div> -->\n" +
     "    <div id=\"findHighlightAll\"></div>\n" +
     "    <div id=\"findMatchCase\"></div>\n" +
-    "    <!-- <div id=\"findResultsCount\"></div> -->\n" +
-    "    <!-- <div id=\"findMsg\"></div> -->\n" +
-    "\n" +
     "    <div id=\"toolbarSidebar\"></div>\n" +
-    "    <div id=\"viewThumbnail\"></div>\n" +
-    "    <!-- <div id=\"viewOutline\"></div> -->\n" +
+    "    <div id=\"sidebarToggle\"></div>\n" +
     "    <div id=\"viewAttachments\"></div>\n" +
     "</div>\n" +
     "")
@@ -587,7 +554,7 @@ $templateCache.put("pdfViewer/pdfViewer.tpl.html","<div dir=\"ltr\"\n" +
         /****************************************
          *      Controller Attributes           *
          ****************************************/
-        $ctrl.ready = false;
+        $window.pdfViewerReady = false;
 
         /****************************************
          *      Controller API                  *
@@ -603,10 +570,6 @@ $templateCache.put("pdfViewer/pdfViewer.tpl.html","<div dir=\"ltr\"\n" +
         /****************************************
          *      Lifecycle Hooks                 *
          ****************************************/
-        $ctrl.$onInit = function() {
-            console.log('👊 activating component');
-        };
-
         $ctrl.$onChanges = function(changesObj) {
 
             if (changesObj.file) {
@@ -616,7 +579,7 @@ $templateCache.put("pdfViewer/pdfViewer.tpl.html","<div dir=\"ltr\"\n" +
                 }
             }
 
-            if ($ctrl.ready) {
+            if ($window.pdfViewerReady) {
                 if (changesObj.search) {
                     $ctrl.find($ctrl.search);
                 }
@@ -646,7 +609,6 @@ $templateCache.put("pdfViewer/pdfViewer.tpl.html","<div dir=\"ltr\"\n" +
                 pdfViewerService.load()
                     .then(function(msg) {
                         getDomElements();
-                        $ctrl.ready = true;
                         $window.pdfViewerReady = true;
                     });
             }, 0);

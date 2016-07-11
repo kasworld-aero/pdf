@@ -1,8 +1,6 @@
 /* ---------- PDFJS DEFAULTS ----------- */
 
 pdf-viewer {
-	flex: 1 1 auto;
-	position: relative;
 	.loadingInProgress {
 		height: 100%;
 	}
@@ -43,7 +41,8 @@ pdf-viewer {
 		border-radius: 0;
 	}
 	.textLayer .highlight.selected {
-		background-color: rgb(0, 100, 0);
+		// background-color: rgb(0, 100, 0);
+		background-color: #ce7805;
 	}
 	.textLayer::selection {
 		background: rgb(0,0,255);
@@ -80,7 +79,7 @@ pdf-viewer {
 	}
 	/* -ms-a */
 	.annotationLayer .linkAnnotation > a {
-		background: url("data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7") 0 0 repeat;
+		// background: url("data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7") 0 0 repeat;
 	}
 	.annotationLayer .linkAnnotation > a:hover {
 		opacity: 0.2;
@@ -122,11 +121,11 @@ pdf-viewer {
 	.annotationLayer .underlineAnnotation {
 		cursor: pointer;
 	}
-	.pdfViewer .canvasWrapper {
+	.main-viewer .canvasWrapper {
 		overflow: hidden;
 		box-shadow: 0 0 25px rgba(0,0,0,0.35);
 	}
-	.pdfViewer .page {
+	.main-viewer .page {
 		direction: ltr;
 		width: 816px;
 		height: 1056px;
@@ -139,22 +138,22 @@ pdf-viewer {
 		background-color: white;
 		box-sizing: content-box;
 	}
-	.pdfViewer.removePageBorders .page {
+	.main-viewer.removePageBorders .page {
 		margin: 0 auto 10px;
 		border: none;
 	}
-	.pdfViewer.singlePageView {
+	.main-viewer.singlePageView {
 		display: inline-block;
 	}
-	.pdfViewer.singlePageView .page {
+	.main-viewer.singlePageView .page {
 		margin: 0;
 		border: none;
 	}
-	.pdfViewer .page canvas {
+	.main-viewer .page canvas {
 		margin: 0;
 		display: block;
 	}
-	.pdfViewer .page .loadingIcon {
+	.main-viewer .page .loadingIcon {
 		position: absolute;
 		display: block;
 		left: 0;
@@ -163,43 +162,43 @@ pdf-viewer {
 		bottom: 0;
 		// background: url('images/loading-icon.gif') center no-repeat;
 	}
-	.pdfPresentationMode:-webkit-full-screen .pdfViewer .page {
+	.pdfPresentationMode:-webkit-full-screen .main-viewer .page {
 		margin-bottom: 100%;
 		border: 0;
 	}
-	.pdfPresentationMode:-moz-full-screen .pdfViewer .page {
+	.pdfPresentationMode:-moz-full-screen .main-viewer .page {
 		margin-bottom: 100%;
 		border: 0;
 	}
-	.pdfPresentationMode:-ms-fullscreen .pdfViewer .page {
+	.pdfPresentationMode:-ms-fullscreen .main-viewer .page {
 		margin-bottom: 100% !important;
 		border: 0;
 	}
-	.pdfPresentationMode:fullscreen .pdfViewer .page {
+	.pdfPresentationMode:fullscreen .main-viewer .page {
 		margin-bottom: 100%;
 		border: 0;
 	}
-	* {
-		padding: 0;
-		margin: 0;
-	}
-	div {
-		height: auto;
-	}
-	div.main {
-		// position: absolute;
-		// height: 100%;
-		// width: 100%;
-		// overflow: hidden;
-		// background-color: #404040;
-		// background-image: url("images/texture.png");
-	}
-	button,
-	input,
-	select {
-		// font: message-box;
-		// outline: none;
-	}
+	// * {
+	// 	padding: 0;
+	// 	margin: 0;
+	// }
+	// div {
+	// 	height: auto;
+	// }
+	// div.main {
+	// 	position: absolute;
+	// 	height: 100%;
+	// 	width: 100%;
+	// 	overflow: hidden;
+	// 	background-color: #404040;
+	// 	background-image: url("images/texture.png");
+	// }
+	// button,
+	// input,
+	// select {
+	// 	font: message-box;
+	// 	outline: none;
+	// }
 	.hidden {
 		display: none !important;
 	}
@@ -1159,12 +1158,14 @@ pdf-viewer {
 		margin: -1px -1px 4px;
 	}
 	.thumbnailImage {
-		border: 1px solid transparent;
-		box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.5), 0 2px 8px rgba(0, 0, 0, 0.3);
+		// border: 1px solid transparent;
+		// box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.5), 0 2px 8px rgba(0, 0, 0, 0.3);
+		box-shadow: 0 0 8px rgba(0,0,0,0.3);
+    opacity: 0.8;
 		opacity: 0.8;
 		z-index: 99;
-		background-color: white;
-		background-clip: content-box;
+		// background-color: white;
+		// background-clip: content-box;
 	}
 	.thumbnailSelectionRing {
 		// border-radius: 2px;
@@ -1176,27 +1177,27 @@ pdf-viewer {
 	}
 	.thumbnail:hover > .thumbnailSelectionRing,
 	a:focus > .thumbnail > .thumbnailSelectionRing {
-		background-color: hsla(0,0%,100%,.15);
-		background-image: linear-gradient(hsla(0,0%,100%,.05), hsla(0,0%,100%,0));
-		background-clip: padding-box;
-		box-shadow: 0 1px 0 hsla(0,0%,100%,.05) inset, 0 0 1px hsla(0,0%,100%,.2) inset, 0 0 1px hsla(0,0%,0%,.2);
-		color: hsla(0,0%,100%,.9);
+		// background-color: hsla(0,0%,100%,.15);
+		// background-image: linear-gradient(hsla(0,0%,100%,.05), hsla(0,0%,100%,0));
+		// background-clip: padding-box;
+		// box-shadow: 0 1px 0 hsla(0,0%,100%,.05) inset, 0 0 1px hsla(0,0%,100%,.2) inset, 0 0 1px hsla(0,0%,0%,.2);
+		// color: hsla(0,0%,100%,.9);
 	}
 	.thumbnail.selected > .thumbnailSelectionRing > .thumbnailImage {
 		box-shadow: 0 0 0 1px hsla(0,0%,0%,.5);
-		opacity: 1;
+		// opacity: 1;
 	}
 	.thumbnail.selected > .thumbnailSelectionRing {
-		background-color: hsla(0,0%,100%,.3);
-		background-image: linear-gradient(hsla(0,0%,100%,.05), hsla(0,0%,100%,0));
-		background-clip: padding-box;
-		box-shadow: 0 1px 0 hsla(0,0%,100%,.05) inset, 0 0 1px hsla(0,0%,100%,.1) inset, 0 0 1px hsla(0,0%,0%,.2);
-		color: hsla(0,0%,100%,1);
+		// background-color: hsla(0,0%,100%,.3);
+		// background-image: linear-gradient(hsla(0,0%,100%,.05), hsla(0,0%,100%,0));
+		// background-clip: padding-box;
+		// box-shadow: 0 1px 0 hsla(0,0%,100%,.05) inset, 0 0 1px hsla(0,0%,100%,.1) inset, 0 0 1px hsla(0,0%,0%,.2);
+		// color: hsla(0,0%,100%,1);
 	}
 	#attachmentsView,
 	#outlineView {
 		position: absolute;
-		width: 192px;
+		// width: 192px;
 		top: 0;
 		bottom: 0;
 		overflow: auto;
@@ -1205,7 +1206,7 @@ pdf-viewer {
 		-moz-user-select: none;
 	}
 	#outlineView {
-		padding: 4px 4px 0;
+		// padding: 4px 4px 0;
 	}
 	#attachmentsView {
 		padding: 3px 4px 0;
@@ -1220,20 +1221,20 @@ pdf-viewer {
 	}
 	.attachmentsItem > button,
 	.outlineItem > a {
-		text-decoration: none;
-		display: inline-block;
-		min-width: 95%;
-		min-width: calc(100% - 4px);
+		// display: inline-block;
+		// min-width: 95%;
+		// min-width: calc(100% - 4px);
 		/* Subtract the right padding (left, in RTL mode)
 		of the container. */
-		height: auto;
-		margin-bottom: 1px;
-		border-radius: 2px;
-		color: hsla(0,0%,100%,.8);
-		font-size: 13px;
-		line-height: 15px;
-		-moz-user-select: none;
-		white-space: normal;
+		// height: auto;
+		// margin-bottom: 1px;
+		// border-radius: 2px;
+		// color: hsla(0,0%,100%,.8);
+		// font-size: 13px;
+		// line-height: 15px;
+		// -moz-user-select: none;
+		// white-space: normal;
+		// text-decoration: none;
 	}
 	.attachmentsItem > button {
 		border: 0 none;
@@ -1242,14 +1243,14 @@ pdf-viewer {
 		width: 100%;
 	}
 	div[dir='ltr'] .outlineItem > a {
-		padding: 2px 0 5px 4px;
+		// padding: 2px 0 5px 4px;
 	}
 	div[dir='ltr'] .attachmentsItem > button {
 		padding: 2px 0 3px 7px;
 		text-align: left;
 	}
 	div[dir='rtl'] .outlineItem > a {
-		padding: 2px 4px 5px 0;
+		// padding: 2px 4px 5px 0;
 	}
 	div[dir='rtl'] .attachmentsItem > button {
 		padding: 2px 7px 3px 0;
@@ -1262,15 +1263,15 @@ pdf-viewer {
 		color: hsla(0,0%,100%,.5);
 	}
 	.outlineItemToggler::before {
-		content: url("images/treeitem-expanded.png");
+		// content: url("images/treeitem-expanded.png");
 		display: inline-block;
 		position: absolute;
 	}
 	div[dir='ltr'] .outlineItemToggler.outlineItemsHidden::before {
-		content: url("images/treeitem-collapsed.png");
+		// content: url("images/treeitem-collapsed.png");
 	}
 	div[dir='rtl'] .outlineItemToggler.outlineItemsHidden::before {
-		content: url("images/treeitem-collapsed-rtl.png");
+		// content: url("images/treeitem-collapsed-rtl.png");
 	}
 	.outlineItemToggler.outlineItemsHidden ~ .outlineItems {
 		display: none;
@@ -1292,19 +1293,19 @@ pdf-viewer {
 	.outlineItemToggler:hover,
 	.outlineItemToggler:hover + a,
 	.outlineItemToggler:hover ~ .outlineItems {
-		background-color: hsla(0,0%,100%,.02);
-		background-image: linear-gradient(hsla(0,0%,100%,.05), hsla(0,0%,100%,0));
-		background-clip: padding-box;
-		box-shadow: 0 1px 0 hsla(0,0%,100%,.05) inset, 0 0 1px hsla(0,0%,100%,.2) inset, 0 0 1px hsla(0,0%,0%,.2);
-		border-radius: 2px;
-		color: hsla(0,0%,100%,.9);
+		// background-color: hsla(0,0%,100%,.02);
+		// background-image: linear-gradient(hsla(0,0%,100%,.05), hsla(0,0%,100%,0));
+		// background-clip: padding-box;
+		// box-shadow: 0 1px 0 hsla(0,0%,100%,.05) inset, 0 0 1px hsla(0,0%,100%,.2) inset, 0 0 1px hsla(0,0%,0%,.2);
+		// border-radius: 2px;
+		// color: hsla(0,0%,100%,.9);
 	}
 	.outlineItem.selected {
-		background-color: hsla(0,0%,100%,.08);
-		background-image: linear-gradient(hsla(0,0%,100%,.05), hsla(0,0%,100%,0));
-		background-clip: padding-box;
-		box-shadow: 0 1px 0 hsla(0,0%,100%,.05) inset, 0 0 1px hsla(0,0%,100%,.1) inset, 0 0 1px hsla(0,0%,0%,.2);
-		color: hsla(0,0%,100%,1);
+		// background-color: hsla(0,0%,100%,.08);
+		// background-image: linear-gradient(hsla(0,0%,100%,.05), hsla(0,0%,100%,0));
+		// background-clip: padding-box;
+		// box-shadow: 0 1px 0 hsla(0,0%,100%,.05) inset, 0 0 1px hsla(0,0%,100%,.1) inset, 0 0 1px hsla(0,0%,0%,.2);
+		// color: hsla(0,0%,100%,1);
 	}
 	.noResults {
 		font-size: 12px;
@@ -1316,7 +1317,8 @@ pdf-viewer {
 	so we can override the opaque grey background when the window is inactive;
 	see https://bugzilla.mozilla.org/show_bug.cgi?id=706209 */
 	::selection {
-		background: rgba(0,0,255,0.3);
+		// background: rgba(0,0,255,0.3);
+		background: rgba(206,120,5,0.3);
 	}
 	::-moz-selection {
 		background: rgba(0,0,255,0.3);

@@ -9,7 +9,7 @@
                 id="toolbarViewer">
                 <div class="toolbar__left">
                     <div class="toolbar__item">
-                        <button id="sidebarToggle"
+                        <button id="viewThumbnail"
                             class="toolbar__button"
                             title="Toggle Sidebar">
                             <i class="fa fa-th-large"></i>
@@ -39,11 +39,19 @@
                             <select name="zoom"
                                 id="scaleSelect"
                                 title="Zoom">
+                                <option id="pageFitOption"
+                                title=""
+                                value="page-fit" data-l10n-id="page_scale_fit">Page Fit</option>
+                                <option id="customScaleOption"
+                                    title=""
+                                    value="custom"
+                                    hidden="true"></option>
                                 <option title=""
                                     value="0.5"
                                     data-l10n-id="page_scale_percent"
                                     data-l10n-args='{ "scale": 50 }'>50%</option>
-                                <option value="0.75"
+                                <option title=""
+                                    value="0.75"
                                     data-l10n-id="page_scale_percent"
                                     data-l10n-args='{ "scale": 75 }'>75%</option>
                                 <option title=""
@@ -225,7 +233,7 @@
                         class="sidebar__thumbnail-view">
                     </div>
                     <div id="outlineView"
-                        class="hidden">
+                        class="sidebar__outline hidden">
                     </div>
                     <div id="attachmentsView"
                         class="hidden">
@@ -236,7 +244,6 @@
 
             <div id="mainContainer"
                 class="main">
-
 
                 <menu type="context"
                     id="viewerContextMenu">
@@ -257,7 +264,7 @@
                 <div id="viewerContainer"
                     tabindex="0">
                     <div id="viewer"
-                        class="pdfViewer"></div>
+                        class="main-viewer"></div>
                 </div>
 
                 <div id="errorWrapper"
@@ -419,9 +426,7 @@
                     padding: 9px;
                     border: 1px solid hsla(0, 0%, 0%, .5);
                     border-radius: 2px;
-                    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
-                    background-color: #474747;
-                    color: hsl(0, 0%, 85%);
+                    background-color: #D8D6D3;
                     font-size: 16px;
                     line-height: 20px;
                 }
@@ -463,71 +468,33 @@
 </div>
 
 <div class="hidden">
-    <!-- <div id="secondaryToolbar"></div> -->
     <div id="secondaryToolbarButtonContainer"></div>
     <div id="secondaryPresentationMode"></div>
     <div id="presentation_mode"></div>
     <div id="secondaryOpenFile"></div>
     <div id="open_file"></div>
     <div id="secondaryPrint"></div>
-    <!-- <div id="print"></div> -->
     <div id="secondaryDownload"></div>
-    <!-- <div id="download"></div> -->
     <div id="secondaryViewBookmark"></div>
     <div id="bookmark"></div>
-    <!-- <div id="firstPage"></div> -->
-    <!-- <div id="first_page"></div> -->
-    <!-- <div id="lastPage"></div> -->
     <div id="last_page"></div>
-    <!-- <div id="pageRotateCw"></div> -->
-    <!-- <div id="pageRotateCcw"></div> -->
     <div id="toggleHandTool"></div>
     <div id="hand_tool_enable"></div>
     <div id="documentProperties"></div>
     <div id="document_properties"></div>
-    <!-- <div id="toolbarContainer"></div> -->
-    <!-- <div id="toolbarViewer"></div> -->
     <div id="toolbarViewerLeft"></div>
-    <!-- <div id="sidebarToggle"></div> -->
     <div id="toggle_sidebar"></div>
-    <!-- <div id="viewFind"></div> -->
-    <!-- <div id="findbar"></div> -->
-    <!-- <div id="previous"></div> -->
-    <!-- <div id="previous"></div> -->
-    <!-- <div id="next"></div> -->
-    <!-- <div id="next"></div> -->
-    <!-- <div id="pageNumberLabel"></div> -->
-    <!-- <div id="pageNumber"></div> -->
-    <!-- <div id="numPages"></div> -->
     <div id="toolbarViewerRight"></div>
-    <!-- <div id="presentationMode"></div> -->
-    <!-- <div id="presentation_mode"></div> -->
     <div id="openFile"></div>
-    <!-- <div id="print"></div> -->
-    <!-- <div id="print"></div> -->
-    <!-- <div id="download"></div> -->
-    <!-- <div id="download"></div> -->
     <div id="viewBookmark"></div>
-    <!-- <div id="bookmark"></div> -->
-    <!-- <div id="secondaryToolbarToggle"></div> -->
     <div id="tools"></div>
     <div id="toolbarViewerMiddle"></div>
-    <!-- <div id="zoomIn"></div> -->
-    <!-- <div id="scaleSelectContainer"></div> -->
-    <!-- <div id="scaleSelect"></div> -->
     <div id="pageAutoOption"></div>
     <div id="pageActualOption"></div>
-    <div id="pageFitOption"></div>
     <div id="pageWidthOption"></div>
-    <div id="customScaleOption"></div>
-    <!-- <div id="loadingBar"></div> -->
     <div id="findHighlightAll"></div>
     <div id="findMatchCase"></div>
-    <!-- <div id="findResultsCount"></div> -->
-    <!-- <div id="findMsg"></div> -->
-
     <div id="toolbarSidebar"></div>
-    <div id="viewThumbnail"></div>
-    <!-- <div id="viewOutline"></div> -->
+    <div id="sidebarToggle"></div>
     <div id="viewAttachments"></div>
 </div>

@@ -34,7 +34,7 @@
         /****************************************
          *      Controller Attributes           *
          ****************************************/
-        $ctrl.ready = false;
+        $window.pdfViewerReady = false;
 
         /****************************************
          *      Controller API                  *
@@ -50,10 +50,6 @@
         /****************************************
          *      Lifecycle Hooks                 *
          ****************************************/
-        $ctrl.$onInit = function() {
-            console.log('👊 activating component');
-        };
-
         $ctrl.$onChanges = function(changesObj) {
 
             if (changesObj.file) {
@@ -63,7 +59,7 @@
                 }
             }
 
-            if ($ctrl.ready) {
+            if ($window.pdfViewerReady) {
                 if (changesObj.search) {
                     $ctrl.find($ctrl.search);
                 }
@@ -93,7 +89,6 @@
                 pdfViewerService.load()
                     .then(function(msg) {
                         getDomElements();
-                        $ctrl.ready = true;
                         $window.pdfViewerReady = true;
                     });
             }, 0);

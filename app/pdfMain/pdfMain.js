@@ -13,7 +13,8 @@
         var $ctrl = this;
 
         $ctrl.searchQuery = '';
-        $ctrl.fileUrl = 'test_pdfs/2014_ChemexBrewGuide.pdf';
+        // $ctrl.fileUrl = 'test_pdfs/2014_ChemexBrewGuide.pdf';
+        $ctrl.fileUrl = 'test_pdfs/grades.pdf';
         $ctrl.isFullscreen = false;
         $ctrl.toggleNext = false;
         $ctrl.togglePrevious = false;
