@@ -3799,11 +3799,11 @@
                         if (id === 1) {
                             // Highlight the thumbnail of the first page when no page number is
                             // specified (or exists in cache) when the document is loaded.
-                            div.classList.add('selected');
+                            anchor.classList.add('selected');
                         }
 
                         var ring = document.createElement('div');
-                        ring.className = 'thumbnailSelectionRing';
+                        ring.className = 'thumbnailSelectionRing sidebar__thumbnail-ring';
                         var borderAdjustment = 2 * THUMBNAIL_CANVAS_BORDER_WIDTH;
                         ring.style.width = this.canvasWidth + borderAdjustment + 'px';
                         ring.style.height = this.canvasHeight + borderAdjustment + 'px';
@@ -3937,6 +3937,15 @@
 
                             this.div.setAttribute('data-loaded', true);
                             this.ring.appendChild(image);
+
+
+                            var pageNumber = document.createElement('div');
+                            pageNumber.id = 'pageNumber' + this.id;
+                            pageNumber.className = 'sidebar__thumbnail-number';
+                            pageNumber.innerHTML = this.id;
+                            this.pageNumber = pageNumber;
+
+                            this.ring.appendChild(pageNumber);
 
                             // Zeroing the width and height causes Firefox to release graphics
                             // resources immediately, which can greatly reduce memory consumption.
@@ -5900,13 +5909,13 @@
                         },
 
                         scrollThumbnailIntoView: function PDFThumbnailViewer_scrollThumbnailIntoView(page) {
-                            var selected = document.querySelector('.thumbnail.selected');
+                            var selected = document.querySelector('a.selected');
                             if (selected) {
                                 selected.classList.remove('selected');
                             }
-                            var thumbnail = document.getElementById('thumbnailContainer' + page);
-                            if (thumbnail) {
-                                thumbnail.classList.add('selected');
+                            var anchor = document.getElementById('thumbnailContainer' + page).parentNode;
+                            if (anchor) {
+                                anchor.classList.add('selected');
                             }
                             var visibleThumbs = this._getVisibleThumbs();
                             var numVisibleThumbs = visibleThumbs.views.length;
@@ -5917,7 +5926,7 @@
                                 // Account for only one thumbnail being visible.
                                 var last = (numVisibleThumbs > 1 ? visibleThumbs.last.id : first);
                                 if (page <= first || page >= last) {
-                                    scrollIntoView(thumbnail, {
+                                    scrollIntoView(anchor, {
                                         top: THUMBNAIL_SCROLL_MARGIN
                                     });
                                 }
