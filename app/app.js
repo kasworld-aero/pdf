@@ -13,4 +13,9 @@
 		.value('$routerRootComponent', 'pdfApp')
 		.component('pdfMain', pdfMain)
 		.component('pdfTools', pdfTools);
+
+	pdfApp.config(['pdfViewerServiceProvider',
+        function(pdfViewerServiceProvider) {
+          pdfViewerServiceProvider.setPath('lib/pdfjs');
+    }]);
 }());

@@ -14,6 +14,11 @@
 		.value('$routerRootComponent', 'pdfApp')
 		.component('pdfMain', pdfMain)
 		.component('pdfTools', pdfTools);
+
+	pdfApp.config(['pdfViewerServiceProvider',
+        function(pdfViewerServiceProvider) {
+          pdfViewerServiceProvider.setPath('lib/pdfjs');
+    }]);
 }());
 
 },{"../dist/pdfViewer":4,"./pdfMain/pdfMain.js":2,"./pdfTools/pdfTools.js":3,"angular":8,"angular-scroll":6}],2:[function(require,module,exports){
@@ -107,11 +112,6 @@
     require('angular');
     require('oclazyload');
     var pdf_viewer = angular.module('pdf.viewer', ['oc.lazyLoad']);
-
-    pdf_viewer.config(['pdfViewerServiceProvider',
-        function(pdfViewerServiceProvider) {
-          pdfViewerServiceProvider.setPath('lib/pdfjs');
-    }]);
 
     module.exports = pdf_viewer;
 })();

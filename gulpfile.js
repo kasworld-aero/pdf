@@ -84,7 +84,7 @@ gulp.task('browserify', ['pdfViewer'], function() {
 
 gulp.task('static', ['pdfjs', 'pdf-less'], function() {
     gulp.src('dist/pdfjs/**/*')
-        .pipe(gulp.dest('public/lib/pdfjs'));
+        .pipe(gulp.dest('public/lib'));
 
     gulp.src('app/**/*.html')
         .pipe($.flatten())
