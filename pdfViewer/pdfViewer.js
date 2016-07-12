@@ -10,8 +10,6 @@
             controller: pdfViewerCtrl,
             bindings: {
                 file: '<',
-                fullscreen: '<',
-                highlight: '<',
                 search: '<',
                 next: '<',
                 previous: '<',
@@ -23,65 +21,63 @@
 
     function pdfViewerCtrl($element, $log, $window, $timeout, pdfViewerService) {
         var $ctrl = this;
-        $window.pdfViewerFileUrl = $ctrl.file || '';
+        var parentClass = 'pdf-viewer-container';
+        var mobileClass = 'pdf-viewer__mobile';
+        var mobileWidth = 770;
 
-        // Add container class if class is not already on parent
-        var parent = $element.parent();
-        if (parent && !parent.hasClass('pdf-viewer-container')) {
-            parent.addClass('pdf-viewer-container');
-        }
 
         /****************************************
          *      Controller Attributes           *
          ****************************************/
-        $window.pdfViewerReady = false;
+        $ctrl.pdfAPI = null;
+        $ctrl.pdfViewerReady = false;
 
         /****************************************
          *      Controller API                  *
          ****************************************/
-        angular.extend($ctrl, {
-            find: find,
-            nextMatch: nextMatch,
-            previousMatch: previousMatch,
-            highlightAll: highlightAll,
-            enterFullscreen: enterFullscreen
-        });
+        $ctrl.pdfAPI = {
+            file: fileChanged,
+            find: findQuery,
+            next: nextMatch,
+            previous: previousMatch,
+        };
 
         /****************************************
          *      Lifecycle Hooks                 *
          ****************************************/
+        $ctrl.$onInit = function() {
+            // Add component class
+            if (!$element.hasClass('pdf-viewer')) {
+                $element.addClass('pdf-viewer');
+            }
+
+            // Add container class if class is not already on parent
+            var parent = $element.parent();
+            if (parent && !parent.hasClass(parentClass)) {
+                parent.addClass(parentClass);
+            }
+
+            // Apply mobile style if necessary
+            checkContainerSize();
+
+            // Set window properties
+            $window.onresize = checkContainerSize;
+            $window.pdfViewerFileUrl = $ctrl.file || '';
+        };
+
         $ctrl.$onChanges = function(changesObj) {
-
-            if (changesObj.file) {
-                $window.pdfViewerFileUrl = $ctrl.file;
-                if ($window.PDFViewerApplication) {
-                    PDFViewerApplication.openFileViaURL($ctrl.file);
+            if ($ctrl.pdfViewerReady) {
+                for (var method in changesObj) {
+                    if ($ctrl.pdfAPI.hasOwnProperty(method)) {
+                        var arg = changesObj[method].currentValue;
+                        $ctrl.pdfAPI[method].call(this, arg);
+                    }
                 }
-            }
-
-            if ($window.pdfViewerReady) {
-                if (changesObj.search) {
-                    $ctrl.find($ctrl.search);
-                }
-
-                if (changesObj.highlight) {
-                    $ctrl.highlightAll($ctrl.highlight);
-                }
-
-                if (changesObj.fullscreen) {
-                    $ctrl.enterFullscreen();
-                }
-
-                if (changesObj.next) {
-                    $ctrl.nextMatch();
-                }
-
-                if (changesObj.previous) {
-                    $ctrl.previousMatch();
-                }
-
                 $ctrl.onUpdate();
+            } else if (changesObj.file) {
+                $ctrl.pdfAPI.file(changesObj.file.currentValue);
             }
+            $ctrl.onUpdate();
         };
 
         $ctrl.$postLink = function() {
@@ -89,7 +85,7 @@
                 pdfViewerService.load()
                     .then(function(msg) {
                         getDomElements();
-                        $window.pdfViewerReady = true;
+                        $ctrl.pdfViewerReady = true;
                     });
             }, 0);
         };
@@ -97,31 +93,30 @@
         /****************************************
          *      API Functions                   *
          ****************************************/
-        function find(query) {
+        function fileChanged(file) {
+            $window.pdfViewerFileUrl = $ctrl.file;
+            if ($window.PDFViewerApplication) {
+                PDFViewerApplication.openFileViaURL($ctrl.file);
+            }
+        }
+
+        function findQuery(query) {
             $ctrl.findInput.value = query;
             PDFViewerApplication.findBar.dispatchEvent('');
         }
 
-        function nextMatch() {
+        function nextMatch(value) {
             PDFViewerApplication.findBar.dispatchEvent('again', false);
         }
 
-        function previousMatch() {
+        function previousMatch(value) {
             PDFViewerApplication.findBar.dispatchEvent('again', true);
-        }
-
-        function highlightAll(highlight) {
-            $ctrl.findHighlightAll.checked = highlight;
-            PDFViewerApplication.findBar.dispatchEvent('highlightallchange');
-        }
-
-        function enterFullscreen() {
-            $ctrl.presentationMode.click();
         }
 
         /****************************************
          *      Private Functions               *
          ****************************************/
+
         function getDomElements() {
             var elements = {
                 'findInput': null,
@@ -137,5 +132,15 @@
             angular.extend($ctrl, elements);
         }
 
+        function checkContainerSize() {
+            var isMobile = $element.hasClass(mobileClass);
+            var parentWidth = document.querySelector('.' + parentClass).offsetWidth;
+
+            if (!isMobile && parentWidth <= mobileWidth) {
+                $element.addClass(mobileClass);
+            } else if (isMobile && parentWidth > mobileWidth) {
+                $element.removeClass(mobileClass);
+            }
+        }
     }
 })();

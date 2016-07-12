@@ -410,8 +410,14 @@ template {
 main {
   display: block;
   /*  embeded */
-  /* fullscreen */
+  height: calc(100vh - 100px);
+  padding: 50px 100px;
+  background-color: #03A9F4;
+}
+main.fullscreen {
   height: 100vh;
+  padding: 0;
+  background-color: transparent;
 }
 .pdf-viewer-container {
   height: 100%;

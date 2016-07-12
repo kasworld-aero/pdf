@@ -3,7 +3,7 @@
 
     require('angular');
     require('oclazyload');
-    var pdfViewer = angular.module('pdf.viewer', ['oc.lazyLoad']);
+    var pdf_viewer = angular.module('pdf.viewer', ['oc.lazyLoad']);
 
-    module.exports = pdfViewer;
+    module.exports = pdf_viewer;
 })();

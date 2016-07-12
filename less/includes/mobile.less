@@ -1,27 +1,29 @@
 /* ---------- MOBILE ------------ */
 
-@media (max-width: 770px) {
-  &__toolbar {
-    &-item--title {
+&__mobile {
+  .pdf-viewer {
+    &__toolbar {
+      &-item--title {
         display: none;
-    }
-  }
-  &__sidebar {
-    background: rgba(255, 255, 255, 0.5);
-  }
-  &__thumbnail-view {
-    a {
-      &:hover {
-        background-color: rgba(228,222,217,0.25);
-      }
-      &.selected {
-        background-color: rgba(228,222,217,0.50);
       }
     }
-  }
-  &__outer {
-    &.sidebarOpen .pdf-viewer__main {
-      left: 0;
+    &__sidebar {
+      background: rgba(255, 255, 255, 0.5);
+    }
+    &__thumbnail-view {
+      a {
+        &:hover {
+          background-color: rgba(228,222,217,0.25);
+        }
+        &.selected {
+          background-color: rgba(228,222,217,0.50);
+        }
+      }
+    }
+    &__outer {
+      &.sidebarOpen .pdf-viewer__main {
+        left: 0;
+      }
     }
   }
 }
