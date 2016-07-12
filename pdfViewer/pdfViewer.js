@@ -1,21 +1,19 @@
 (function() {
     'use strict';
 
-    angular
-        .module('pdf.viewer')
-        .component('pdfViewer', {
-            template: ['$templateCache', function($templateCache) {
-                return $templateCache.get('pdfViewer/pdfViewer.tpl.html');
-            }],
-            controller: pdfViewerCtrl,
-            bindings: {
-                file: '<',
-                search: '<',
-                next: '<',
-                previous: '<',
-                onUpdate: '&'
-            }
-        });
+    var pdfViewer = {
+        template: ['$templateCache', function($templateCache) {
+            return $templateCache.get('pdfViewer/pdfViewer.tpl.html');
+        }],
+        controller: pdfViewerCtrl,
+        bindings: {
+            file: '<',
+            search: '<',
+            next: '<',
+            previous: '<',
+            onUpdate: '&'
+        }
+    };
 
     pdfViewerCtrl.$inject = ['$element', '$log', '$window', '$timeout', 'pdfViewerService'];
 
@@ -143,4 +141,6 @@
             }
         }
     }
+
+    module.exports = pdfViewer;
 })();

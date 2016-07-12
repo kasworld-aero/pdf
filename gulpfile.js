@@ -33,10 +33,17 @@ gulp.task('pdfjs', function(done) {
 });
 
 gulp.task('pdfViewer', ['tpl'], function(done) {
-    gulp.src(['pdfViewer/module.js', 'tmp/pdfViewer.tpl.js', 'pdfViewer/**/*.js'])
-        .pipe($.concat('pdfViewer.js'))
-        .pipe(gulp.dest('dist')
-            .on('end', done));
+    browserify({
+            entries: ['dist/pdfViewer.js', 'dist/pdfViewer.js']
+        })
+        .bundle()
+        .pipe(source('pdfViewer.js'))
+        .pipe(gulp.dest('dist'))
+        .on('end', done);
+    // gulp.src(['pdfViewer/module.js', 'tmp/pdfViewer.tpl.js', 'pdfViewer/**/*.js'])
+    //     .pipe($.concat('pdfViewer.js'))
+    //     .pipe(gulp.dest('dist')
+    //         .on('end', done));
     return done;
 });
 
@@ -75,7 +82,7 @@ gulp.task('connect', function() {
 
 gulp.task('browserify', ['pdfViewer'], function() {
     browserify({
-            entries: ['app/app.js', 'dist/pdfViewer.js']
+            entries: ['app/app.js']
         })
         .bundle()
         .pipe(source('main.js'))

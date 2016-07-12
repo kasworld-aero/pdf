@@ -28,7 +28,6 @@
   },
   "dependencies": {
     "angular": "^1.5.6",
-    "angular-scroll": "^1.0.0",
     "oclazyload": "^1.0.9"
   }
 }
