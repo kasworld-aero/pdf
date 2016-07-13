@@ -31,30 +31,25 @@
         bindings: {}
     };
 
-    pdfMainCtrl.$inject = [];
+    pdfMainCtrl.$inject = ['$interval'];
 
-    function pdfMainCtrl() {
+    function pdfMainCtrl($interval) {
         var $ctrl = this;
+        var files = [
+            'test_pdfs/grades.pdf',
+            'test_pdfs/chemex.pdf'
+        ]
 
         $ctrl.searchQuery = '';
-        // $ctrl.fileUrl = 'test_pdfs/2014_ChemexBrewGuide.pdf';
-        $ctrl.fileUrl = 'test_pdfs/grades.pdf';
-        $ctrl.isFullscreen = false;
+        $ctrl.fileUrl = files[0];
         $ctrl.toggleNext = false;
         $ctrl.togglePrevious = false;
 
-        $ctrl.fullscreen = function() {
-            $ctrl.isFullscreen = !$ctrl.isFullscreen;
-        };
         $ctrl.nextMatch = function() {
             $ctrl.toggleNext = !$ctrl.toggleNext;
         };
         $ctrl.previousMatch = function() {
             $ctrl.togglePrevious = !$ctrl.togglePrevious;
-        };
-        $ctrl.updateHighlight = function(highlightAll) {
-            $ctrl.highlightAll = highlightAll;
-            console.log('Highlight from Main: ', $ctrl.highlightAll);
         };
         $ctrl.search = function(query) {
             $ctrl.searchQuery = query;
@@ -63,6 +58,13 @@
         $ctrl.viewerUpdated = function() {
             console.log('Viewer has been updated');
         };
+
+        // var i = 0;
+        // $interval(function() {
+        //     i++;
+        //     $ctrl.fileUrl = files[i % 2];
+        //     console.log('changed file: ', $ctrl.fileUrl);
+        // }, 5000);
     }
 
     module.exports = pdfMain;
@@ -106,25 +108,15 @@
 }());
 
 },{}],4:[function(require,module,exports){
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 (function() {
     'use strict';
 
-    angular.module('pdf.viewer', ['oc.lazyLoad']);
+    require('angular');
+    require('oclazyload');
 
+    var pdf_viewer = angular.module('pdf.viewer', ['oc.lazyLoad']);
+
+    module.exports = pdf_viewer;
 })();
 
 //HEAD 
@@ -315,9 +307,6 @@ $templateCache.put("pdfViewer/pdfViewer.tpl.html","<div class=\"pdf-viewer__view
     "\n" +
     "        <div id=\"findbar\"\n" +
     "            class=\"pdf-viewer__toolbar pdf-viewer__toolbar--sub\">\n" +
-    "            <div class=\"pdf-viewer__toolbar-center\">\n" +
-    "            </div>\n" +
-    "\n" +
     "            <div class=\"pdf-viewer__toolbar-right\">\n" +
     "                <div class=\"pdf-viewer__toolbar-item pdf-viewer__toolbar-button--text\">\n" +
     "                    <span id=\"findResultsCount\"></span>\n" +
@@ -375,8 +364,7 @@ $templateCache.put("pdfViewer/pdfViewer.tpl.html","<div class=\"pdf-viewer__view
     "            class=\"pdf-viewer__main\">\n" +
     "\n" +
     "            <div id=\"viewerContainer\">\n" +
-    "                <div id=\"viewer\"\n" +
-    "                    class=\"viewer\"></div>\n" +
+    "                <div id=\"viewer\"></div>\n" +
     "            </div>\n" +
     "\n" +
     "            <div id=\"errorWrapper\"\n" +
@@ -566,8 +554,7 @@ $templateCache.put("pdfViewer/pdfViewer.tpl.html","<div class=\"pdf-viewer__view
 (function() {
     'use strict';
 
-    angular
-        .module('pdf.viewer')
+    angular.module('pdf.viewer')
         .component('pdfViewer', {
             template: ['$templateCache', function($templateCache) {
                 return $templateCache.get('pdfViewer/pdfViewer.tpl.html');
@@ -638,7 +625,6 @@ $templateCache.put("pdfViewer/pdfViewer.tpl.html","<div class=\"pdf-viewer__view
                         $ctrl.pdfAPI[method].call(this, arg);
                     }
                 }
-                $ctrl.onUpdate();
             } else if (changesObj.file) {
                 $ctrl.pdfAPI.file(changesObj.file.currentValue);
             }
@@ -699,7 +685,8 @@ $templateCache.put("pdfViewer/pdfViewer.tpl.html","<div class=\"pdf-viewer__view
 
         function checkContainerSize() {
             var isMobile = $element.hasClass(mobileClass);
-            var parentWidth = document.querySelector('.' + parentClass).offsetWidth;
+            var parentWidth = document.querySelector('.' + parentClass)
+                .offsetWidth;
 
             if (!isMobile && parentWidth <= mobileWidth) {
                 $element.addClass(mobileClass);
@@ -713,8 +700,7 @@ $templateCache.put("pdfViewer/pdfViewer.tpl.html","<div class=\"pdf-viewer__view
 (function() {
     'use strict';
 
-    angular
-        .module('pdf.viewer')
+    angular.module('pdf.viewer')
         .provider('pdfViewerService', pdfViewerService);
 
     function pdfViewerService() {
@@ -801,35 +787,7 @@ $templateCache.put("pdfViewer/pdfViewer.tpl.html","<div class=\"pdf-viewer__view
     }
 })();
 
-},{}]},{},[1]);
-
-},{}]},{},[1]);
-
-},{}]},{},[1]);
-
-},{}]},{},[1]);
-
-},{}]},{},[1]);
-
-},{}]},{},[1]);
-
-},{}]},{},[1]);
-
-},{}]},{},[1]);
-
-},{}]},{},[1]);
-
-},{}]},{},[1]);
-
-},{}]},{},[1]);
-
-},{}]},{},[1]);
-
-},{}]},{},[1]);
-
-},{}]},{},[1]);
-
-},{}],5:[function(require,module,exports){
+},{"angular":6,"oclazyload":7}],5:[function(require,module,exports){
 /**
  * @license AngularJS v1.5.7
  * (c) 2010-2016 Google, Inc. http://angularjs.org
