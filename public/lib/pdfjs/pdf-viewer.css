@@ -21,6 +21,10 @@
   -webkit-box-sizing: content-box;
   -moz-box-sizing: content-box;
   box-sizing: content-box;
+  font-family: Roboto, sans-serif;
+}
+.pdf-viewer .fa {
+  font-family: FontAwesome;
 }
 .pdf-viewer button,
 .pdf-viewer [type="reset"],
