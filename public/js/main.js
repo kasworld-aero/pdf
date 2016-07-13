@@ -17,7 +17,7 @@
 
 	pdfApp.config(['pdfViewerServiceProvider',
         function(pdfViewerServiceProvider) {
-          pdfViewerServiceProvider.setPath('lib/pdfjs');
+          pdfViewerServiceProvider.setPath('/lib/pdfjs');
     }]);
 }());
 
