@@ -111,12 +111,8 @@
 (function() {
     'use strict';
 
-    require('angular');
-    require('oclazyload');
-
     var pdf_viewer = angular.module('pdf.viewer', ['oc.lazyLoad']);
 
-    module.exports = pdf_viewer;
 })();
 
 //HEAD 
@@ -787,7 +783,7 @@ $templateCache.put("pdfViewer/pdfViewer.tpl.html","<div class=\"pdf-viewer__view
     }
 })();
 
-},{"angular":6,"oclazyload":7}],5:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 /**
  * @license AngularJS v1.5.7
  * (c) 2010-2016 Google, Inc. http://angularjs.org
