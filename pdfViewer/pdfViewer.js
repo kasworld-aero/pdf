@@ -1,19 +1,20 @@
 (function() {
     'use strict';
 
-    var pdfViewer = {
-        template: ['$templateCache', function($templateCache) {
-            return $templateCache.get('pdfViewer/pdfViewer.tpl.html');
-        }],
-        controller: pdfViewerCtrl,
-        bindings: {
-            file: '<',
-            search: '<',
-            next: '<',
-            previous: '<',
-            onUpdate: '&'
-        }
-    };
+    angular.module('pdf.viewer')
+        .component('pdfViewer', {
+            template: ['$templateCache', function($templateCache) {
+                return $templateCache.get('pdfViewer/pdfViewer.tpl.html');
+            }],
+            controller: pdfViewerCtrl,
+            bindings: {
+                file: '<',
+                search: '<',
+                next: '<',
+                previous: '<',
+                onUpdate: '&'
+            }
+        });
 
     pdfViewerCtrl.$inject = ['$element', '$log', '$window', '$timeout', 'pdfViewerService'];
 
@@ -71,7 +72,6 @@
                         $ctrl.pdfAPI[method].call(this, arg);
                     }
                 }
-                $ctrl.onUpdate();
             } else if (changesObj.file) {
                 $ctrl.pdfAPI.file(changesObj.file.currentValue);
             }
@@ -132,7 +132,8 @@
 
         function checkContainerSize() {
             var isMobile = $element.hasClass(mobileClass);
-            var parentWidth = document.querySelector('.' + parentClass).offsetWidth;
+            var parentWidth = document.querySelector('.' + parentClass)
+                .offsetWidth;
 
             if (!isMobile && parentWidth <= mobileWidth) {
                 $element.addClass(mobileClass);
@@ -141,6 +142,4 @@
             }
         }
     }
-
-    module.exports = pdfViewer;
 })();

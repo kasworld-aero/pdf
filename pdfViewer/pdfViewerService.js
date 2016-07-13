@@ -1,7 +1,8 @@
 (function() {
     'use strict';
 
-    var pdfViewerServiceProvider = pdfViewerService;
+    angular.module('pdf.viewer')
+        .provider('pdfViewerService', pdfViewerService);
 
     function pdfViewerService() {
 
@@ -85,6 +86,4 @@
         }];
         /* end service */
     }
-
-    module.exports = pdfViewerServiceProvider;
 })();

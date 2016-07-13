@@ -7,30 +7,25 @@
         bindings: {}
     };
 
-    pdfMainCtrl.$inject = [];
+    pdfMainCtrl.$inject = ['$interval'];
 
-    function pdfMainCtrl() {
+    function pdfMainCtrl($interval) {
         var $ctrl = this;
+        var files = [
+            'test_pdfs/grades.pdf',
+            'test_pdfs/chemex.pdf'
+        ]
 
         $ctrl.searchQuery = '';
-        // $ctrl.fileUrl = 'test_pdfs/2014_ChemexBrewGuide.pdf';
-        $ctrl.fileUrl = 'test_pdfs/grades.pdf';
-        $ctrl.isFullscreen = false;
+        $ctrl.fileUrl = files[0];
         $ctrl.toggleNext = false;
         $ctrl.togglePrevious = false;
 
-        $ctrl.fullscreen = function() {
-            $ctrl.isFullscreen = !$ctrl.isFullscreen;
-        };
         $ctrl.nextMatch = function() {
             $ctrl.toggleNext = !$ctrl.toggleNext;
         };
         $ctrl.previousMatch = function() {
             $ctrl.togglePrevious = !$ctrl.togglePrevious;
-        };
-        $ctrl.updateHighlight = function(highlightAll) {
-            $ctrl.highlightAll = highlightAll;
-            console.log('Highlight from Main: ', $ctrl.highlightAll);
         };
         $ctrl.search = function(query) {
             $ctrl.searchQuery = query;
@@ -39,6 +34,13 @@
         $ctrl.viewerUpdated = function() {
             console.log('Viewer has been updated');
         };
+
+        // var i = 0;
+        // $interval(function() {
+        //     i++;
+        //     $ctrl.fileUrl = files[i % 2];
+        //     console.log('changed file: ', $ctrl.fileUrl);
+        // }, 5000);
     }
 
     module.exports = pdfMain;

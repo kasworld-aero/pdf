@@ -26,24 +26,17 @@ gulp.task('tpl', function(done) {
 });
 
 gulp.task('pdfjs', function(done) {
-    gulp.src('static/**/*')
+    gulp.src('static/**')
         .pipe(gulp.dest('dist')
             .on('end', done));
     return done;
 });
 
 gulp.task('pdfViewer', ['tpl'], function(done) {
-    browserify({
-            entries: ['dist/pdfViewer.js', 'dist/pdfViewer.js']
-        })
-        .bundle()
-        .pipe(source('pdfViewer.js'))
-        .pipe(gulp.dest('dist'))
-        .on('end', done);
-    // gulp.src(['pdfViewer/module.js', 'tmp/pdfViewer.tpl.js', 'pdfViewer/**/*.js'])
-    //     .pipe($.concat('pdfViewer.js'))
-    //     .pipe(gulp.dest('dist')
-    //         .on('end', done));
+    gulp.src(['pdfViewer/module.js', 'tmp/pdfViewer.tpl.js', 'pdfViewer/**/*.js'])
+        .pipe($.concat('pdfViewer.js'))
+        .pipe(gulp.dest('dist')
+            .on('end', done));
     return done;
 });
 
@@ -90,8 +83,8 @@ gulp.task('browserify', ['pdfViewer'], function() {
 });
 
 gulp.task('static', ['pdfjs', 'pdf-less'], function() {
-    gulp.src('dist/pdfjs/**/*')
-        .pipe(gulp.dest('public/lib'));
+    gulp.src('dist/pdfjs/**')
+        .pipe(gulp.dest('public/lib/pdfjs'));
 
     gulp.src('app/**/*.html')
         .pipe($.flatten())

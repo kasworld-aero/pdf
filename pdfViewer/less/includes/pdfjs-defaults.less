@@ -112,11 +112,11 @@
 .annotationLayer .underlineAnnotation {
 	cursor: pointer;
 }
-.viewer .canvasWrapper {
+#viewerContainer .canvasWrapper {
 	overflow: hidden;
 	box-shadow: 0 0 25px rgba(0,0,0,0.35);
 }
-.viewer .page {
+#viewerContainer .page {
 	direction: ltr;
 	width: 816px;
 	height: 1056px;
@@ -128,22 +128,22 @@
 	background-color: white;
 	box-sizing: content-box;
 }
-.viewer.removePageBorders .page {
+#viewerContainer.removePageBorders .page {
 	margin: 0 auto 10px;
 	border: none;
 }
-.viewer.singlePageView {
+#viewerContainer.singlePageView {
 	display: inline-block;
 }
-.viewer.singlePageView .page {
+#viewerContainer.singlePageView .page {
 	margin: 0;
 	border: none;
 }
-.viewer .page canvas {
+#viewerContainer .page canvas {
 	margin: 0;
 	display: block;
 }
-.viewer .page .loadingIcon {
+#viewerContainer .page .loadingIcon {
 	position: absolute;
 	display: block;
 	left: 0;
@@ -151,19 +151,19 @@
 	right: 0;
 	bottom: 0;
 }
-.pdfPresentationMode:-webkit-full-screen .viewer .page {
+.pdfPresentationMode:-webkit-full-screen #viewerContainer .page {
 	margin-bottom: 100%;
 	border: 0;
 }
-.pdfPresentationMode:-moz-full-screen .viewer .page {
+.pdfPresentationMode:-moz-full-screen #viewerContainer .page {
 	margin-bottom: 100%;
 	border: 0;
 }
-.pdfPresentationMode:-ms-fullscreen .viewer .page {
+.pdfPresentationMode:-ms-fullscreen #viewerContainer .page {
 	margin-bottom: 100% !important;
 	border: 0;
 }
-.pdfPresentationMode:fullscreen .viewer .page {
+.pdfPresentationMode:fullscreen #viewerContainer .page {
 	margin-bottom: 100%;
 	border: 0;
 }
@@ -280,22 +280,6 @@
 	bottom: 0;
 	overflow: auto;
 	-webkit-overflow-scrolling: touch;
-}
-.thumbnail:not([data-loaded]) {
-	border: 1px dashed rgba(255, 255, 255, 0.5);
-	margin: -1px -1px 4px;
-}
-.thumbnailImage {
-	box-shadow: 0 0 8px rgba(0,0,0,0.3);
-	opacity: 0.8;
-	z-index: 99;
-}
-.thumbnail:hover > .thumbnailSelectionRing > .thumbnailImage,
-a:focus > .thumbnail > .thumbnailSelectionRing > .thumbnailImage {
-	opacity: 0.9;
-}
-.thumbnail.selected > .thumbnailSelectionRing > .thumbnailImage {
-	box-shadow: 0 0 0 1px hsla(0,0%,0%,.5);
 }
 #outlineView {
 	position: absolute;
