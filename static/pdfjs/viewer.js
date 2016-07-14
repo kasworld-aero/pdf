@@ -8516,7 +8516,7 @@
                     fileInput.className = 'fileInput';
                     fileInput.setAttribute('type', 'file');
                     fileInput.oncontextmenu = noContextMenuHandler;
-                    document.getElementById('outerContainer').appendChild(fileInput);
+                    // document.getElementById('outerContainer').appendChild(fileInput);
                     outerContainer
                     if (!window.File || !window.FileReader || !window.FileList || !window.Blob) {
                         appConfig.toolbar.openFile.setAttribute('hidden', 'true');
@@ -8912,9 +8912,9 @@
                     if (!files || files.length === 0) {
                         return;
                     }
-                    PDFViewerApplication.eventBus.dispatch('fileinputchange', {
-                        fileInput: evt.target
-                    });
+                    // PDFViewerApplication.eventBus.dispatch('fileinputchange', {
+                    //     fileInput: evt.target
+                    // });
                 }, true);
 
                 function webViewerFileInputChange(e) {
