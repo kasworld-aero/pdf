@@ -10,23 +10,28 @@ We needed a custom document viewer that could be embedded into any Angular proje
 
 1. The viewer needs [ocLazyLoad](https://github.com/ocombe/ocLazyLoad) to load in its assets. Include ocLazyLoad in your project with the commmand
 	`bower install oclazyload` or `npm install oclazyload`
-2. Download / clone the repo or just the`dist` folder
-3. Include the `dist/pdfViewer.js` into your project (script tags, browserify, etc)
-4. Copy the `dist/pdfjs` folder into your public folder to be accessible via HTTP requests (for lazy loading of assets)
-5. Add `pdf.viewer` to your Angular app's module dependencies
-```javascript
-var app = angular.module('app', ['pdf.viewer', 'oc.lazyload']);
-```
-6. Set the `pdfViewerServiceProvider` to the path where you copied the `dist/pdfjs` folder
-```javascript
-app.config(['pdfViewerServiceProvider',
-    function(pdfViewerServiceProvider) {
-    	pdfViewerServiceProvider.setPath('<PATH>/pdfjs');
-}]);
-```
-7. Include the `pdf-view` component in your angular app template
-```html
-<div>
-	<pdf-viewer file="{{file}}"></pdf-viewer>
-</div>
-```
+1. Download / clone the repo or just the`dist` folder
+1. Include the `dist/pdfViewer.js` into your project (script tags, browserify, etc)
+1. Copy the `dist/pdfjs` folder into your public folder to be accessible via HTTP requests (for lazy loading of assets)
+1. Add `pdf.viewer` to your Angular app's module dependencies
+ 	
+ 	```javascript
+	var app = angular.module('app', ['pdf.viewer', 'oc.lazyload']);
+	```
+	
+1. Set the `pdfViewerServiceProvider` to the path where you copied the `dist/pdfjs` folder
+	
+	```javascript
+	app.config(['pdfViewerServiceProvider',
+    	function(pdfViewerServiceProvider) {
+    		pdfViewerServiceProvider.setPath('<PATH>/pdfjs');
+	}]);
+	```
+	
+1. Include the `pdf-view` component in your angular app template
+	
+	```html
+	<div>
+		<pdf-viewer file="{{file}}"></pdf-viewer>
+	</div>
+	```
