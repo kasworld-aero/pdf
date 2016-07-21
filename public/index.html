@@ -7,24 +7,24 @@
         content="width=device-width, initial-scale=1">
     <title>PDF Viewer</title>
 
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/style.css">
 
-    <link
-        rel="stylesheet"
-        href="css/style.css">
-    <script type="text/javascript"
-            src="js/main.js"></script>
-    <!-- <script type="text/javascript"
-        src="js/main.min.js"></script> -->
 </head>
 
 <body>
 
     <main class="fullscreen">
-    <!-- <main> -->
         <pdf-main></pdf-main>
     </main>
+
+    <!-- Libraries and Dependencies -->
+    <script type="text/javascript" src="lib/angular/angular.js"></script>
+    <script type="text/javascript" src="lib/ocLazyLoad/ocLazyLoad.min.js"></script>
+    <script type="text/javascript" src="lib/pdfViewer/pdfViewer.js"></script>
+
+    <!-- Main App Bundle -->
+    <script type="text/javascript" src="js/main.js"></script>
 </body>
 
 </html>

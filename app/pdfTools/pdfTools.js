@@ -1,19 +1,18 @@
 (function() {
     'use strict';
 
-    var pdfTools = {
-        templateUrl: 'tpl/pdfTools.tpl.html',
-        controller: pdfToolsCtrl,
-        bindings: {
-            search: '&',
-            fullscreen: '&',
-            highlight: '&',
-            next: '&',
-            previous: '&',
-        }
-    };
-
-    pdfToolsCtrl.$inject = [];
+    angular.module('pdfApp')
+        .component('pdfTools', {
+            templateUrl: 'tpl/pdfTools.tpl.html',
+            controller: pdfToolsCtrl,
+            bindings: {
+                search: '&',
+                fullscreen: '&',
+                highlight: '&',
+                next: '&',
+                previous: '&',
+            }
+        });
 
     function pdfToolsCtrl() {
         var $ctrl = this;
@@ -24,12 +23,14 @@
 
         $ctrl.selectKeyword = function(index) {
             $ctrl.searchQuery = $ctrl.keywords[index];
-            $ctrl.search({query: $ctrl.searchQuery});
+            $ctrl.search({
+                query: $ctrl.searchQuery
+            });
         };
-        $ctrl.onChecked = function(){
-            $ctrl.highlight({ highlightAll: $ctrl.highlightAll });
+        $ctrl.onChecked = function() {
+            $ctrl.highlight({
+                highlightAll: $ctrl.highlightAll
+            });
         };
     }
-
-    module.exports = pdfTools;
-}());
+})();

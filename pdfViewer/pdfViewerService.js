@@ -5,10 +5,17 @@
         .provider('pdfViewerService', pdfViewerService);
 
     function pdfViewerService() {
-
         var provider = this,
-            baseUrl = 'pdfjs';
+            baseUrl = 'pdfjs'; // default base, assuming assets are in 'pdfjs' folder
 
+        /**
+         * Use this to set the path where you host the pdfjs dependencies.
+         * This is everything that is included in the `dist/pdfjs` folder.
+         * It is needed to lazy load assets so you can include the component in your
+         * main app module, but not load the viewer assets until the pdfComponent is rendered
+         * 
+         * @param {String} path The path in a publicly accessible folder to the pdfjs assets
+         */
         provider.setPath = function(path) {
             window.pdfWorkerUrl = path;
             baseUrl = path;
@@ -18,8 +25,8 @@
             var service = {
                 load: load,
             };
-
             return service;
+            
             /***********************************/
             /*          Service API            */
             /***********************************/
@@ -63,7 +70,6 @@
 
             function loadCSS() {
                 return $ocLazyLoad.load({
-                    // insertBefore: '#load_css_before',
                     files: [
                         baseUrl + '/pdf-viewer.css',
                     ]

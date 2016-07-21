@@ -8,41 +8,51 @@
             }],
             controller: pdfViewerCtrl,
             bindings: {
+                // INPUTS
+                // -- must be the same name as the $ctrl.pdfAPI keys
                 file: '<',
                 search: '<',
                 next: '<',
                 previous: '<',
+
+                // OUTPUTS
                 onUpdate: '&'
             }
         });
 
-    pdfViewerCtrl.$inject = ['$element', '$log', '$window', '$timeout', 'pdfViewerService'];
+    pdfViewerCtrl.$inject = ['$element', '$timeout','$window', 'pdfViewerService'];
 
-    function pdfViewerCtrl($element, $log, $window, $timeout, pdfViewerService) {
+    function pdfViewerCtrl($element, $timeout, $window, pdfViewerService) {
+
+        /****************************************
+         *          Local Variabls              *
+         ****************************************/
         var $ctrl = this;
+        var MOBILE_WIDTH = 770;
         var parentClass = 'pdf-viewer-container';
         var mobileClass = 'pdf-viewer__mobile';
-        var mobileWidth = 770;
 
 
         /****************************************
-         *      Controller Attributes           *
+         *        Controller Attributes         *
          ****************************************/
         $ctrl.pdfAPI = null;
         $ctrl.pdfViewerReady = false;
 
         /****************************************
-         *      Controller API                  *
+         *           Controller API             *
          ****************************************/
+
+        // -- must have the same name as the input bindings
         $ctrl.pdfAPI = {
             file: fileChanged,
-            find: findQuery,
+            search: searchQuery,
             next: nextMatch,
             previous: previousMatch,
         };
 
         /****************************************
-         *      Lifecycle Hooks                 *
+         *            Lifecycle Hooks           *
          ****************************************/
         $ctrl.$onInit = function() {
             // Add component class
@@ -65,6 +75,11 @@
         };
 
         $ctrl.$onChanges = function(changesObj) {
+
+            /** 
+             * the method in pdfAPI with the same name. For this to work,
+             * the input bindings and pdfAPI methods must have the same key name
+             */
             if ($ctrl.pdfViewerReady) {
                 for (var method in changesObj) {
                     if ($ctrl.pdfAPI.hasOwnProperty(method)) {
@@ -73,19 +88,30 @@
                     }
                 }
             } else if (changesObj.file) {
+                // pdfViewer does not need to be ready to update the file
                 $ctrl.pdfAPI.file(changesObj.file.currentValue);
             }
+
+            // notify other components the viewer has been updated
             $ctrl.onUpdate();
         };
 
         $ctrl.$postLink = function() {
             $timeout(function() {
+                /**
+                 * 1. Load external assest
+                 * 2. Link DOM Elements to API functions
+                 */
                 pdfViewerService.load()
                     .then(function(msg) {
                         getDomElements();
                         $ctrl.pdfViewerReady = true;
                     });
             }, 0);
+        };
+
+        $ctrl.$onDestroy = function() {
+            PDFViewerApplication.close();
         };
 
         /****************************************
@@ -98,7 +124,7 @@
             }
         }
 
-        function findQuery(query) {
+        function searchQuery(query) {
             $ctrl.findInput.value = query;
             PDFViewerApplication.findBar.dispatchEvent('');
         }
@@ -117,9 +143,7 @@
 
         function getDomElements() {
             var elements = {
-                'findInput': null,
-                'findHighlightAll': null,
-                'presentationMode': null
+                'findInput': null
             };
 
             Object.keys(elements)
@@ -130,14 +154,20 @@
             angular.extend($ctrl, elements);
         }
 
+        /**
+         * This function is called when the screen is resized.
+         * It checks to see if the parent container is smaller than
+         * the MOBILE_WIDTH value. If so, apply a mobile styling to
+         * the viewer.
+         * 
+         * @return {function}
+         */
         function checkContainerSize() {
             var isMobile = $element.hasClass(mobileClass);
-            var parentWidth = document.querySelector('.' + parentClass)
-                .offsetWidth;
-
-            if (!isMobile && parentWidth <= mobileWidth) {
+            var parentWidth = document.querySelector('.' + parentClass).offsetWidth;
+            if (!isMobile && parentWidth <= MOBILE_WIDTH) {
                 $element.addClass(mobileClass);
-            } else if (isMobile && parentWidth > mobileWidth) {
+            } else if (isMobile && parentWidth > MOBILE_WIDTH) {
                 $element.removeClass(mobileClass);
             }
         }
