@@ -9,7 +9,7 @@
             controller: pdfViewerCtrl,
             bindings: {
                 // INPUTS
-                // -- must be the same name as the $ctrl.pdfAPI keys
+                // must be the same name as the $ctrl.pdfAPI keys
                 file: '<',
                 search: '<',
                 next: '<',
@@ -43,7 +43,7 @@
          *           Controller API             *
          ****************************************/
 
-        // -- must have the same name as the input bindings
+        // must have the same name as the input bindings
         $ctrl.pdfAPI = {
             file: fileChanged,
             search: searchQuery,
@@ -76,7 +76,7 @@
 
         $ctrl.$onChanges = function(changesObj) {
 
-            /** 
+            /**
              * the method in pdfAPI with the same name. For this to work,
              * the input bindings and pdfAPI methods must have the same key name
              */
@@ -159,7 +159,7 @@
          * It checks to see if the parent container is smaller than
          * the MOBILE_WIDTH value. If so, apply a mobile styling to
          * the viewer.
-         * 
+         *
          * @return {function}
          */
         function checkContainerSize() {

@@ -44,3 +44,11 @@ node_modules
 
 # Temp Folder#
 tmp
+
+# Floo files #
+*.floo
+*.flooignore
+
+# Linter Config #
+.eslintrc.js
+.htmlhintrc

@@ -14,22 +14,22 @@ We needed a custom document viewer that could be embedded into any Angular proje
 1. Include the `dist/pdfViewer.js` into your project (script tags, browserify, etc)
 1. Copy the `dist/pdfjs` folder into your public folder to be accessible via HTTP requests (for lazy loading of assets)
 1. Add `pdf.viewer` to your Angular app's module dependencies
- 	
+
  	```javascript
 	var app = angular.module('app', ['pdf.viewer', 'oc.lazyload']);
 	```
-	
+
 1. Set the `pdfViewerServiceProvider` to the path where you copied the `dist/pdfjs` folder
-	
+
 	```javascript
 	app.config(['pdfViewerServiceProvider',
     	function(pdfViewerServiceProvider) {
     		pdfViewerServiceProvider.setPath('<PATH>/pdfjs');
 	}]);
 	```
-	
+
 1. Include the `pdf-view` component in your angular app template
-	
+
 	```html
 	<div>
 		<pdf-viewer file="{{file}}"></pdf-viewer>
