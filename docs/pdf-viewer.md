@@ -42,6 +42,8 @@ Once loaded into your module, you can use the PDF viewer component by adding `<p
 </div>
 ```
 
+It is recommended you wrap the viewer in parent container `<div>`. The component will look for the parent node and apply the class of `.pdf-viewer-container`. This ensures PDF viewer will take on the full width of the parent container. It is up to you to set the height of the parent container.
+
 ### Attribute Bindings
 These are the bindings available to interface with the PDF viewer component.
 
@@ -68,13 +70,26 @@ bindings {
 }
 ```
 
-These bindings serve as a simple API to hook into the magic of `viewer.js`, written by Mozilla, modified slightly to work within the Angular container and the redesign. More on 'viewer.js' later, but it is important to note that when a binding value does change, the `$onChanges` hook within the component is called. This then triggers a method on the controller (`$ctrl`) to fire which simply utilizes functions on the `PDFViewerApplication` object. This ojbect is created by `viewer.js` and contains all the primary logic for the viewer. It is attached to the `window` object and accessible globally; however, it is recommended to use the comonent's API.
-
+These bindings serve as a simple API to hook into the magic of `viewer.js`, written by Mozilla, modified slightly to work within the Angular container and the redesign. More on 'viewer.js' later, but it is important to note that when a binding value does change, the `$onChanges` hook within the component is called. This then triggers a method on the controller (`$ctrl`) to fire which simply utilizes functions on the `PDFViewerApplication` object. This object is created by `viewer.js` and contains all the primary logic for the viewer. It is attached to the `window` object and accessible globally; however, it is recommended to use the component's API.
 
 
 ## The `pdfViewerService` at your service 🍸
+The job of the `pdfViewerService` is to load the PDF viewer assets from the `pdfjs` folder. This includes:
+- locale/locale.properties
+- compatibility.js
+- l10n.js
+- pdf-viewer.less
+- pdf.js
+- viewer.js
+
+### Nework Requests within the Assets
+`pdf.js`				will request		`pdf.worker.js`
+`locale.properties`		will request		`locale/[subfolders]`
+`viewer.js`				will request		`[YOUR-PDF]`
 
 
+## The `pdfViewer.tpl.html` 
 
-## The `viewer.js` 
+
+## The `viewer.js` 👀
 This is the brain of the viewer. It is what creates the primary `PDFViewerApplication`, the event listeners on the DOM elements, and communicates with the pdf.js library to decode and manipulate the PDF file. It contains some extra tooling that our viewer does not utilize (such as *GrabToPan* and )
