@@ -135,7 +135,7 @@ $templateCache.put("pdfViewer/pdfViewer.tpl.html","<div class=\"pdf-viewer__view
     "                </div>\n" +
     "            </div>\n" +
     "        </div>\n" +
-    "        <!-- My Toolbar -->\n" +
+    "        <!-- Toolbar -->\n" +
     "\n" +
     "        <div id=\"secondaryToolbar\"\n" +
     "            class=\"pdf-viewer__toolbar pdf-viewer__toolbar--sub\">\n" +
@@ -189,7 +189,7 @@ $templateCache.put("pdfViewer/pdfViewer.tpl.html","<div class=\"pdf-viewer__view
     "                </div>\n" +
     "            </div>\n" +
     "        </div>\n" +
-    "        <!-- My Secondary Toolbar -->\n" +
+    "        <!-- Secondary Toolbar -->\n" +
     "\n" +
     "        <div id=\"findbar\"\n" +
     "            class=\"pdf-viewer__toolbar pdf-viewer__toolbar--sub\">\n" +
@@ -448,7 +448,7 @@ $templateCache.put("pdfViewer/pdfViewer.tpl.html","<div class=\"pdf-viewer__view
             controller: pdfViewerCtrl,
             bindings: {
                 // INPUTS
-                // -- must be the same name as the $ctrl.pdfAPI keys
+                // must be the same name as the $ctrl.pdfAPI keys
                 file: '<',
                 search: '<',
                 next: '<',
@@ -482,7 +482,7 @@ $templateCache.put("pdfViewer/pdfViewer.tpl.html","<div class=\"pdf-viewer__view
          *           Controller API             *
          ****************************************/
 
-        // -- must have the same name as the input bindings
+        // must have the same name as the input bindings
         $ctrl.pdfAPI = {
             file: fileChanged,
             search: searchQuery,
@@ -515,7 +515,7 @@ $templateCache.put("pdfViewer/pdfViewer.tpl.html","<div class=\"pdf-viewer__view
 
         $ctrl.$onChanges = function(changesObj) {
 
-            /** 
+            /**
              * the method in pdfAPI with the same name. For this to work,
              * the input bindings and pdfAPI methods must have the same key name
              */
@@ -598,7 +598,7 @@ $templateCache.put("pdfViewer/pdfViewer.tpl.html","<div class=\"pdf-viewer__view
          * It checks to see if the parent container is smaller than
          * the MOBILE_WIDTH value. If so, apply a mobile styling to
          * the viewer.
-         * 
+         *
          * @return {function}
          */
         function checkContainerSize() {

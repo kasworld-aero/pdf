@@ -1,21 +1,19 @@
 .pdf-viewer {
-  /* -------- COLORS -------- */
-  /* ---------- VARIABLES ------------ */
-  /* -------- MIXINS -------- */
-  /* -------- COMPONENT CONTAINER -------- */
-  /* ---------- PDFJS DEFAULTS ----------- */
-  /* TODO: file FF bug to support ::-moz-selection:window-inactive
-	so we can override the opaque grey background when the window is inactive;
-	see https://bugzilla.mozilla.org/show_bug.cgi?id=706209 */
-  /* ---------- INPUT ----------- */
-  /* ---------- SELECT ----------  */
-  /* ----------- VIEWER ----------- */
-  /* ---------- MAIN ------------ */
-  /* ---------- TOOLBAR ----------  */
-  /* --------- SIDEBAR ------------ */
-  /* --------- SEARCH ----------- */
-  /* --------- LOADING ------------ */
-  /* ---------- MOBILE ------------ */
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 }
 .pdf-viewer * {
   -webkit-box-sizing: content-box;
@@ -470,10 +468,10 @@
 }
 @media print {
   .pdf-viewer {
-    /* General rules for printing. */
-    /* Rules for browsers that don't support mozPrintCallback. */
-    /* Rules for browsers that support mozPrintCallback */
-    /* wrapper around (scaled) print canvas elements */
+    
+    
+    
+    
   }
   .pdf-viewer body {
     background: transparent none;

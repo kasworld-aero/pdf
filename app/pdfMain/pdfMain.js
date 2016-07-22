@@ -12,8 +12,7 @@
     function pdfMainCtrl($interval) {
         var $ctrl = this;
         var files = [
-            'test_pdfs/grades.pdf',
-            'test_pdfs/chemex.pdf'
+            'test_pdfs/grades.pdf'
         ]
 
         $ctrl.searchQuery = '';
