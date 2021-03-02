@@ -11,9 +11,10 @@
     pdfMainCtrl.$inject = ['$interval'];
     function pdfMainCtrl($interval) {
         var $ctrl = this;
-        var files = [
-            'test_pdfs/grades.pdf'
-        ]
+        var url_string = window.location.href; //window.location.href
+var url = new URL(url_string);
+  var purl = url.searchParams.get("purl");
+        var files = purl;
 
         $ctrl.searchQuery = '';
         $ctrl.fileUrl = files[0];
